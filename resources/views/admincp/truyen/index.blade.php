@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-    @include('layouts.nav')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -17,10 +16,11 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Tên danh mục</th>
-                                    <th scope="col">Slug danh mục</th>
+                                    <th scope="col">Tên truyện</th>
+                                    <th scope="col">Tác giả</th>
+                                    <th scope="col">Slug truyện</th>
                                     <th scope="col">Mô tả</th>
-                                    <th scope="col">Danh mục</th>
+                                    <th scope="col">truyện</th>
                                     <th scope="col">Trạng thái</th>
                                     <th scope="col">Hình ảnh</th>
                                     <th scope="col">Quản lý </th>
@@ -31,6 +31,7 @@
                                     <tr>
                                         <th scope="row">{{ $key }}</th>
                                         <td>{{ $tr->tentruyen }}</td>
+                                        <td>{{ $tr->tacgia ? $tr->tacgia : 'Đang cập nhật' }}</td>
                                         <td>{{ $tr->slug_truyen }}</td>
                                         <td>{{ $tr->tomtat }}</td>
                                         <td>{{ $tr->danhmuctruyen->tendanhmuc }}</td>

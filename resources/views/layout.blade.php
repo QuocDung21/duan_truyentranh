@@ -10,13 +10,14 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
 </head>
 
-<body>
-    <div class="container">
+<body class="container ">
+    <div class="">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{ url('/') }}">Truyện tranh</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -45,6 +46,19 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
+                            Thể loại
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach ($theloai as $tloai)
+                                <li><a class="dropdown-item"
+                                        href="{{ url('the-loai/' . $tloai->slug_theloai) }}">{{ $tloai->tentheloai }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
+                    {{-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Thể loại truyện
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -55,7 +69,7 @@
                             </li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="nav-item">
                         <a class="nav-link disabled">Disabled</a>
                     </li>
@@ -84,11 +98,11 @@
             </div>
         </footer>
     </div>
-
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    
+
+
     <script type="text/javascript">
         $('.owl-carousel').owlCarousel({
             loop: true,
@@ -107,6 +121,23 @@
                 }
             }
         })
+    </script>
+
+    <script type="text/javascript">
+        $('.select-chapter').on('change', function() {
+            var url = $(this).val();
+            if (url) {
+                window.location = url
+            }
+            return false;
+        })
+
+        current_chapter();
+
+        function current_chapter() {
+            var url = window.location.href;
+            $('.select-chapter').find('option[value="' + url + '"]').attr("selected", true);
+        }
     </script>
 </body>
 

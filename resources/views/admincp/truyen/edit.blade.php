@@ -1,9 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    @include('layouts.nav')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">{{ __('Thêm truyện') }}</div>
                     @if ($errors->any())
@@ -32,11 +31,16 @@
                                     name="tentruyen" class="form-control" id="exampleInputEmail1">
                             </div>
                             <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Tác giả</label>
+                                <input type="text" value="{{ $truyen->tacgia }}" placeholder="Tên tác giả..."
+                                    name="tacgia" class="form-control" id="exampleInputEmail1">
+                            </div>
+                            <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Tóm tắt truyện</label>
                                 <textarea rows="5" type="text" value="{{ $truyen->tomtat }}" name="tomtat" placeholder="Tóm tắt truyện..."
                                     class="form-control" id="exampleInputEmail1">{{ $truyen->tomtat }}</textarea>
                             </div>
-                            <div class="mb-3 form-control">
+                            <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Ảnh truyện</label>
                                 <div class="m-3">
                                     <img src="{{ asset('public/uploads/truyen/' . $truyen->hinhanh) }}" width="150"

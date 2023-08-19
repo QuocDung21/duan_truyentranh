@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @include('layouts.nav')
-    <div class="container">
+    <div class="container ">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -34,9 +33,9 @@
                                 <textarea type="text" name="tomtat" placeholder="Tóm tắt chapter..." class="form-control"
                                     value="{{ old('tomtat') }}" id="exampleInputEmail1" rows="5"></textarea>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3 editor">
                                 <label for="exampleInputEmail1" class="form-label">Nội dung chapter</label>
-                                <textarea type="text" name="noidung" placeholder="Nội dung chapter..." class="form-control"
+                                <textarea type="text" id="noidung_chapter" name="noidung" placeholder="Nội dung chapter..." class="form-control"
                                     value="{{ old('noidung') }}" id="exampleInputEmail1" rows="5"></textarea>
                             </div>
                             <div class="mb-3">
