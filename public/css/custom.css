@@ -1,0 +1,23 @@
+/* Đảm bảo menu dropdown hiển thị trên các kết quả tìm kiếm */
+#search_results {
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+/* Tùy chỉnh giao diện kết quả tìm kiếm */
+.li_search_ajax {
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.li_search_ajax a {
+    color: #333;
+    text-decoration: none;
+}
+
+.li_search_ajax:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}

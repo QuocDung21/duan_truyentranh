@@ -10,9 +10,13 @@
     </style>
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item"><a href="#">Library</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Data</li>
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Trang chủ</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{{ route('danh-muc', [$truyen_breadcrumb->danhmuctruyen->slug_danhmuc]) }}">{{ $truyen_breadcrumb->danhmuctruyen != null ? $truyen_breadcrumb->danhmuctruyen->tendanhmuc : 'Đang cập nhật' }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+                {{ $chapter->truyen->tentruyen }}
+            </li>
         </ol>
     </nav>
     <div class="container text-center">

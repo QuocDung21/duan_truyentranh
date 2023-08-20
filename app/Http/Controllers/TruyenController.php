@@ -9,14 +9,20 @@ use Illuminate\Support\Str;
 
 class TruyenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    protected $theloai, $danhmuc;
+
+    public function __construct()
+    {
+        $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
+            ->where('kichhoat', 0)
+            ->get();
+        $this->theloai = Theloai::orderBy('id', 'DESC')
+            ->where('kichhoat', 0)
+            ->get();
+    }
     public function index()
     {
-        $truyen = Truyen::with('danhmuctruyen')
+        $truyen = Truyen::with('danhmuctruyen', 'theloai')
             ->orderBy('id', 'DESC')
             ->get();
         return view('admincp.truyen.index')->with(compact('truyen'));
@@ -31,7 +37,7 @@ class TruyenController extends Controller
     {
         $danhmuc = Danhmuctruyen::orderBy('id', 'DESC')->get();
         $theloai = Theloai::orderBy('id', 'DESC')->get();
-        return view('admincp.truyen.create')->with(compact('danhmuc','theloai'));
+        return view('admincp.truyen.create')->with(compact('danhmuc', 'theloai'));
     }
 
     /**
@@ -143,15 +149,15 @@ class TruyenController extends Controller
         $truyen->theloai_id = $data['theloai_id'];
         $get_image = $request->hinhanh;
         if ($get_image) {
-            $path = 'public/uploads/truyen/'.$truyen->hinhanh;
-            if(file_exists($path)) {
+            $path = 'public/uploads/truyen/' . $truyen->hinhanh;
+            if (file_exists($path)) {
                 unlink($path);
             }
             $path = 'public/uploads/truyen/';
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move($path,$new_image);
+            $get_image->move($path, $new_image);
             $truyen->hinhanh = $new_image;
         }
         $truyen->save();

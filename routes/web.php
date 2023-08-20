@@ -9,24 +9,21 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\DanhmucTruyen;
 use App\Http\Controllers\TheloaiController;
 
-
-
-
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::resource('/danhmuc',DanhmucController::class);
+Route::resource('/danhmuc', DanhmucController::class);
 Route::resource('/truyen', TruyenController::class);
 Route::resource('/chapter', ChapterController::class);
 Route::resource('/theloai', TheloaiController::class);
 
-
 // Client
 Route::get('/', [IndexController::class, 'home']);
-Route::get('/danh-muc/{slug}', [IndexController::class, 'danhmuc']);
+Route::get('/danh-muc/{slug}', [IndexController::class, 'danhmuc'])->name('danh-muc');
 Route::get('/xem-chapter/{slug}', [IndexController::class, 'xemchapter'])->name('xem-chapter');
 Route::get('/xem-truyen/{slug}', [IndexController::class, 'xemtruyen'])->name('xem-truyen');
 Route::get('/the-loai/{slug}', [IndexController::class, 'theloai'])->name('the-loai');
-
+Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
+Route::post('/timkiem-ajax', [IndexController::class, 'timkiem_ajax']);
 
 // Api
 // getdata tabtable

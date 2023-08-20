@@ -9,7 +9,13 @@ class Theloai extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['tentheloai','slug_theloai' ,'mota','kichhoat'];
+    protected $fillable = ['tentheloai', 'slug_theloai', 'mota', 'kichhoat'];
     protected $primaryKey = 'id';
     protected $table = 'theloai';
+
+
+    public function truyen()
+    {
+        return $this->hasMany('App\Models\Truyen');
+    }
 }

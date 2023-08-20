@@ -10,10 +10,14 @@ use App\Models\Chapter;
 
 class IndexController extends Controller
 {
-    protected $theloai, $danhmuc;
+    protected $theloai, $danhmuc, $truyen, $slide_truyen;
 
     public function __construct()
     {
+        $this->slide_truyen = Truyen::orderBy('id', 'DESC')
+            ->where('kichhoat', 0)
+            ->take(8)
+            ->first();
         $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->get();
@@ -27,80 +31,80 @@ class IndexController extends Controller
         $theloai_id = Theloai::where('slug_theloai', $slug)->first();
         if (!$theloai_id) {
             dd('error');
-            // return redirect()->route('home');
         }
-        $truyen = Truyen::orderBy('id', 'DESC')
+        $truyen = Truyen::with('danhmuctruyen', 'theloai')
+            ->orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->where('theloai_id', $theloai_id->id)
             ->get();
-
         return view('pages.theloai')
             ->with(compact('truyen'))
             ->with('theloai', $this->theloai)
-            ->with('danhmuc', $this->danhmuc);
+            ->with('danhmuc', $this->danhmuc)
+            ->with('theloai_id', $theloai_id);
     }
 
     public function home()
     {
-        $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
-            ->where('kichhoat', 0)
-            ->get();
         $truyen = Truyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->get();
         return view('pages.home')
-            ->with(compact('danhmuc', 'truyen'))
+            ->with(compact('truyen'))
+            ->with('danhmuc', $this->danhmuc)
             ->with('theloai', $this->theloai);
     }
 
     public function danhmuc($slug)
     {
-        $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
         $danhmuc_id = DanhmucTruyen::where('slug_danhmuc', $slug)->first();
         $truyen = Truyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->where('danhmuc_id', $danhmuc_id->id)
             ->get();
         return view('pages.danhmuc')
-            ->with(compact('danhmuc', 'truyen'))
-            ->with('theloai', $this->theloai);
+            ->with(compact('truyen'))
+            ->with('theloai', $this->theloai)
+            ->with('danhmuc', $this->danhmuc)
+            ->with('tendanhmuc', $danhmuc_id->tendanhmuc);
     }
 
     public function xemtruyen($slug)
     {
         $truyen = Truyen::orderBy('id', 'DESC')
+            ->with('danhmuctruyen')
             ->where('kichhoat', 0)
             ->where('slug_truyen', $slug)
             ->first();
         $truyenId = Truyen::where('slug_truyen', $slug)->first();
-        $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
-            ->where('kichhoat', 0)
-            ->get();
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
             ->get();
-
         $chapter_dau = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
             ->first();
-
         $cungdanhmuc = Truyen::with('danhmuctruyen')
             ->where('danhmuc_id', $truyen->danhmuctruyen->id)
             ->whereNotIn('id', [$truyen->id])
             ->orderBy('id', 'DESC')
             ->get();
-
         return view('pages.truyen')
-            ->with(compact('danhmuc', 'truyen', 'chapter', 'cungdanhmuc', 'chapter_dau'))
-            ->with('theloai', $this->theloai);
+            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau'))
+            ->with('theloai', $this->theloai)
+            ->with('danhmuc', $this->danhmuc);
     }
 
     public function xemchapter($slug)
     {
-        $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
         $truyenId = Chapter::where('slug_chapter', $slug)->first();
+        $truyen = Chapter::orderBy('id', 'DESC')
+            ->where('slug_chapter', $slug)
+            ->first();
+        $truyen_breadcrumb = Truyen::with('danhmuctruyen', 'theloai')
+            ->where('id', $truyen->id)
+            ->first();
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('slug_chapter', $slug)
@@ -115,7 +119,6 @@ class IndexController extends Controller
         $previous_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
             ->where('id', '<', $chapter->id)
             ->max('slug_chapter');
-
         $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
             ->orderBy('id', 'DESC')
             ->first();
@@ -123,7 +126,41 @@ class IndexController extends Controller
             ->orderBy('id', 'ASC')
             ->first();
         return view('pages.chapter')
-            ->with(compact('danhmuc', 'chapter', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id'))
-            ->with('theloai', $this->theloai);
+            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id'))
+            ->with('theloai', $this->theloai)
+            ->with('danhmuc', $this->danhmuc);
+    }
+
+    public function timkiem()
+    {
+        $tukhoa = $_GET['tukhoa'];
+        $truyen = Truyen::with('danhmuctruyen', 'theloai')
+            ->where('tentruyen', 'LIKE', '%' . $tukhoa . '%')
+            ->orWhere('tomtat', 'LIKE', '%' . $tukhoa . '%')
+            ->orWhere('tacgia', 'LIKE', '%' . $tukhoa . '%')
+            ->get();
+        return view('pages.timkiem')
+            ->with(compact('tukhoa', 'truyen'))
+            ->with('theloai', $this->theloai)
+            ->with('danhmuc', $this->danhmuc);
+    }
+
+    public function timkiem_ajax(Request $request)
+    {
+        $data = $request->all();
+        if ($data['keywords']) {
+            $truyen = Truyen::with('danhmuctruyen', 'theloai')
+                ->where('tentruyen', 'LIKE', '%' . $data['keywords'] . '%')
+                ->orWhere('tomtat', 'LIKE', '%' . $data['keywords'] . '%')
+                ->orWhere('tacgia', 'LIKE', '%' . $data['keywords'] . '%')
+                ->get();
+            $output = '<ul class="dropdown-menu" style="display:block;">';
+            foreach ($truyen as $key => $tr) {
+                $output .= '<li class="li_search_ajax"><a href="">' . $tr->tentruyen . '</a></li>';
+            }
+            $output .= '<li class="li_search_ajax"><a href="#">Tìm kiếm kết quả khác</a></li>';
+            $output .= '</ul>';
+            echo $output;
+        }
     }
 }

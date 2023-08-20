@@ -9,16 +9,24 @@ class Truyen extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['tentruyen','tacgia' ,'tomtat','slug_truyen', 'danhmuc_id', 'hinhanh','kichhoat'];
+    protected $fillable = ['tentruyen', 'tacgia', 'tomtat', 'slug_truyen', 'danhmuc_id', 'hinhanh', 'kichhoat'];
     protected $primaryKey = 'id';
     protected $table = 'truyen';
 
-    public function danhmuctruyen(){
+    public function danhmuctruyen()
+    {
         return $this->belongsTo('App\Models\DanhmucTruyen', 'danhmuc_id', 'id');
     }
 
-    public function chapter()  {
-        return $this->hasMany('App\Models\Chapter','truyen_id' ,'id');
+
+    public function chapter()
+    {
+        return $this->hasMany('App\Models\Chapter', 'truyen_id', 'id');
+    }
+
+    public function theloai()
+    {
+        return $this->belongsTo('App\Models\Theloai', 'theloai_id', 'id');
 
     }
 }

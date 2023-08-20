@@ -3,20 +3,23 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Trang chủ</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ $tendanhmuc }}</li>
+            <li class="breadcrumb-item active" aria-current="page">
+                Tìm kiếm
+            </li>
         </ol>
     </nav>
+    <h3>Bạn đang tìm kiếm với từ khóa là : {{ $tukhoa }}</h3>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
                 @php
-                    echo $count = count($truyen);
+                    $count = count($truyen);
                 @endphp
                 @if ($count == 0)
                     <div class="col-md-12 d-flex">
                         <div class="card shadow-sm">
                             <div class="card-body">
-                                <p>Truyện đang cập nhật...</p>
+                                <p>Không tìm thấy truyện...</p>
                             </div>
                         </div>
                     </div>

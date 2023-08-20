@@ -8,6 +8,7 @@
     <title>Truyện tranh Quản lý</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
@@ -16,7 +17,7 @@
 
 </head>
 
-<body class="container ">
+<body class="container  test">
     <div class="">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="{{ url('/') }}">Truyện tranh</a>
@@ -74,10 +75,21 @@
                         <a class="nav-link disabled">Disabled</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form autocomplete="off" class="form-inline my-2 my-lg-0" method="GET"
+                            action="{{ route('tim-kiem') }}">
+                            @csrf
+                            <div class="d-flex">
+                                <input class="form-control me-2" type="search" name="tukhoa" id="keywords"
+                                    placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-success" type="submit">Search</button>
+                            </div>
+                            <div class="w-full" id="search_ajax">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </nav>
         @yield('slide')
@@ -101,6 +113,30 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script type="text/javascript">
+        $('#keywords').keyup(function() {
+            var keywords = $(this).val();
+            if (keywords != '') {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ url('/timkiem-ajax') }}",
+                    method: "POST",
+                    data: {
+                        keywords: keywords,
+                        _token: _token
+                    },
+                    success: function(data) {
+                        $("#search_ajax").empty(); // Xóa dữ liệu tìm kiếm trước đó
+                        $("#search_ajax").fadeIn(); // Hiển thị phần tử
+                        $("#search_ajax").html(data); // Hiển thị dữ liệu mới
+                    }
+                });
+            } else {
+                $("#search_ajax").fadeOut(); // Ẩn phần tử
+            }
+        });
+    </script>
 
 
     <script type="text/javascript">

@@ -19,7 +19,9 @@
                                     <th scope="col">Tên truyện</th>
                                     <th scope="col">Tác giả</th>
                                     <th scope="col">Slug truyện</th>
-                                    <th scope="col">Mô tả</th>
+                                    <th scope="col">Tóm tắt</th>
+                                    <th scope="col">Thể loại</th>
+                                    <th scope="col">Danh mục</th>
                                     <th scope="col">truyện</th>
                                     <th scope="col">Trạng thái</th>
                                     <th scope="col">Hình ảnh</th>
@@ -34,6 +36,8 @@
                                         <td>{{ $tr->tacgia ? $tr->tacgia : 'Đang cập nhật' }}</td>
                                         <td>{{ $tr->slug_truyen }}</td>
                                         <td>{{ $tr->tomtat }}</td>
+                                        <td>{{ $tr->theloai->tentheloai }}</td>
+                                        <td>{{ $tr->danhmuctruyen->tendanhmuc }}</td>
                                         <td>{{ $tr->danhmuctruyen->tendanhmuc }}</td>
                                         <td class="">
                                             @if ($tr->kichhoat == 0)

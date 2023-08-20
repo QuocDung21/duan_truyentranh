@@ -1,5 +1,15 @@
 @extends('../layout')
 @section('content')
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url('/') }}">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">
+                <a href="{{ route('the-loai', [$theloai_id->slug_theloai]) }}">
+                    {{ $theloai_id->tentheloai }}
+                </a>
+            </li>
+        </ol>
+    </nav>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
