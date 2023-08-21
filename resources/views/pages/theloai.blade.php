@@ -1,6 +1,166 @@
 @extends('../layout')
 @section('content')
-    <nav aria-label="breadcrumb">
+    @php
+        echo $count = count($truyen);
+    @endphp
+    @if ($count == 0)
+        <section class="product-page spad ">
+            <div class="container" style="height: 100vh;">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="product__page__content">
+                            <div class="product__page__title">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-8 col-sm-6">
+                                        <div class="section-title">
+                                            <h4>Truyện đang cập nhật</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <div class="product__page__filter">
+                                            <p>Order by:</p>
+                                            <select>
+                                                <option value="">A-Z</option>
+                                                <option value="">1-10</option>
+                                                <option value="">10-50</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @else
+        <section class="product-page spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="product__page__content">
+                            <div class="product__page__title">
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-8 col-sm-6">
+                                        <div class="section-title">
+                                            <h4>{{ $theloai_id->tentheloai }}</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <div class="product__page__filter">
+                                            <p>Order by:</p>
+                                            <select>
+                                                <option value="">A-Z</option>
+                                                <option value="">1-10</option>
+                                                <option value="">10-50</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                @foreach ($truyen as $key => $tr)
+                                    <div class="col-lg-2  col-md-6 col-sm-6">
+                                        <div class="product__item">
+                                            <div class="product__item__pic set-bg" style="height: 200px"
+                                                data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
+                                                <div class="ep">18 / 18</div>
+                                                <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                            </div>
+                                            <div class="product__item__text">
+                                                <ul>
+                                                    <li>
+                                                        {{ $tr->theloai->tentheloai }}
+                                                    </li>
+                                                </ul>
+                                                <h5 style="font-size: 14px"><a href="#">
+                                                        {{ $tr->tentruyen }}
+                                                    </a></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="product__pagination">
+                            <a href="#" class="current-page">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">4</a>
+                            <a href="#">5</a>
+                            <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-8">
+                        <div class="product__sidebar">
+                            <div class="product__sidebar__view">
+                                <div class="section-title">
+                                    <h5>Top Views</h5>
+                                </div>
+                                {{-- <ul class="filter__controls">
+                                <li class="active" data-filter="*">Day</li>
+                                <li data-filter=".week">Week</li>
+                                <li data-filter=".month">Month</li>
+                                <li data-filter=".years">Years</li>
+                            </ul> --}}
+                                <div class="filter__gallery">
+                                    @foreach ($truyen as $tr)
+                                        <div class="product__sidebar__comment__item" style=" height:150px">
+                                            <div class="product__sidebar__comment__item__pic">
+                                                <img style=" width:100px"
+                                                    src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="product__sidebar__comment__item__text">
+                                                <ul>
+                                                    <li>Active</li>
+                                                    <li>Movie</li>
+                                                </ul>
+                                                <h5 style="font-size: 13px"><a href="#">
+                                                        {{ $tr->tentruyen }}
+                                                    </a></h5>
+                                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="product__sidebar__comment">
+                                <div class="section-title">
+                                    <h5>New Comment</h5>
+                                </div>
+                                <div class="product__sidebar__comment__item">
+                                    @foreach ($truyen as $tr)
+                                        <div class="product__sidebar__comment__item" style=" height:150px">
+                                            <div class="product__sidebar__comment__item__pic">
+                                                <img style=" width:100px"
+                                                    src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
+                                                    alt="">
+                                            </div>
+                                            <div class="product__sidebar__comment__item__text">
+                                                <ul>
+                                                    <li>Active</li>
+                                                    <li>Movie</li>
+                                                </ul>
+                                                <h5 style="font-size: 13px"><a href="#">
+                                                        {{ $tr->tentruyen }}
+                                                    </a></h5>
+                                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    <!-- Product Section End -->
+    {{-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Trang chủ</a></li>
             <li class="breadcrumb-item active" aria-current="page">
@@ -48,5 +208,5 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

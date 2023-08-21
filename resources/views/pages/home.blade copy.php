@@ -36,7 +36,7 @@
                         </div>
                         <div class="row">
                             @foreach ($truyen as $key => $tr)
-                                <div class="col-lg-2  col-md-6 col-4">
+                                <div class="col-lg-2  col-md-6 col-sm-6">
                                     <div class="product__item">
                                         <div class="product__item__pic set-bg" style="height: 200px"
                                             data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
@@ -45,13 +45,13 @@
                                             <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                         </div>
                                         <div class="product__item__text">
-                                            {{-- <ul>
-                                                    <li>
-                                                        {{ $tr->theloai->tentheloai }}
-                                                    </li>
-                                                </ul> --}}
-                                            <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                    style="font-size: 10px;font-weight: 600" href="#">
+                                            <ul>
+                                                <li>
+                                                    {{ $tr->theloai->tentheloai }}
+                                                </li>
+                                            </ul>
+                                            <h5 style="font-size: 14px"><a
+                                                    href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                                     {{ $tr->tentruyen }}
                                                 </a></h5>
                                         </div>
@@ -79,7 +79,7 @@
                             </div>
                             <div class="row">
                                 @foreach ($truyen as $key => $tr)
-                                    <div class="col-lg-2  col-md-6 col-4">
+                                    <div class="col-lg-2  col-md-6 col-sm-6">
                                         <div class="product__item">
                                             <div class="product__item__pic set-bg" style="height: 200px"
                                                 data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
@@ -88,13 +88,12 @@
                                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                             </div>
                                             <div class="product__item__text">
-                                                {{-- <ul>
+                                                <ul>
                                                     <li>
                                                         {{ $tr->theloai->tentheloai }}
                                                     </li>
-                                                </ul> --}}
-                                                <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                        style="font-size: 10px;font-weight: 600" href="#">
+                                                </ul>
+                                                <h5 style="font-size: 14px"><a href="#">
                                                         {{ $tr->tentruyen }}
                                                     </a></h5>
                                             </div>
@@ -122,8 +121,7 @@
                                             <li>Active</li>
                                             <li>Movie</li>
                                         </ul>
-                                        <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                style="font-size: 10px;font-weight: 600" href="#">
+                                        <h5 style="font-size: 13px"><a href="#">
                                                 {{ $tr->tentruyen }}
                                             </a></h5>
                                         <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
@@ -146,8 +144,7 @@
                                             <li>Active</li>
                                             <li>Movie</li>
                                         </ul>
-                                        <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                style="font-size: 10px;font-weight: 600" href="#">
+                                        <h5 style="font-size: 13px"><a href="#">
                                                 {{ $tr->tentruyen }}
                                             </a></h5>
                                         <span><i class="fa fa-eye"></i> 19.141 Viewes</span>

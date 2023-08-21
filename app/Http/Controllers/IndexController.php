@@ -47,7 +47,11 @@ class IndexController extends Controller
     public function home()
     {
         $truyen = Truyen::orderBy('id', 'DESC')
+            ->with('theloai')
             ->where('kichhoat', 0)
+            ->get();
+        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'theloai')
+            ->limit(12)
             ->get();
         return view('pages.home')
             ->with(compact('truyen'))
