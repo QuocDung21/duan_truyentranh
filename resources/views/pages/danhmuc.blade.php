@@ -97,28 +97,20 @@
                             </div>
                         </div>
                         <div class="row">
-                            @foreach ($truyen as $key => $tr)
-                                <div class="col-lg-2  col-md-6 col-sm-6">
-                                    <div class="product__item">
-                                        <div class="product__item__pic set-bg" style="height: 200px"
-                                            data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
-                                            <div class="ep">18 / 18</div>
-                                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                        </div>
-                                        <div class="product__item__text">
-                                            <ul>
-                                                <li>
-                                                    {{ $tr->theloai->tentheloai }}
-                                                </li>
-                                            </ul>
-                                            <h5 style="font-size: 14px"><a href="#">
-                                                    {{ $tr->tentruyen }}
-                                                </a></h5>
+                             @foreach ($truyen as $key => $tr)
+                                 <a href="{{ route('xem-truyen',[$tr->slug_truyen]) }}">
+                                      <div class="col-lg-2 col-md-6 col-4">
+                                        <div class="product__item">
+                                            <div class="product__item__pic set-bg" style="height: 200px; width: 130px;"
+                                                data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
+                                                <div class="ep">18 / 18</div>
+                                                <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
+                                            </div>
+
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                 </a>
+                                @endforeach
                         </div>
                     </div>
                     <div class="product__pagination">

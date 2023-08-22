@@ -104,9 +104,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Trang chủ</a>
-                        <a href="./categories.html">Categories</a>
-                        <span>Romance</span>
+                        <a href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a
+                            href="{{ route('danh-muc', [$truyen->danhmuctruyen->slug_danhmuc]) }}">{{ $truyen->danhmuctruyen->tendanhmuc }}</a>
+                        <span>{{ $truyen->tentruyen }}</span>
                     </div>
                 </div>
             </div>
@@ -126,7 +127,7 @@
             <div class="anime__details__content">
                 <div class="row">
                     <div class="col-lg-3">
-                        <div class="anime__details__pic set-bg"
+                        <div class="anime__details__pic set-bg "
                             data-setbg="{{ asset('public/uploads/truyen/' . $truyen->hinhanh) }}">
                             <div class="comment"><i class="fa fa-comments"></i> 11</div>
                             <div class="view"><i class="fa fa-eye"></i> 9141</div>
@@ -136,6 +137,16 @@
                         <div class="anime__details__text">
                             <div class="anime__details__title">
                                 <h3>{{ $truyen->tentruyen }}</h3>
+                            </div>
+                            <div class="anime__details__rating">
+                                <div class="rating">
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star"></i></a>
+                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
+                                </div>
+                                <span>1.029 Votes</span>
                             </div>
                             <p>{{ $truyen->tomtat }}</p>
                             <div class="anime__details__widget">
@@ -163,18 +174,30 @@
                                         <i class="fa fa-angle-right"></i></a>
                                 </div>
                             @else
-                             <div class="anime__details__btn">
-                                    <a href="#"
-                                        class="watch-btn"><span>Đang cập nhật</span>
+                                <div class="anime__details__btn">
+                                    <a href="#" class="watch-btn"><span>Đang cập nhật</span>
                                         <i class="fa fa-angle-right"></i></a>
                                 </div>
                             @endif
 
                         </div>
+
                     </div>
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="anime__details__episodes">
+                        <div class="section-title">
+                            <h5>Danh mục {{ $chapter == null ? '' : 'đang cập nhật'    }}</h5>
+                        </div>
+                        @foreach ($chapter as $cter)
+                            <a href="{{ route('xem-chapter',[$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+            {{-- <div class="row">
                 <div class="col-lg-8 col-md-8">
                     <div class="anime__details__review">
                         <div class="section-title">
@@ -274,7 +297,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </section>
     <!-- Anime Section End -->

@@ -16,19 +16,20 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> --}}
     {{-- test giao dien moi --}}
     <!-- Google Font -->
+    <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <!-- Css Styles -->
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/elegant-icons.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/plyr.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/elegant-icons.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/plyr.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/nice-select.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/owl.carousel.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/slicknav.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
 </head>
 
 <body>
@@ -92,16 +93,18 @@
             </div>
         </nav>
     <div id="preloder"> --}}
-    <div class="loader"></div>
+    <div class="loader" style="z-index: 9999"></div>
     </div>
-
     <header class="header">
         <div class="container">
             <div class="row">
                 <div class="col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html">
-                            <img src="img/logo.png" alt="">
+                    <div class="header__logo"
+                        style="height: 50px;width: 50px; display: flex;justify-content: center;align-items: center;margin-top: 4px;text-align: center;">
+                        <a href="{{ url('/') }}" style="display: flex;justify-content: center;align-items: center">
+                            <img style="border-radius: 50%;"
+                                src="https://img.freepik.com/free-vector/flat-design-ninja-logo-template_23-2149008851.jpg?w=2000"
+                                alt="">
                         </a>
                     </div>
                 </div>
@@ -138,8 +141,8 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="./login.html"><span class="icon_profile"></span></a>
+                        {{-- <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a href="./login.html"><span class="icon_profile"></span></a> --}}
                         <i class="fa-solid fa-user"></i>
                     </div>
                 </div>
@@ -200,7 +203,7 @@
     @yield('slide')
     @yield('content')
     <!-- Footer Section Begin -->
-    <footer class="footer">
+    {{-- <footer class="footer">
         <div class="page-up">
             <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
         </div>
@@ -234,7 +237,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> --}}
     <!-- Footer Section End -->
     {{-- <footer class="text-muted">
             <div class="container">
@@ -263,7 +266,6 @@
     <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-
     <script type="text/javascript">
         $('#keywords').keyup(function() {
             var keywords = $(this).val();
@@ -330,7 +332,6 @@
             }
             return false;
         })
-
         current_chapter();
 
         function current_chapter() {
@@ -338,6 +339,7 @@
             $('.select-chapter').find('option[value="' + url + '"]').attr("selected", true);
         }
     </script>
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({

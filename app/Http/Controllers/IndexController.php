@@ -130,7 +130,7 @@ class IndexController extends Controller
             ->orderBy('id', 'ASC')
             ->first();
         return view('pages.chapter')
-            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id'))
+            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id','truyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc);
     }
