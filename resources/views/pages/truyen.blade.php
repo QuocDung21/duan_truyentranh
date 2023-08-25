@@ -129,8 +129,10 @@
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg "
                             data-setbg="{{ asset('public/uploads/truyen/' . $truyen->hinhanh) }}">
-                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                            {{-- <div class="comment"><i class="fa fa-comments"></i> 11</div> --}}
+                            <div class="view" style="top: 5px;height: 26px;"><i class="fa fa-eye"></i>
+                                {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-9">
@@ -154,15 +156,32 @@
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
                                             <li><span>Tác giả:</span> {{ $truyen->tacgia }}</li>
-                                            <li><span>Danh mục:</span> {{ $truyen->danhmuctruyen->tendanhmuc }} </li>
-                                            <li><span>Thể loại:</span> {{ $truyen->theloai->tentheloai }}</li>
+                                            <li><span>Số chapter:</span>{{ count($chapter) }}</li>
+                                            <li><span>Lượt xem:</span> {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
+                                            </li>
+                                            <li><span>Trạng thái:</span> Đang cập nhật</li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
-                                            <li><span>Số chapter:</span>{{ count($chapter) }}</li>
-                                            <li><span>Lượt xem:</span> 131,541</li>
-                                            <li><span>Trạng thái:</span> Đang cập nhật</li>
+                                            <li>
+                                                <span>Danh mục:</span>
+                                                @foreach ($danhMucTruyen as $key => $dmuc)
+                                                    {{ $dmuc->tendanhmuc == '' ? 'Đang cập nhật' : $dmuc->tendanhmuc }}
+                                                    @if ($key < count($danhMucTruyen) - 1)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </li>
+                                            <li>
+                                                <span>Thể loại:</span>
+                                                @foreach ($theLoaiTruyen as $key => $tloai)
+                                                    {{ $tloai->tentheloai == null ? 'Đang cập nhật' : $tloai->tentheloai }}
+                                                    @if ($key < count($theLoaiTruyen) - 1)
+                                                        ,
+                                                    @endif
+                                                @endforeach
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -189,10 +208,10 @@
                 <div class="col-lg-12">
                     <div class="anime__details__episodes">
                         <div class="section-title">
-                            <h5>Danh mục {{ $chapter == null ? '' : 'đang cập nhật'    }}</h5>
+                            <h5>Danh mục {{ $chapter == null ? '' : 'đang cập nhật' }}</h5>
                         </div>
                         @foreach ($chapter as $cter)
-                            <a href="{{ route('xem-chapter',[$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
+                            <a href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
                         @endforeach
                     </div>
                 </div>

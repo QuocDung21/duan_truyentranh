@@ -20,39 +20,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-sm-12 col-md-12">
-                    <div class="trending__product ">
-                        <div class="row">
-                            <div class="col-lg-8 col-md-8 col-sm-8">
-                                <div class="section-title">
-                                    <h4>Truyện hot</h4>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4">
-                                <div class="btn__all">
-                                    <a href="#" class="primary-btn">Xem tất cả </a>
-                                    {{-- <a href="#" class="primary-btn">Xem tất cả <span class="arrow_right"></span></a> --}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            @foreach ($truyen as $key => $tr)
-                                <a href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
-                                    <div class="col-lg-2 col-md-6 col-4">
-                                        <div class="product__item">
-                                            <div class="product__item__pic set-bg" style="height: 200px;width: 130px; "
-                                                data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
-                                                {{-- <div class="comment"><i class="fa fa-comments"></i> 11</div> --}}
-                                                <div class="view" style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i class="fa fa-eye"></i> 9141</div>
-                                                {{-- <div class="ep"><i class="fa fa-eye"></i> 124</div> --}}
-                                                <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                    @foreach ($danhmuc as $dmuc)
+                    @foreach ($danhMucList as $dmuc)
                         <div class="trending__product ">
                             <div class="row">
                                 <div class="col-lg-8 col-md-8 col-sm-8">
@@ -64,22 +32,24 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="btn__all">
-                                        <a href="#" class="primary-btn">Xem tất cả </a>
-                                        {{-- <a href="#" class="primary-btn">Xem tất cả <span class="arrow_right"></span></a> --}}
+                                        <a href="{{ route('danh-muc', [$dmuc->slug_danhmuc]) }}" class="primary-btn">Xem tất cả </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="row ">
-                                @foreach ($truyen as $key => $tr)
+                                @foreach ($dmuc->danhSachTruyen as $key => $tr)
                                     <a href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                         <div class="col-lg-2 col-md-6 col-4">
                                             <div class="product__item">
-                                                <div class="product__item__pic set-bg" style="height: 200px; width: 130px;"
+                                                <div class="product__item__pic set-bg" style="height: 200px;width: 130px; "
                                                     data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
-                                                    <div class="ep">18 / 18</div>
+                                                    {{-- <div class="comment"><i class="fa fa-comments"></i> 11</div> --}}
+                                                    <div class="view"
+                                                        style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
+                                                            class="fa fa-eye"></i> {{ $tr->luotxem == 0 ? 0 : $tr->luotxem  }}</div>
+                                                    {{-- <div class="ep"><i class="fa fa-eye"></i> 124</div> --}}
                                                     <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </a>
@@ -94,36 +64,11 @@
                             <div class="section-title">
                                 <h5>Mới cập nhật</h5>
                             </div>
-                            @foreach ($truyen as $tr)
+                            @foreach ($truyenmoicapnhat as $tr)
                                 <div class="product__sidebar__comment__item" style=" height:150px">
                                     <div class="product__sidebar__comment__item__pic">
                                         <img style=" width:100px" src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
                                             alt="">
-                                    </div>
-                                    <div class="product__sidebar__comment__item__text">
-                                        <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
-                                        </ul>
-                                        <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                style="font-size: 10px;font-weight: 600"
-                                                href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
-                                                {{ $tr->tentruyen }}
-                                            </a></h5>
-                                        <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="product__sidebar__comment">
-                            <div class="section-title">
-                                <h5>Mới cập nhật</h5>
-                            </div>
-                            @foreach ($truyen as $tr)
-                                <div class="product__sidebar__comment__item" style=" height:150px">
-                                    <div class="product__sidebar__comment__item__pic">
-                                        <img style=" width:100px"
-                                            src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt="">
                                     </div>
                                     <div class="product__sidebar__comment__item__text">
                                         <ul>

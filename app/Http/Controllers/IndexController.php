@@ -7,6 +7,7 @@ use App\Models\DanhmucTruyen;
 use App\Models\Theloai;
 use App\Models\Truyen;
 use App\Models\Chapter;
+use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
@@ -29,14 +30,12 @@ class IndexController extends Controller
     public function theloai($slug)
     {
         $theloai_id = Theloai::where('slug_theloai', $slug)->first();
-        if (!$theloai_id) {
-            dd('error');
-        }
         $truyen = Truyen::with('danhmuctruyen', 'theloai')
             ->orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->where('theloai_id', $theloai_id->id)
             ->get();
+
         return view('pages.theloai')
             ->with(compact('truyen'))
             ->with('theloai', $this->theloai)
@@ -46,15 +45,25 @@ class IndexController extends Controller
 
     public function home()
     {
+        $danhMucList = DanhmucTruyen::all();
+        foreach ($danhMucList as $dm) {
+            $dm->danhSachTruyen = Truyen::where('danhmuc_id', $dm->id)
+                ->where('kichhoat', 0)
+                ->orderBy('id', 'DESC')
+                ->take(10)
+                ->get();
+        }
         $truyen = Truyen::orderBy('id', 'DESC')
             ->with('theloai')
             ->where('kichhoat', 0)
             ->get();
         $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'theloai')
-            ->limit(12)
+            ->take(5)
+            ->where('kichhoat', 0)
             ->get();
+        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')->get();
         return view('pages.home')
-            ->with(compact('truyen'))
+            ->with(compact('truyen', 'danhMucList', 'truyenmoicapnhat'))
             ->with('danhmuc', $this->danhmuc)
             ->with('theloai', $this->theloai);
     }
@@ -76,10 +85,12 @@ class IndexController extends Controller
     public function xemtruyen($slug)
     {
         $truyen = Truyen::orderBy('id', 'DESC')
-            ->with('danhmuctruyen')
+            ->with('danhmuctruyen', 'thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
             ->where('kichhoat', 0)
             ->where('slug_truyen', $slug)
             ->first();
+        $danhMucTruyen = $truyen->thuocnhieudanhmuctruyen;
+        $theLoaiTruyen = $truyen->thuocnhieutheloaitruyen;
         $truyenId = Truyen::where('slug_truyen', $slug)->first();
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
@@ -95,7 +106,7 @@ class IndexController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
         return view('pages.truyen')
-            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau'))
+            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc);
     }
@@ -109,6 +120,7 @@ class IndexController extends Controller
         $truyen_breadcrumb = Truyen::with('danhmuctruyen', 'theloai')
             ->where('id', $truyen->id)
             ->first();
+
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('slug_chapter', $slug)
@@ -129,8 +141,16 @@ class IndexController extends Controller
         $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
             ->orderBy('id', 'ASC')
             ->first();
+        $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
+        if (!Session::has($hasViewedKey)) {
+            // Tăng lượt xem cho truyện
+            $chapter->truyen->luotxem += 1;
+            $chapter->truyen->save();
+            // Đánh dấu là đã xem trong session
+            Session::put($hasViewedKey, true);
+        }
         return view('pages.chapter')
-            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id','truyen'))
+            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc);
     }
@@ -147,6 +167,15 @@ class IndexController extends Controller
             ->with(compact('tukhoa', 'truyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc);
+    }
+
+    public function phanquyen($id) {
+        $user = User::find($id);
+
+    }
+
+    public function assignRole($id){
+
     }
 
     public function timkiem_ajax(Request $request)

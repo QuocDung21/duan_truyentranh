@@ -15,6 +15,13 @@ class ChapterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:publish chapter|edit chapter|delete chapter|add chapter', ['only' => ['index', 'show']]);
+        $this->middleware('permission:add chapter|publish chapter|public', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit chapter|publish chapter|public', ['only' => ['edit', 'update']]);
+        // $this->middleware('permission:view chapter|publish chapter | public', ['only' => ['index']]);
+    }
     public function index()
     {
         $chapter = Chapter::with('truyen')
@@ -63,7 +70,7 @@ class ChapterController extends Controller
         $chapter->slug_chapter = $slug;
         $chapter->tomtat = $data['tomtat'];
         $chapter->noidung = $data['noidung'];
-        $chapter->kichhoat = $data['kichhoat'];
+        $chapter->kichhoat = 1;
         $chapter->truyen_id = $data['truyen_id'];
         $chapter->save();
         return redirect()
@@ -125,6 +132,7 @@ class ChapterController extends Controller
         $chapter->slug_chapter = $slug;
         $chapter->tomtat = $data['tomtat'];
         $chapter->noidung = $data['noidung'];
+        // $chapter->kichhoat = 1;
         $chapter->kichhoat = $data['kichhoat'];
         $chapter->truyen_id = $data['truyen_id'];
         $chapter->save();
@@ -145,27 +153,5 @@ class ChapterController extends Controller
         return redirect()
             ->back()
             ->with('status', 'Xóa chapter truyện thành công');
-    }
-
-    // Api
-    public function destroyChapterApi($id)
-    {
-        $data = Chapter::findOrFail($id);
-        $data->delete();
-    }
-    public function getChaptersApi(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Chapter::orderBy('id', 'DESC')->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($data) {
-                    $button = '<a type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Sửa</a>';
-                    $button .= '   <a type="button" name="edit" id="' . $data->id . '" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Xóa</a>';
-                    return $button;
-                })
-                ->make(true);
-        }
-        return view('admincp.chapter.index');
     }
 }

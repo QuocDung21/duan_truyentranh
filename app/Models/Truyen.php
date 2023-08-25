@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Theloai;
+use App\Models\DanhmucTruyen;
 
 class Truyen extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['tentruyen', 'tacgia', 'tomtat', 'slug_truyen', 'danhmuc_id', 'hinhanh', 'kichhoat'];
+    protected $fillable = ['tentruyen', 'tacgia', 'tomtat', 'slug_truyen', 'danhmuc_id', 'hinhanh', 'kichhoat','luotxem'];
     protected $primaryKey = 'id';
     protected $table = 'truyen';
 
@@ -17,7 +19,6 @@ class Truyen extends Model
     {
         return $this->belongsTo('App\Models\DanhmucTruyen', 'danhmuc_id', 'id');
     }
-
 
     public function chapter()
     {
@@ -27,6 +28,14 @@ class Truyen extends Model
     public function theloai()
     {
         return $this->belongsTo('App\Models\Theloai', 'theloai_id', 'id');
+    }
+    public function thuocnhieutheloaitruyen()
+    {
+        return $this->belongsToMany(Theloai::class, 'truyen_theloai', 'truyen_id', 'theloai_id');
+    }
 
+    public function thuocnhieudanhmuctruyen()
+    {
+        return $this->belongsToMany(DanhmucTruyen::class, 'truyen_danhmuc', 'truyen_id', 'danhmuc_id');
     }
 }

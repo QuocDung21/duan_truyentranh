@@ -1,28 +1,32 @@
 @extends('layouts.app')
 @section('content')
-    @include('layouts.nav')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Cập nhật chapter') }}</div>
-                    @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+    @if (session('status'))
+        <script>
+            $(function() {
+                toastr.success('{{ session('status') }}', 'Success');
+            });
+        </script>
+    @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                $(function() {
+                    toastr.error('{{ $error }}', 'Error');
+                });
+            </script>
+        @endforeach
+    @endif
+    <div class="content-wrapper">
+        <section class="content mt-3">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Cập nhật chapter</h3>
                             </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('chapter.update', [$chapter->id]) }}"
+                            <div class="card-body">
+                                 <form method="POST" action="{{ route('chapter.update', [$chapter->id]) }}"
                             enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
@@ -38,9 +42,9 @@
                                 {{ $chapter->tomtat }}
                                 </textarea>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-3 editor">
                                 <label for="exampleInputEmail1" class="form-label">Nội dung chapter</label>
-                                <textarea type="text" name="noidung" placeholder="Nội dung chapter..." class="form-control"
+                                <textarea  type="text" name="noidung" id="noidung_chapter" placeholder="Nội dung chapter..." class="form-control"
                                     value="{{ $chapter->noidung }}" id="exampleInputEmail1" rows="5">{{ $chapter->noidung }}</textarea>
                             </div>
                             <div class="mb-3">
@@ -70,9 +74,11 @@
                             <a href="{{ route('chapter.index') }}" class="btn btn-primary">Trở về</a>
 
                         </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div><!-- /.container-fluid -->
+        </section>
     </div>
 @endsection

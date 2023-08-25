@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use App\Models\Theloai;
-
+use Illuminate\Support\Str;
 
 class TheloaiController extends Controller
 {
@@ -13,6 +13,12 @@ class TheloaiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:publish genre|edit genre|delete genre|add genre|publish genre|public', ['only' => ['index', 'show']]);
+        $this->middleware('permission:add genre|public|publish genre', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit genre|public|publish genre', ['only' => ['edit', 'update']]);
+    }
     public function index()
     {
         $theloai = Theloai::orderBy('id', 'DESC')->get();
@@ -26,7 +32,7 @@ class TheloaiController extends Controller
      */
     public function create()
     {
-        //
+        return view('admincp.theloai.create');
     }
 
     /**
@@ -37,7 +43,28 @@ class TheloaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate(
+            [
+                'tentheloai' => 'required|unique:theloai|max:255',
+                'mota' => 'required|max:255',
+                'kichhoat' => 'required',
+            ],
+            [
+                'tentheloai.unique' => 'Tên thể loại đã tổn tại',
+                'tentheloai.required' => 'Tên thể loại không được trống',
+                'mota.required' => 'Mô tả không được trống',
+            ],
+        );
+        $slug = Str::slug($data['tentheloai']);
+        $theloaitruyen = new Theloai();
+        $theloaitruyen->tentheloai = $data['tentheloai'];
+        $theloaitruyen->slug_theloai = $slug;
+        $theloaitruyen->mota = $data['mota'];
+        $theloaitruyen->kichhoat = $data['kichhoat'];
+        $theloaitruyen->save();
+        return redirect()
+            ->back()
+            ->with('status', 'Thêm thể loại thành công');
     }
 
     /**
@@ -60,6 +87,7 @@ class TheloaiController extends Controller
     public function edit($id)
     {
         //
+        return view('admincp.theloai.edit');
     }
 
     /**

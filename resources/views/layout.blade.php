@@ -32,127 +32,67 @@
     <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
 </head>
 
-<body>
-    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{{ url('/') }}">Truyện tranh</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url('/') }}">Trang chủ</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Danh mục truyện
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach ($danhmuc as $dmuc)
-                                <li><a class="dropdown-item"
-                                        href="{{ url('danh-muc/' . $dmuc->slug_danhmuc) }}">{{ $dmuc->tendanhmuc }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Thể loại
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach ($theloai as $tloai)
-                                <li><a class="dropdown-item"
-                                        href="{{ url('the-loai/' . $tloai->slug_theloai) }}">{{ $tloai->tentheloai }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled">Disabled</a>
-                    </li>
-                </ul>
-                <div class="row">
-                    <div class="col-md-12">
-                        <form autocomplete="off" class="form-inline my-2 my-lg-0" method="GET"
-                            action="{{ route('tim-kiem') }}">
-                            @csrf
-                            <div class="d-flex">
-                                <input class="form-control me-2" type="search" name="tukhoa" id="keywords"
-                                    placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-success" type="submit">Search</button>
-                            </div>
-                            <div class="w-full" id="search_ajax">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    <div id="preloder"> --}}
-    <div class="loader" style="z-index: 9999"></div>
-    </div>
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="header__logo"
-                        style="height: 50px;width: 50px; display: flex;justify-content: center;align-items: center;margin-top: 4px;text-align: center;">
-                        <a href="{{ url('/') }}" style="display: flex;justify-content: center;align-items: center">
-                            <img style="border-radius: 50%;"
-                                src="https://img.freepik.com/free-vector/flat-design-ninja-logo-template_23-2149008851.jpg?w=2000"
-                                alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li class="active"><a href="{{ url('/') }}">Trang chủ</a></li>
-                                <li><a href="#">Danh mục <i class="fa-solid fa-caret-down"></i></a>
-                                    <ul class="dropdown">
-                                        @foreach ($danhmuc as $dmuc)
-                                            <li>
-                                                <a class="dropdown-item"
-                                                    href="{{ url('danh-muc/' . $dmuc->slug_danhmuc) }}">{{ $dmuc->tendanhmuc }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                <li><a href="#">Thể loại <i class="fa-solid fa-caret-down"></i></a>
-                                    <ul class="dropdown">
-                                        @foreach ($theloai as $tloai)
-                                            <li><a class="dropdown-item"
-                                                    href="{{ url('the-loai/' . $tloai->slug_theloai) }}">{{ $tloai->tentheloai }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li>
-                                {{-- <li><a href="./blog.html">Our Blog</a></li> --}}
-                                <li><a href="#">Liên hệ</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
-                        {{-- <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="./login.html"><span class="icon_profile"></span></a> --}}
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                </div>
-            </div>
-            <div id="mobile-menu-wrap"></div>
+    <body>
+        <div class="loader" style="z-index: 9999"></div>
         </div>
-    </header>
-    <!-- Header End -->
-    <!-- Hero Section Begin -->
-    {{-- <section class="hero">
+        <header class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="header__logo"
+                            style="height: 50px;width: 50px; display: flex;justify-content: center;align-items: center;margin-top: 4px;text-align: center;">
+                            <a href="{{ url('/') }}" style="display: flex;justify-content: center;align-items: center">
+                                <img style="border-radius: 50%;"
+                                    src="https://img.freepik.com/free-vector/flat-design-ninja-logo-template_23-2149008851.jpg?w=2000"
+                                    alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="header__nav">
+                            <nav class="header__menu mobile-menu">
+                                <ul>
+                                    <li class="active"><a href="{{ url('/') }}">Trang chủ</a></li>
+                                    <li><a href="#">Danh mục <i class="fa-solid fa-caret-down"></i></a>
+                                        <ul class="dropdown">
+                                            @foreach ($danhmuc as $dmuc)
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ url('danh-muc/' . $dmuc->slug_danhmuc) }}">{{ $dmuc->tendanhmuc }}
+                                                    </a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    <li><a href="#">Thể loại <i class="fa-solid fa-caret-down"></i></a>
+                                        <ul class="dropdown">
+                                            @foreach ($theloai as $tloai)
+                                                <li><a class="dropdown-item"
+                                                        href="{{ url('the-loai/' . $tloai->slug_theloai) }}">{{ $tloai->tentheloai }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                    {{-- <li><a href="./blog.html">Our Blog</a></li> --}}
+                                    <li><a href="#">Liên hệ</a></li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="header__right">
+                            {{-- <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a href="./login.html"><span class="icon_profile"></span></a> --}}
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+                </div>
+                <div id="mobile-menu-wrap"></div>
+            </div>
+        </header>
+        <!-- Header End -->
+        <!-- Hero Section Begin -->
+        {{-- <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
                 <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
@@ -194,16 +134,14 @@
             </div>
         </div>
     </section> --}}
-    <!-- Product Section Begin -->
+        <!-- Product Section Begin -->
 
-    <!-- Product Section End -->
-    <!-- Hero Section End -->
-
-
-    @yield('slide')
-    @yield('content')
-    <!-- Footer Section Begin -->
-    {{-- <footer class="footer">
+        <!-- Product Section End -->
+        <!-- Hero Section End -->
+            @yield('slide')
+            @yield('content')
+        <!-- Footer Section Begin -->
+        {{-- <footer class="footer">
         <div class="page-up">
             <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
         </div>
@@ -238,8 +176,8 @@
             </div>
         </div>
     </footer> --}}
-    <!-- Footer Section End -->
-    {{-- <footer class="text-muted">
+        <!-- Footer Section End -->
+        {{-- <footer class="text-muted">
             <div class="container">
                 <p class="float-right">
                     <a href="">Back to top</a>
@@ -254,110 +192,110 @@
                 </p>
             </div>
         </footer> --}}
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script>
+        {{-- <script src="{{ asset('js/app.js') }}" defer></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> --}}
-    <!-- Js Plugins -->
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/player.js') }}"></script>
-    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
-    <script src="{{ asset('js/mixitup.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-    <script type="text/javascript">
-        $('#keywords').keyup(function() {
-            var keywords = $(this).val();
-            if (keywords != '') {
-                var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{ url('/timkiem-ajax') }}",
-                    method: "POST",
-                    data: {
-                        keywords: keywords,
-                        _token: _token
-                    },
-                    success: function(data) {
-                        $("#search_ajax").empty(); // Xóa dữ liệu tìm kiếm trước đó
-                        $("#search_ajax").fadeIn(); // Hiển thị phần tử
-                        $("#search_ajax").html(data); // Hiển thị dữ liệu mới
-                    }
-                });
-            } else {
-                $("#search_ajax").fadeOut(); // Ẩn phần tử
-            }
-        });
-    </script>
-    <script type="text/javascript">
-        $('.owl-carousel').owlCarousel({
-            margin: 10,
-            center: true,
-            lazyLoad: true,
-            loop: true,
-            dots: true,
-            autoplay: true,
-            autoplayTimeout: 2000,
-            autoplayHoverPause: true,
-            nav: true,
-            responsive: {
-                0: {
-                    items: 4,
-                    margin: 40,
-                    center: true,
-                },
-                300: {
-                    items: 2,
-                    margin: 0,
-                    margin: 40,
-                    center: true,
-                },
-                600: {
-                    items: 2,
-                    margin: 0,
-                },
-                1000: {
-                    items: 5,
-                    center: true
+        <!-- Js Plugins -->
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/player.js') }}"></script>
+        <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+        <script src="{{ asset('js/mixitup.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
+        <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('js/main.js') }}"></script>
+        <script type="text/javascript">
+            $('#keywords').keyup(function() {
+                var keywords = $(this).val();
+                if (keywords != '') {
+                    var _token = $('input[name="_token"]').val();
+                    $.ajax({
+                        url: "{{ url('/timkiem-ajax') }}",
+                        method: "POST",
+                        data: {
+                            keywords: keywords,
+                            _token: _token
+                        },
+                        success: function(data) {
+                            $("#search_ajax").empty(); // Xóa dữ liệu tìm kiếm trước đó
+                            $("#search_ajax").fadeIn(); // Hiển thị phần tử
+                            $("#search_ajax").html(data); // Hiển thị dữ liệu mới
+                        }
+                    });
+                } else {
+                    $("#search_ajax").fadeOut(); // Ẩn phần tử
                 }
-            }
-        })
-    </script>
-
-    <script type="text/javascript">
-        $('.select-chapter').on('change', function() {
-            var url = $(this).val();
-            if (url) {
-                window.location = url
-            }
-            return false;
-        })
-        current_chapter();
-
-        function current_chapter() {
-            var url = window.location.href;
-            $('.select-chapter').find('option[value="' + url + '"]').attr("selected", true);
-        }
-    </script>
-
-    <script type="text/javascript">
-        $(document).ready(function() {
+            });
+        </script>
+        <script type="text/javascript">
             $('.owl-carousel').owlCarousel({
-                // Các thiết lập khác của Owl Carousel
-            });
+                margin: 10,
+                center: true,
+                lazyLoad: true,
+                loop: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 4,
+                        margin: 40,
+                        center: true,
+                    },
+                    300: {
+                        items: 2,
+                        margin: 0,
+                        margin: 40,
+                        center: true,
+                    },
+                    600: {
+                        items: 2,
+                        margin: 0,
+                    },
+                    1000: {
+                        items: 5,
+                        center: true
+                    }
+                }
+            })
+        </script>
 
-            // Lắng nghe sự kiện click nút chuyển qua
-            $('.custom-next').click(function() {
-                $('.owl-carousel').trigger('next.owl.carousel');
-            });
+        <script type="text/javascript">
+            $('.select-chapter').on('change', function() {
+                var url = $(this).val();
+                if (url) {
+                    window.location = url
+                }
+                return false;
+            })
+            current_chapter();
 
-            // Lắng nghe sự kiện click nút chuyển lại
-            $('.custom-prev').click(function() {
-                $('.owl-carousel').trigger('prev.owl.carousel');
-            });
-        });
-    </script>
+            function current_chapter() {
+                var url = window.location.href;
+                $('.select-chapter').find('option[value="' + url + '"]').attr("selected", true);
+            }
+        </script>
 
-</body>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('.owl-carousel').owlCarousel({
+                    // Các thiết lập khác của Owl Carousel
+                });
+
+                // Lắng nghe sự kiện click nút chuyển qua
+                $('.custom-next').click(function() {
+                    $('.owl-carousel').trigger('next.owl.carousel');
+                });
+
+                // Lắng nghe sự kiện click nút chuyển lại
+                $('.custom-prev').click(function() {
+                    $('.owl-carousel').trigger('prev.owl.carousel');
+                });
+            });
+        </script>
+
+    </body>
 
 </html>

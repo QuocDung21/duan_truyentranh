@@ -13,6 +13,10 @@ class TruyenController extends Controller
 
     public function __construct()
     {
+        $this->middleware('permission:publish articles|edit articles|delete articles|add articles', ['only' => ['index', 'show']]);
+        $this->middleware('permission:add articles|publish articles', ['only' => ['create', 'store']]);
+        $this->middleware('permission:edit articles|publish articles', ['only' => ['edit', 'update']]);
+
         $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->get();
@@ -47,17 +51,20 @@ class TruyenController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    //
+    // 'hinhanh' => 'required|image|mimes:png,jpg,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+
     public function store(Request $request)
     {
         $data = $request->validate(
             [
                 'tentruyen' => 'required|unique:truyen|max:255',
-                'hinhanh' => 'required|image|mimes:png,jpg,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+                'hinhanh' => 'required|image|mimes:png,jpg,jpeg,gif,svg|max:2048|',
                 'tomtat' => 'required|max:255',
                 'kichhoat' => 'required',
-                'theloai_id' => 'required',
+                'danhmuc' => 'required',
+                'theloai' => 'required',
                 'tacgia' => 'required',
-                'danhmuc_id' => 'required',
             ],
             [
                 'tentruyen.unique' => 'Tên danh mục đã tổn tại',
@@ -67,15 +74,20 @@ class TruyenController extends Controller
                 'tacgia.required' => 'Tác giả không được trống',
             ],
         );
-        $slug = Str::slug($data['tentruyen']);
         $truyen = new Truyen();
+        foreach ($data['danhmuc'] as $key => $dmuc) {
+            $truyen->danhmuc_id = $dmuc[0];
+        }
+        foreach ($data['theloai'] as $key => $tloai) {
+            $truyen->theloai_id = $tloai[0];
+        }
+        $slug = Str::slug($data['tentruyen']);
         $truyen->tentruyen = $data['tentruyen'];
         $truyen->tacgia = $data['tacgia'];
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat'];
-        $truyen->kichhoat = $data['kichhoat'];
-        $truyen->danhmuc_id = $data['danhmuc_id'];
-        $truyen->theloai_id = $data['theloai_id'];
+        $truyen->kichhoat = 1;
+        // $truyen->kichhoat = $data['kichhoat'];
         $get_image = $request->hinhanh;
         $path = 'public/uploads/truyen/';
         $get_name_image = $get_image->getClientOriginalName();
@@ -84,6 +96,8 @@ class TruyenController extends Controller
         $get_image->move($path, $new_image);
         $truyen->hinhanh = $new_image;
         $truyen->save();
+        $truyen->thuocnhieudanhmuctruyen()->attach($data['danhmuc']);
+        $truyen->thuocnhieutheloaitruyen()->attach($data['theloai']);
         return redirect()
             ->back()
             ->with('status', 'Thêm truyện thành công');
@@ -109,8 +123,11 @@ class TruyenController extends Controller
     public function edit($id)
     {
         $truyen = Truyen::find($id);
+        $theloai = Theloai::orderBy('id', 'DESC')->get();
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
-        return view('admincp.truyen.edit')->with(compact('truyen', 'danhmuc'));
+        $danhmucCuaTruyen = $truyen->thuocnhieudanhmuctruyen;
+        $theloaiCuaTruyen = $truyen->thuocnhieutheloaitruyen;
+        return view('admincp.truyen.edit')->with(compact('truyen', 'danhmuc', 'theloai', 'danhmucCuaTruyen', 'theloaiCuaTruyen'));
     }
 
     /**
@@ -126,10 +143,12 @@ class TruyenController extends Controller
             [
                 'tentruyen' => 'required|max:255',
                 'tacgia' => 'required|max:255',
-                'hinhanh' => 'image|mimes:png,jpg,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+                'hinhanh' => 'image|mimes:png,jpg,jpeg,gif,svg|max:2048|',
                 'tomtat' => 'required|max:255',
                 'kichhoat' => 'required',
-                'danhmuc_id' => 'required',
+                'danhmuc' => 'required',
+                'theloai' => 'required',
+                // 'danhmuc_id' => 'required',
             ],
             [
                 'tentruyen.unique' => 'Tên danh mục đã tổn tại',
@@ -140,13 +159,19 @@ class TruyenController extends Controller
         );
         $slug = Str::slug($data['tentruyen']);
         $truyen = Truyen::find($id);
+        foreach ($data['danhmuc'] as $key => $dmuc) {
+            $truyen->danhmuc_id = $dmuc[0];
+        }
+        foreach ($data['theloai'] as $key => $tloai) {
+            $truyen->theloai_id = $tloai[0];
+        }
         $truyen->tentruyen = $data['tentruyen'];
         $truyen->tacgia = $data['tacgia'];
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat'];
         $truyen->kichhoat = $data['kichhoat'];
-        $truyen->danhmuc_id = $data['danhmuc_id'];
-        $truyen->theloai_id = $data['theloai_id'];
+        // $truyen->danhmuc_id = $data['danhmuc_id'];
+        // $truyen->theloai_id = $data['theloai_id'];
         $get_image = $request->hinhanh;
         if ($get_image) {
             $path = 'public/uploads/truyen/' . $truyen->hinhanh;
@@ -161,6 +186,8 @@ class TruyenController extends Controller
             $truyen->hinhanh = $new_image;
         }
         $truyen->save();
+        $truyen->thuocnhieudanhmuctruyen()->sync($data['danhmuc']);
+        $truyen->thuocnhieutheloaitruyen()->sync($data['theloai']);
         return redirect()
             ->back()
             ->with('status', 'Cập nhật truyện thành công');
@@ -179,6 +206,9 @@ class TruyenController extends Controller
         if (file_exists($path)) {
             unlink($path);
         }
+        $truyen->chapter()->delete();
+        $truyen->thuocnhieudanhmuctruyen()->detach();
+        $truyen->thuocnhieutheloaitruyen()->detach();
         Truyen::find($id)->delete();
         return redirect()
             ->back()

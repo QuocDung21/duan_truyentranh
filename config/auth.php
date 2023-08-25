@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
@@ -39,6 +38,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+            'middleware' => ['web'],
         ],
     ],
 
@@ -107,5 +107,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];
