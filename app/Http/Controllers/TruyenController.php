@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Danhmuctruyen;
+
+use App\Models\DanhmucTruyen;
 use App\Models\Truyen;
 use App\Models\Theloai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class TruyenController extends Controller
 {
@@ -39,7 +41,7 @@ class TruyenController extends Controller
      */
     public function create()
     {
-        $danhmuc = Danhmuctruyen::orderBy('id', 'DESC')->get();
+        $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
         $theloai = Theloai::orderBy('id', 'DESC')->get();
         return view('admincp.truyen.create')->with(compact('danhmuc', 'theloai'));
     }
@@ -56,6 +58,8 @@ class TruyenController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->file('hinhanh'));
+        dd($request->hinhanh);
         $data = $request->validate(
             [
                 'tentruyen' => 'required|unique:truyen|max:255',
@@ -88,8 +92,9 @@ class TruyenController extends Controller
         $truyen->tomtat = $data['tomtat'];
         $truyen->kichhoat = 1;
         // $truyen->kichhoat = $data['kichhoat'];
+        $truyen->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $get_image = $request->hinhanh;
-        $path = 'public/uploads/truyen/';
+        $path = base_path() . '/public/uploads/truyen/';
         $get_name_image = $get_image->getClientOriginalName();
         $name_image = current(explode('.', $get_name_image));
         $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
@@ -167,11 +172,10 @@ class TruyenController extends Controller
         }
         $truyen->tentruyen = $data['tentruyen'];
         $truyen->tacgia = $data['tacgia'];
+        $truyen->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat'];
         $truyen->kichhoat = $data['kichhoat'];
-        // $truyen->danhmuc_id = $data['danhmuc_id'];
-        // $truyen->theloai_id = $data['theloai_id'];
         $get_image = $request->hinhanh;
         if ($get_image) {
             $path = 'public/uploads/truyen/' . $truyen->hinhanh;

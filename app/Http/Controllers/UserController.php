@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use Yajra\Datatables\Datatables;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Permission;
+use Yajra\DataTables\Exceptions\Exception;
 
 class UserController extends Controller
 {
@@ -28,7 +30,7 @@ class UserController extends Controller
         $all_column_roles = $user->roles->first();
         $get_permission_via_role = $user->getPermissionsViaRoles();
         $get_permissions = $user->permissions->first();
-        return view('admincp.users.phanquyen', compact('user', 'role', 'all_column_roles', 'permission', 'get_permission_via_role','get_permissions'));
+        return view('admincp.users.phanquyen', compact('user', 'role', 'all_column_roles', 'permission', 'get_permission_via_role', 'get_permissions'));
     }
     public function vaitro($id)
     {

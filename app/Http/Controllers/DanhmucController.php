@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
-use App\Models\Danhmuctruyen;
+use App\Models\DanhmucTruyen;
 use Illuminate\Support\Str;
 
 class DanhmucController extends Controller
@@ -22,7 +23,7 @@ class DanhmucController extends Controller
     }
     public function index()
     {
-        $danhmuctruyen = Danhmuctruyen::orderBy('id', 'DESC')->get();
+        $danhmuctruyen = DanhmucTruyen::orderBy('id', 'DESC')->get();
         return view('admincp.danhmuctruyen.index')->with(compact('danhmuctruyen'));
     }
 
@@ -35,7 +36,7 @@ class DanhmucController extends Controller
     public function create()
     {
         //
-        $danhmuctruyen = Danhmuctruyen::orderBy('id', 'DESC')->get();
+        $danhmuctruyen = DanhmucTruyen::orderBy('id', 'DESC')->get();
         return view('admincp.danhmuctruyen.create')->with(compact('danhmuctruyen'));
     }
 
@@ -60,7 +61,7 @@ class DanhmucController extends Controller
             ],
         );
         $slug = Str::slug($data['tendanhmuc']);
-        $danhmuctruyen = new Danhmuctruyen();
+        $danhmuctruyen = new DanhmucTruyen();
         $danhmuctruyen->tendanhmuc = $data['tendanhmuc'];
         $danhmuctruyen->slug_danhmuc = $slug;
         $danhmuctruyen->mota = $data['mota'];
@@ -90,7 +91,7 @@ class DanhmucController extends Controller
      */
     public function edit($id)
     {
-        $danhmuc = Danhmuctruyen::find($id);
+        $danhmuc = DanhmucTruyen::find($id);
         return view('admincp.danhmuctruyen.edit')->with(compact('danhmuc'));
     }
 
@@ -114,7 +115,7 @@ class DanhmucController extends Controller
                 'mota.required' => 'Mô tả không được trống',
             ],
         );
-        $danhmuctruyen = Danhmuctruyen::find($id);
+        $danhmuctruyen = DanhmucTruyen::find($id);
         $slug = Str::slug($data['tendanhmuc']);
         $danhmuctruyen->slug_danhmuc = $slug;
         $danhmuctruyen->tendanhmuc = $data['tendanhmuc'];
@@ -134,7 +135,7 @@ class DanhmucController extends Controller
      */
     public function destroy($id)
     {
-        Danhmuctruyen::find($id)->delete();
+        DanhmucTruyen::find($id)->delete();
         return redirect()
             ->back()
             ->with('status', 'Xóa danh mục truyện thành công');

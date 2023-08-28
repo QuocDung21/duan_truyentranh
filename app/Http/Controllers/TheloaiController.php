@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use App\Models\Theloai;

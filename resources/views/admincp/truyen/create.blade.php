@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 @section('content')
     @if (session('status'))
@@ -28,7 +27,7 @@
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ route('truyen.store') }}" enctype="multipart/form-data">
-                                @csrf
+                                {{ csrf_field() }}
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Tên truyện</label>
                                     <input type="text" value="{{ old('tentruyen') }}" placeholder="Tên truyện..."

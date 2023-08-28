@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Chapter;
-use Yajra\Datatables\Datatables;
+use Carbon\Carbon;
 use App\Models\Truyen;
+use App\Models\Chapter;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class ChapterController extends Controller
 {
@@ -70,6 +71,7 @@ class ChapterController extends Controller
         $chapter->slug_chapter = $slug;
         $chapter->tomtat = $data['tomtat'];
         $chapter->noidung = $data['noidung'];
+        $chapter->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $chapter->kichhoat = 1;
         $chapter->truyen_id = $data['truyen_id'];
         $chapter->save();
@@ -133,6 +135,7 @@ class ChapterController extends Controller
         $chapter->tomtat = $data['tomtat'];
         $chapter->noidung = $data['noidung'];
         // $chapter->kichhoat = 1;
+        $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $chapter->kichhoat = $data['kichhoat'];
         $chapter->truyen_id = $data['truyen_id'];
         $chapter->save();

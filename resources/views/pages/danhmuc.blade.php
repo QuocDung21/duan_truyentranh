@@ -48,7 +48,7 @@
     @php
         echo $count = count($truyen);
     @endphp
-    @if ($count == 0)
+    {{-- @if ($count == 0)
         <div class="col-md-12 d-flex">
             <div class="card shadow-sm">
                 <div class="card-body">
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-    @endif
+    @endif --}}
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">

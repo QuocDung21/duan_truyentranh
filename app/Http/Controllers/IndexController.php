@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\DanhmucTruyen;
-use App\Models\Theloai;
+use App\Models\User;
 use App\Models\Truyen;
 use App\Models\Chapter;
+use App\Models\Theloai;
+use Illuminate\Http\Request;
+use App\Models\DanhmucTruyen;
 use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller

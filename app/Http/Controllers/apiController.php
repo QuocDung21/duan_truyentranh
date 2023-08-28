@@ -1,14 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-use Yajra\Datatables\Datatables;
-use Illuminate\Http\Request;
-use App\Models\Theloai;
-use App\Models\Danhmuctruyen;
-use App\Models\Chapter;
-use App\Models\Truyen;
+
 use App\Models\User;
+use App\Models\Truyen;
+use App\Models\Chapter;
+use App\Models\Theloai;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\DanhmucTruyen;
+use Yajra\Datatables\Datatables;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Exceptions\Exception;
 
 class apiController extends Controller
 {
@@ -28,11 +31,8 @@ class apiController extends Controller
         $this->middleware('permission:delete chapter', ['only' => ['destroyChapterApi']]);
         $this->middleware('permission:delete articles', ['only' => ['destroyTruyenApi']]);
 
-        $this->middleware('permission:check chapter', ['only' => ['getDataCheckTruyen','checkTruyen']]);
-        $this->middleware('permission:check articles', ['only' => ['getDataCheckChapter','checkChapter']]);
-
-
-
+        $this->middleware('permission:check chapter', ['only' => ['getDataCheckTruyen', 'checkTruyen']]);
+        $this->middleware('permission:check articles', ['only' => ['getDataCheckChapter', 'checkChapter']]);
 
         $this->middleware('role:admin', ['only' => ['destroyUserApi']]);
     }
@@ -47,7 +47,7 @@ class apiController extends Controller
         if ($request->ajax()) {
             $data = Truyen::with('danhmuctruyen', 'theloai')
                 ->orderBy('id', 'DESC')
-                ->where("kichhoat", 1)
+                ->where('kichhoat', 1)
                 ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
@@ -125,7 +125,7 @@ class apiController extends Controller
     public function getDataDanhmuc(Request $request)
     {
         if ($request->ajax()) {
-            $data = Danhmuctruyen::orderBy('id', 'DESC')->get();
+            $data = DanhmucTruyen::orderBy('id', 'DESC')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
@@ -140,7 +140,7 @@ class apiController extends Controller
 
     public function destroyDanhmucApi($id)
     {
-        $data = Danhmuctruyen::findOrFail($id);
+        $data = DanhmucTruyen::findOrFail($id);
         $data->delete();
     }
 
@@ -231,15 +231,18 @@ class apiController extends Controller
     public function getListUsers(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::orderBy('id', 'DESC')->get();
+            $currentUser = Auth::user();
+            $data = User::orderBy('id', 'DESC')
+                ->where('id', '!=', $currentUser->id)
+                ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
                     $button = '<div class="btn-group d-flex flex-column " role="group">';
                     // $button .= '<a type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm m-1"> <i class="bi bi-pencil-square"></i>Sửa</a>';
-                    $button .= '<a type="button" name="edit" id="' . $data->id . '" class="deletes btn btn-danger btn-sm m-1"> <i class="bi bi-backspace-reverse-fill"></i> Xóa</a>';
-                    $button .= '<a href=' . route('vai-tro', [$data->id]) . ' type="button" name="edit" id="' . $data->id . '" class="delete btn btn-info btn-sm m-1"> <i class="bi bi-backspace-reverse-fill"></i> vai trò</a>';
-                    $button .= '<a href=' . route('phan-quyen', [$data->id]) . ' type="button" name="edit" id="' . $data->id . '" class="delete btn btn-primary btn-sm m-1"> <i class="bi bi-backspace-reverse-fill"></i> Phân quyền</a>';
+                    $button .= '<a href=' . route('vai-tro', [$data->id]) . ' type="button" name="edit" id="' . $data->id . '" class="delete btn btn-info btn-sm m-1"> <i class="bi bi-backspace-reverse-fill"></i> Vai trò (Chức vụ)</a>';
+                    $button .= '<a href=' . route('phan-quyen', [$data->id]) . ' type="button" name="edit" id="' . $data->id . '" class="delete btn btn-primary btn-sm m-1"> <i class="bi bi-backspace-reverse-fill"></i> Cấp quyền (Chức năng)</a>';
+                    $button .= '<a type="button" name="edit" id="' . $data->id . '" class="deletes btn btn-danger btn-sm m-1"> <i class="bi bi-backspace-reverse-fill"></i>Xóa người dùng</a>';
                     $button .= '</div>';
                     return $button;
                 })

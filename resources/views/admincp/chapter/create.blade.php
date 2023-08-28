@@ -1,10 +1,3 @@
-
-
-
-
-
-
-
 @extends('layouts.app')
 @section('content')
     @if (session('status'))
@@ -33,7 +26,7 @@
                                 <h3 class="card-title">Thêm chapter</h3>
                             </div>
                             <div class="card-body">
-                             <form method="POST" action="{{ route('chapter.store') }}" enctype="multipart/form-data">
+                                <form method="POST" action="{{ route('chapter.store') }}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Tên chapter</label>
@@ -77,4 +70,5 @@
             </div><!-- /.container-fluid -->
         </section>
     </div>
+
 @endsection

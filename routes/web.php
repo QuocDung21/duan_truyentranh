@@ -14,12 +14,12 @@ use App\Http\Controllers\apiController;
 Auth::routes();
 // Client
 Route::get('/', [IndexController::class, 'home']);
+Route::post('/timkiem-ajax', [IndexController::class, 'timkiem_ajax'])->name('timkiem-ajax');
 Route::get('/danh-muc/{slug}', [IndexController::class, 'danhmuc'])->name('danh-muc');
 Route::get('/xem-chapter/{slug}', [IndexController::class, 'xemchapter'])->name('xem-chapter');
 Route::get('/xem-truyen/{slug}', [IndexController::class, 'xemtruyen'])->name('xem-truyen');
 Route::get('/the-loai/{slug}', [IndexController::class, 'theloai'])->name('the-loai');
 Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
-Route::post('/timkiem-ajax', [IndexController::class, 'timkiem_ajax']);
 Route::get('/phan-quyen/{id}', [UserController::class, 'phanquyen'])->name('phan-quyen');
 Route::get('/vai-tro/{id}', [UserController::class, 'vaitro'])->name('vai-tro');
 Route::post('/insert_roles/{id}', [UserController::class, 'insert_roles'])->name('insert_roles');
