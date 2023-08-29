@@ -245,7 +245,7 @@
                                         <h5>Từ khóa :</h5>
                                     </div>
                                     <div class="fb-comments" data-href="{{ \URL::current() }}" data-width="100%"
-                                        width="850" data-numposts="5"></div>
+                                        data-colorscheme="dark" width="850" data-numposts="5"></div>
                                 </div>
                             </div>
                         </div>
