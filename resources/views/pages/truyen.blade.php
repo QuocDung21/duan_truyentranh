@@ -220,15 +220,13 @@
                                     <div class="anime__details__widget">
                                         <div class="row">
                                             <div class="tagcloud05">
+                                                @php
+                                                    $tukhoa = explode(',', $truyen->tag);
+                                                    print_r($tukhoa);
+                                                @endphp
                                                 <ul>
                                                     <li><a href="#"><span>tag</span></a></li>
-                                                    <li><a href="#"><span>tag</span></a></li>
-                                                    <li><a href="#"><span>tag</span></a></li>
-                                                    <li><a href="#"><span>tag</span></a></li>
-                                                    <li><a href="#"><span>tag</span></a></li>
-                                                    <li><a href="#"><span>tag</span></a></li>
-                                                    <li><a href="#"><span>tag</span></a></li>
-                                                    <li><a href="#"><span>tag</span></a></li>
+                                                 
                                                 </ul>
                                             </div>
                                         </div>

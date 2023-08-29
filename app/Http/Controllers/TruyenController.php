@@ -153,6 +153,7 @@ class TruyenController extends Controller
                 'kichhoat' => 'required',
                 'danhmuc' => 'required',
                 'theloai' => 'required',
+                'tag' => ''
                 // 'danhmuc_id' => 'required',
             ],
             [
@@ -172,6 +173,7 @@ class TruyenController extends Controller
         }
         $truyen->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $truyen->tentruyen = $data['tentruyen'];
+        $truyen->tag = $data['tag'];
         $truyen->tacgia = $data['tacgia'];
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat'];

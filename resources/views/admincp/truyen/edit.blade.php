@@ -26,7 +26,7 @@
                             <h3 class="card-title">Cập nhật truyện</h3>
                         </div>
                         <div class="card-body">
-                                <form method="POST" action="{{ route('truyen.update', [$truyen->id]) }}"
+                            <form method="POST" action="{{ route('truyen.update', [$truyen->id]) }}"
                                 enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
@@ -39,6 +39,11 @@
                                     <label for="exampleInputEmail1" class="form-label">Tác giả</label>
                                     <input type="text" value="{{ $truyen->tacgia }}" placeholder="Tên tác giả..."
                                         name="tacgia" class="form-control" id="exampleInputEmail1">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Từ khóa</label>
+                                    <textarea rows="2" type="text" value="{{ old('tag') }}" name="tag" placeholder="Từ khóa..."
+                                        class="form-control" id="exampleInputEmail1"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Tóm tắt truyện</label>
@@ -71,11 +76,10 @@
                                     @foreach ($danhmuc as $dmuc)
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" name="danhmuc[]"
-                                            @foreach ($danhmucCuaTruyen as $dmt)
+                                                @foreach ($danhmucCuaTruyen as $dmt)
                                             @if ($dmt->id == $dmuc->id)
                                             checked
-                                            @endif
-                                            @endforeach
+                                            @endif @endforeach
                                                 id="danhmuc_{{ $dmuc->id }}" value={{ $dmuc->id }}>
                                             <label class="form-check-label"
                                                 for="danhmuc_{{ $dmuc->id }}">{{ $dmuc->tendanhmuc }}</label>
@@ -88,11 +92,10 @@
                                     @foreach ($theloai as $tloai)
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="checkbox" name="theloai[]"
-                                            @foreach ($theloaiCuaTruyen as $dmt)
+                                                @foreach ($theloaiCuaTruyen as $dmt)
                                             @if ($dmt->id == $tloai->id)
                                             checked
-                                            @endif
-                                            @endforeach
+                                            @endif @endforeach
                                                 id="theloai_{{ $tloai->id }}" value={{ $tloai->id }}>
                                             <label class="form-check-label"
                                                 for="theloai_{{ $dmuc->id }}">{{ $tloai->tentheloai }}</label>
