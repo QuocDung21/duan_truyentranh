@@ -246,9 +246,7 @@
                                     </div>
                                     <div class="fb-comments" style="background-color: white !important"
                                         data-href="{{ \URL::current() }}" data-width="100%" data-colorscheme="dark"
-                                        width="850" data-numposts="5"></div>
-                                    {{-- <div class="fb-comments" data-href="{{ \URL::current() }}" data-width="100%"
-                                        data-colorscheme="dark" width="850" data-numposts="5"></div> --}}
+                                        width="100%" data-numposts="5"></div>
                                 </div>
                             </div>
                         </div>

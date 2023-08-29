@@ -6,27 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="fb:app_id" content="100015679356908" />
     <title>TruyenhayHt</title>
-    {{-- <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
-    <link rel="shortcut icon" href="{{ asset('images/logo/favicon.png') }}">
-    <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> --}}
-    {{-- test giao dien moi --}}
-    <!-- Google Font -->
-
-
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg') }}">
-
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <!-- Css Styles -->
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('css/elegant-icons.css') }}" type="text/css">
