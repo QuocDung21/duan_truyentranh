@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="fb:app_id" content="203369009102213" />
+    <meta property="fb:app_id" content="6105361332881408" />
     <title>TruyenhayHt</title>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg') }}">
