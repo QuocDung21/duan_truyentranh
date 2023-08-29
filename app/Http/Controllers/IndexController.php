@@ -126,6 +126,7 @@ class IndexController extends Controller
             ->whereNotIn('id', [$truyen->id])
             ->orderBy('id', 'DESC')
             ->get();
+
         return view('pages.truyen')
             ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi'))
             ->with('theloai', $this->theloai)

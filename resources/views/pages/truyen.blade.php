@@ -136,9 +136,9 @@
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
                                             <li>
-                                                <span>Danh mục:</span>
+                                                <span>Danh mục: </span>
                                                 @foreach ($danhMucTruyen as $key => $dmuc)
-                                                    {{ $dmuc->tendanhmuc == '' ? 'Đang cập nhật' : $dmuc->tendanhmuc }}
+                                                    {{ $dmuc->tendanhmuc == null ? 'Đang cập nhật' : $dmuc->tendanhmuc }}
                                                     @if ($key < count($danhMucTruyen) - 1)
                                                         ,
                                                     @endif
@@ -179,7 +179,7 @@
                             <div class="col-lg-12">
                                 <div class="anime__details__episodes">
                                     <div class="section-title">
-                                        <h5>Chương mới nhất</h5>
+                                        <h5>Chương mới nhất :</h5>
                                     </div>
                                     @foreach ($chapter as $cter)
                                         <a
@@ -192,7 +192,7 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
                                     <div class="section-title">
-                                        <h5>Danh sách chương</h5>
+                                        <h5>Danh sách chương :</h5>
                                     </div>
                                     <div class="anime__details__widget">
                                         <div class="row">
@@ -215,22 +215,25 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
                                     <div class="section-title">
-                                        <h5>Từ khóa</h5>
+                                        <h5>Từ khóa :</h5>
                                     </div>
-                                    <div class="anime__details__widget">
-                                        <div class="row">
-                                            <div class="tagcloud05">
-                                                @php
-                                                    $tukhoa = explode(',', $truyen->tag);
-                                                @endphp
-                                                <ul>
-                                                    @foreach ($tukhoa as $key => $tu)
-                                                        <li><a href="#"><span>{{ $tu }}</span></a></li>
-                                                    @endforeach
-                                                </ul>
+                                    @php
+                                        $tukhoa = explode(',', $truyen->tag);
+                                    @endphp
+                                    @if (count($tukhoa) > 1)
+                                        <div class="anime__details__widget">
+                                            <div class="row">
+                                                <div class="tagcloud05">
+                                                    <ul>
+                                                        @foreach ($tukhoa as $key => $tu)
+                                                            <li><a href="#"><span>{{ $tu }}</span></a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    @else
+                                    @endif
                                 </div>
                             </div>
                         </div>
