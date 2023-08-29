@@ -242,10 +242,13 @@
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
                                     <div class="section-title">
-                                        <h5>Từ khóa :</h5>
+                                        <h5>Bình luận :</h5>
                                     </div>
-                                    <div class="fb-comments" data-href="{{ \URL::current() }}" data-width="100%"
-                                        data-colorscheme="dark" width="850" data-numposts="5"></div>
+                                    <div class="fb-comments" style="background-color: white !important"
+                                        data-href="{{ \URL::current() }}" data-width="100%" data-colorscheme="dark"
+                                        width="850" data-numposts="5"></div>
+                                    {{-- <div class="fb-comments" data-href="{{ \URL::current() }}" data-width="100%"
+                                        data-colorscheme="dark" width="850" data-numposts="5"></div> --}}
                                 </div>
                             </div>
                         </div>
