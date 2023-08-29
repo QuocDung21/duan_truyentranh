@@ -211,6 +211,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
@@ -234,6 +235,17 @@
                                         </div>
                                     @else
                                     @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="anime__details__review">
+                                    <div class="section-title">
+                                        <h5>Từ khóa :</h5>
+                                    </div>
+                                    <div class="fb-comments" data-href="{{ \URL::current() }}" data-width="100%"
+                                        width="850" data-numposts="5"></div>
                                 </div>
                             </div>
                         </div>
@@ -267,8 +279,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator"
-                        data-width="" data-numposts="5"></div>
+
+
                 </div>
 
             </div>
