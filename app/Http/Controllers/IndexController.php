@@ -72,7 +72,7 @@ class IndexController extends Controller
             ->where('kichhoat', 0)
             ->take(5)
             ->get();
-        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'theloai')
+        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
             ->take(5)
             ->orderBy('updated_at', 'desc')
             ->where('kichhoat', 0)

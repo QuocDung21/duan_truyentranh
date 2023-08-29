@@ -30,7 +30,8 @@
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="btn__all">
-                                        <a href="{{ route('danh-muc', [$dmuc->slug_danhmuc]) }}" class="primary-btn">Xem tất cả </a>
+                                        <a href="{{ route('danh-muc', [$dmuc->slug_danhmuc]) }}" class="primary-btn">Xem tất
+                                            cả </a>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +44,8 @@
                                                     data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
                                                     <div class="view"
                                                         style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
-                                                            class="fa fa-eye"></i> {{ $tr->luotxem == 0 ? 0 : $tr->luotxem  }}</div>
+                                                            class="fa fa-eye"></i>
+                                                        {{ $tr->luotxem == 0 ? 0 : $tr->luotxem }}</div>
                                                     <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
                                                 </div>
                                             </div>
@@ -55,10 +57,10 @@
                     @endforeach
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-8">
-                    <div class="product__sidebar">
+                    {{-- <div class="product__sidebar">
                         <div class="product__sidebar__comment">
                             <div class="section-title">
-                                <h5>Mới cập nhật</h5>
+                                <h5>Yêu thích</h5>
                             </div>
                             @foreach ($truyenmoicapnhat as $tr)
                                 <div class="product__sidebar__comment__item" style=" height:150px">
@@ -68,20 +70,51 @@
                                     </div>
                                     <div class="product__sidebar__comment__item__text">
                                         <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
+                                            @foreach ($tr->thuocnhieutheloaitruyen as $item)
+                                                <li>{{ $item->tentheloai }}</li>
+                                            @endforeach
                                         </ul>
                                         <h5 class="text-truncate" style="max-width: 300px;"><a class=""
                                                 style="font-size: 10px;font-weight: 600" href="#">
                                                 {{ $tr->tentruyen }}
                                             </a></h5>
-                                        <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                                        <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
+                                            xem</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div> --}}
+                    <div class="product__sidebar">
+                        <div class="product__sidebar__comment">
+                            <div class="section-title">
+                                <h5>Mới cập nhật</h5>
+                            </div>
+                            @foreach ($truyenmoicapnhat as $tr)
+                                <div class="product__sidebar__comment__item" style=" height:150px">
+                                    <div class="product__sidebar__comment__item__pic">
+                                        <img style=" width:100px"
+                                            src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt="">
+                                    </div>
+                                    <div class="product__sidebar__comment__item__text">
+                                        <ul>
+                                            @foreach ($tr->thuocnhieutheloaitruyen as $item)
+                                                <li>{{ $item->tentheloai }}</li>
+                                            @endforeach
+                                        </ul>
+                                        <h5 class="text-truncate" style="max-width: 300px;"><a class=""
+                                                style="font-size: 10px;font-weight: 600" href="#">
+                                                {{ $tr->tentruyen }}
+                                            </a></h5>
+                                        <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
+                                            xem</span>
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
                 </div>
+
             </div>
     </section>
 @endsection

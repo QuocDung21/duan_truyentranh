@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a>
                         <a
                             href="{{ route('danh-muc', [$truyen_breadcrumb->danhmuctruyen->slug_danhmuc]) }}">{{ $truyen_breadcrumb->danhmuctruyen != null ? $truyen_breadcrumb->danhmuctruyen->tendanhmuc : 'Đang cập nhật' }}</a>
                         <span> {{ $chapter->truyen->tentruyen }}</span>
