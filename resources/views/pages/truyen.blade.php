@@ -244,7 +244,7 @@
                                     <div class="section-title">
                                         <h5>Bình luận :</h5>
                                     </div>
-                                    <div class="fb-comments" style="background-color: white !important"
+                                    <div class="fb-comments" style="background-color: white !important" data-mobile
                                         data-href="{{ \URL::current() }}" data-width="100%" data-colorscheme="dark"
                                         width="100%" data-numposts="5"></div>
                                 </div>
