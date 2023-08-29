@@ -88,7 +88,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    
+
                     <div class="blog__details__content">
                         <div class="blog__details__text" style="line-height: 20px">
                             <p>{!! html_entity_decode($chapter->noidung) !!}</p>

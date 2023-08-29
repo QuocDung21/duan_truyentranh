@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
-    protected $theloai, $danhmuc, $truyen, $slide_truyen;
+    protected $theloai, $danhmuc, $truyen_moicapnhat, $slide_truyen;
 
     public function __construct()
     {
@@ -25,6 +25,10 @@ class IndexController extends Controller
             ->get();
         $this->theloai = Theloai::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
+            ->get();
+        $this->truyen_moicapnhat = Truyen::orderBy('id', 'DESC')
+            ->where('kichhoat', 0)
+            ->take(4)
             ->get();
     }
 
@@ -46,7 +50,10 @@ class IndexController extends Controller
 
     public function home()
     {
-        $danhMucList = DanhmucTruyen::all();
+        $danhMucList = DanhmucTruyen::where('kichhoat', 0)
+            ->orderBy('id', 'ASC')
+            ->take(5)
+            ->get();;
         foreach ($danhMucList as $dm) {
             $dm->danhSachTruyen = Truyen::where('danhmuc_id', $dm->id)
                 ->where('kichhoat', 0)
@@ -62,7 +69,9 @@ class IndexController extends Controller
             ->take(5)
             ->where('kichhoat', 0)
             ->get();
-        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')->get();
+        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')
+            ->where('kichhoat', 0)
+            ->get();
         return view('pages.home')
             ->with(compact('truyen', 'danhMucList', 'truyenmoicapnhat'))
             ->with('danhmuc', $this->danhmuc)
@@ -97,6 +106,11 @@ class IndexController extends Controller
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
             ->get();
+        $chapter_moi = Chapter::with('truyen')
+            ->orderBy('id', 'DESC')
+            ->where('truyen_id', $truyenId->id)
+            ->take(3)
+            ->get();
         $chapter_dau = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
@@ -107,8 +121,9 @@ class IndexController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
         return view('pages.truyen')
-            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen'))
+            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi'))
             ->with('theloai', $this->theloai)
+            ->with('truyen_moicapnhat', $this->truyen_moicapnhat)
             ->with('danhmuc', $this->danhmuc);
     }
 
@@ -170,13 +185,13 @@ class IndexController extends Controller
             ->with('danhmuc', $this->danhmuc);
     }
 
-    public function phanquyen($id) {
+    public function phanquyen($id)
+    {
         $user = User::find($id);
-
     }
 
-    public function assignRole($id){
-
+    public function assignRole($id)
+    {
     }
 
     public function timkiem_ajax(Request $request)
