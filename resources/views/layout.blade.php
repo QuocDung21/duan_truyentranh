@@ -18,7 +18,7 @@
 
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg')}}" >
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg') }}">
 
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -200,6 +200,10 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> --}}
     <!-- Js Plugins -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=6105361332881408&autoLogAppEvents=1"
+        nonce="hrXFhAJK"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/player.js') }}"></script>
     <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
