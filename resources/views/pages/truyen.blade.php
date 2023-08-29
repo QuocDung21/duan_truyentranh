@@ -1,5 +1,80 @@
 @extends('../layout')
 @section('content')
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300);
+
+        .tagcloud05 ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .tagcloud05 ul li {
+            display: inline-block;
+            margin: 0 0 .3em 1em;
+            padding: 0;
+        }
+
+        .tagcloud05 ul li a {
+            position: relative;
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 1em;
+            background-color: #3c3d55;
+            border-radius: 0 3px 3px 0;
+            color: #fff;
+            font-size: 13px;
+            text-decoration: none;
+            -webkit-transition: .2s;
+            transition: .2s;
+        }
+
+        .tagcloud05 ul li a::before {
+            position: absolute;
+            top: 0;
+            left: -15px;
+            content: '';
+            width: 0;
+            height: 0;
+            border-color: transparent #3c3d55 transparent transparent;
+            border-style: solid;
+            border-width: 15px 15px 15px 0;
+            -webkit-transition: .2s;
+            transition: .2s;
+        }
+
+        .tagcloud05 ul li a::after {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 2;
+            display: block;
+            content: '';
+            width: 6px;
+            height: 6px;
+            margin-top: -3px;
+            background-color: #fff;
+            border-radius: 100%;
+        }
+
+        .tagcloud05 ul li span {
+            display: block;
+            max-width: 100px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .tagcloud05 ul li a:hover {
+            background-color: #555;
+            color: #fff;
+        }
+
+        .tagcloud05 ul li a:hover::before {
+            border-right-color: #555;
+        }
+    </style>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
@@ -18,13 +93,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Anime Section Begin -->
-    <section class="anime-details spad" {{-- style="
-         opacity: 0.5;
-        backdrop-filter: blur(100px);
-        background-repeat: no-repeat;
-        background-size: 100% 100%;
-        background-image: url('{{ asset('public/uploads/truyen/' . $truyen->hinhanh) }}');
-        " --}}>
+    <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
                 <div class="row">
@@ -87,6 +156,7 @@
                                         </ul>
                                     </div>
                                 </div>
+
                             </div>
                             @if (count($chapter) != 0)
                                 <div class="anime__details__btn">
@@ -104,6 +174,7 @@
                         </div>
                     </div>
                     <div class="col-9" style="margin-top: 50px">
+
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="anime__details__episodes">
@@ -118,7 +189,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-8 col-md-8">
+                            <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
                                     <div class="section-title">
                                         <h5>Danh sách chương</h5>
@@ -133,6 +204,31 @@
                                                                 href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
                                                         </li>
                                                     @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="anime__details__review">
+                                    <div class="section-title">
+                                        <h5>Từ khóa</h5>
+                                    </div>
+                                    <div class="anime__details__widget">
+                                        <div class="row">
+                                            <div class="tagcloud05">
+                                                <ul>
+                                                    <li><a href="#"><span>tag</span></a></li>
+                                                    <li><a href="#"><span>tag</span></a></li>
+                                                    <li><a href="#"><span>tag</span></a></li>
+                                                    <li><a href="#"><span>tag</span></a></li>
+                                                    <li><a href="#"><span>tag</span></a></li>
+                                                    <li><a href="#"><span>tag</span></a></li>
+                                                    <li><a href="#"><span>tag</span></a></li>
+                                                    <li><a href="#"><span>tag</span></a></li>
                                                 </ul>
                                             </div>
                                         </div>

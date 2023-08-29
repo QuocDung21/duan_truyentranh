@@ -54,12 +54,18 @@ class IndexController extends Controller
             ->orderBy('id', 'ASC')
             ->take(5)
             ->get();;
-        foreach ($danhMucList as $dm) {
-            $dm->danhSachTruyen = Truyen::where('danhmuc_id', $dm->id)
+        foreach ($danhMucList as $key => $dm) {
+            $danhSachTruyen = Truyen::where('danhmuc_id', $dm->id)
                 ->where('kichhoat', 0)
                 ->orderBy('id', 'DESC')
                 ->take(10)
                 ->get();
+
+            if ($danhSachTruyen->isEmpty()) {
+                unset($danhMucList[$key]);
+            } else {
+                $dm->danhSachTruyen = $danhSachTruyen;
+            }
         }
         $truyen = Truyen::orderBy('id', 'DESC')
             ->with('theloai')

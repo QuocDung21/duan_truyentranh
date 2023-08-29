@@ -58,8 +58,6 @@ class TruyenController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->file('hinhanh'));
-        dd($request->hinhanh);
         $data = $request->validate(
             [
                 'tentruyen' => 'required|unique:truyen|max:255',
@@ -69,6 +67,7 @@ class TruyenController extends Controller
                 'danhmuc' => 'required',
                 'theloai' => 'required',
                 'tacgia' => 'required',
+                'tag' => ''
             ],
             [
                 'tentruyen.unique' => 'Tên danh mục đã tổn tại',
@@ -87,6 +86,7 @@ class TruyenController extends Controller
         }
         $slug = Str::slug($data['tentruyen']);
         $truyen->tentruyen = $data['tentruyen'];
+        $truyen->tag = $data['tag'];
         $truyen->tacgia = $data['tacgia'];
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat'];
@@ -170,9 +170,9 @@ class TruyenController extends Controller
         foreach ($data['theloai'] as $key => $tloai) {
             $truyen->theloai_id = $tloai[0];
         }
+        $truyen->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $truyen->tentruyen = $data['tentruyen'];
         $truyen->tacgia = $data['tacgia'];
-        $truyen->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat'];
         $truyen->kichhoat = $data['kichhoat'];
