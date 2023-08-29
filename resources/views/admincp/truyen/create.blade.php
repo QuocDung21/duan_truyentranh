@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Từ khóa</label>
-                                    <textarea rows="2" type="text" value="{{ old('tag') }}" name="tag" placeholder="Từ khóat..."
+                                    <textarea rows="2" type="text" value="{{ old('tag') }}" name="tag" placeholder="Từ khóa..."
                                         class="form-control" id="exampleInputEmail1"></textarea>
                                 </div>
                                 <div class="mb-3">
