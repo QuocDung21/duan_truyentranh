@@ -1,6 +1,5 @@
 @extends('../layout')
 @section('slide')
-    <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -12,7 +11,6 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
     @include('pages.slide')
 @endsection
 @section('content')
@@ -43,11 +41,9 @@
                                             <div class="product__item">
                                                 <div class="product__item__pic set-bg" style="height: 200px;width: 130px; "
                                                     data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
-                                                    {{-- <div class="comment"><i class="fa fa-comments"></i> 11</div> --}}
                                                     <div class="view"
                                                         style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
                                                             class="fa fa-eye"></i> {{ $tr->luotxem == 0 ? 0 : $tr->luotxem  }}</div>
-                                                    {{-- <div class="ep"><i class="fa fa-eye"></i> 124</div> --}}
                                                     <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
                                                 </div>
                                             </div>
@@ -88,57 +84,4 @@
                 </div>
             </div>
     </section>
-    {{-- <h3>Truyện mới cập nhật</h3>
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="btn btn-primary">Xem tất cả</div>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-                @foreach ($truyen as $tr)
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src=" {{ asset('public/uploads/truyen/download0.png') }}" alt="" srcset="">
-                            <div class="card-body">
-                                <h5>{{ $tr->tentruyen }}</h5>
-                                <p class="card-text">{{ $tr->tomtat }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <a type="button" class="btn btn-sm btn-outline-secondary">Đọc
-                                            ngay</a>
-                                        <a type="button" class="btn btn-sm btn-outline-secondary">2130</a>
-                                    </div>
-                                    <small class="text-muted">9 phút trước</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-
-            </div>
-        </div>
-    </div>
-    <h3>Truyện xem nhiều</h3>
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3">
-                <div class="col">
-                    <div class="card shadow-sm">
-                        <img src=" {{ asset('public/uploads/truyen/download0.png') }}" alt="" srcset="">
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <a type="button btn-sm btn-outline-secondary"
-                                        class="btn btn-sm btn-outline-secondary">Đọc
-                                        ngay</a>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">2130</button>
-                                </div>
-                                <small class="text-muted">9 phút trước</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
 @endsection

@@ -67,12 +67,14 @@ class IndexController extends Controller
                 $dm->danhSachTruyen = $danhSachTruyen;
             }
         }
-        $truyen = Truyen::orderBy('id', 'DESC')
+        $truyen = Truyen::orderBy('luotxem', 'DESC')
             ->with('theloai')
             ->where('kichhoat', 0)
+            ->take(5)
             ->get();
         $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'theloai')
             ->take(5)
+            ->orderBy('updated_at', 'desc')
             ->where('kichhoat', 0)
             ->get();
         $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')

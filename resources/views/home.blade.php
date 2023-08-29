@@ -7,10 +7,8 @@
                     <div class="col-md-12">
                         <section class="content">
                             <div class="container-fluid">
-                                <!-- Small boxes (Stat box) -->
                                 <div class="row">
                                     <div class="col-lg-3 col-6">
-                                        <!-- small box -->
                                         <div class="small-box bg-info">
                                             <div class="inner">
                                                 <h3>{{ count($truyen) }}</h3>
@@ -24,9 +22,7 @@
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-                                    <!-- ./col -->
                                     <div class="col-lg-3 col-6">
-                                        <!-- small box -->
                                         <div class="small-box bg-success">
                                             <div class="inner">
                                                 <h3>{{ count($theloai) }}</h3>
@@ -39,9 +35,7 @@
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-                                    <!-- ./col -->
                                     <div class="col-lg-3 col-6">
-                                        <!-- small box -->
                                         <div class="small-box bg-warning">
                                             <div class="inner">
                                                 <h3>{{ count($danhmuc) }}</h3>
@@ -54,12 +48,10 @@
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-                                    <!-- ./col -->
                                     <div class="col-lg-3 col-6">
-                                        <!-- small box -->
                                         <div class="small-box bg-danger">
                                             <div class="inner">
-                                                 <h3>{{ count($user) }}</h3>
+                                                <h3>{{ count($user) }}</h3>
                                                 <p>Người dùng</p>
                                             </div>
                                             <div class="icon">
@@ -69,13 +61,8 @@
                                                     class="fas fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
-                                    <!-- ./col -->
                                 </div>
-                                <!-- /.row -->
-                                <!-- Main row -->
-
-                                <!-- /.row (main row) -->
-                            </div><!-- /.container-fluid -->
+                            </div>
                         </section>
                     </div>
                 </div>
