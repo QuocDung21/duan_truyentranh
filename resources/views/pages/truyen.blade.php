@@ -222,11 +222,11 @@
                                             <div class="tagcloud05">
                                                 @php
                                                     $tukhoa = explode(',', $truyen->tag);
-                                                    print_r($tukhoa);
                                                 @endphp
                                                 <ul>
-                                                    <li><a href="#"><span>tag</span></a></li>
-                                                 
+                                                    @foreach ($tukhoa as $key => $tu)
+                                                        <li><a href="#"><span>{{ $tu }}</span></a></li>
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
