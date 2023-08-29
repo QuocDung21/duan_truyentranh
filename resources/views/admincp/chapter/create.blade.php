@@ -33,11 +33,6 @@
                                         <input type="text" name="tieude" value="{{ old('tieude') }}"
                                             placeholder="Tên chapter..." class="form-control" id="exampleInputEmail1">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="exampleInputEmail1" class="form-label">Tóm tắt chapter</label>
-                                        <textarea type="text" name="tomtat" placeholder="Tóm tắt chapter..." class="form-control"
-                                            value="{{ old('tomtat') }}" id="exampleInputEmail1" rows="5"></textarea>
-                                    </div>
                                     <div class="mb-3 editor">
                                         <label for="exampleInputEmail1" class="form-label">Nội dung chapter</label>
                                         <textarea type="text" id="noidung_chapter" name="noidung" placeholder="Nội dung chapter..." class="form-control"

@@ -88,28 +88,7 @@
                     }, {
                         data: 'slug_chapter',
                         name: 'slug_chapter'
-                    }, {
-                        data: 'tomtat',
-                        name: 'tomtat',
-                        render: function(data) {
-                            if (data.length > 100) {
-                                var truncatedData = data.substring(0, 100) + '...';
-                                return (truncatedData);
-                            }
-                            return (data);
-                        }
                     },
-                    // {
-                    //     data: 'noidung',
-                    //     name: 'noidung',
-                    //     render: function(data) {
-                    //         if (data.length > 100) {
-                    //             var truncatedData = data.substring(0, 100) + '...';
-                    //             return (truncatedData);
-                    //         }
-                    //         return (data);
-                    //     }
-                    // },
                     {
                         data: 'thuoctruyen',
                         name: 'thuoctruyen'

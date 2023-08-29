@@ -58,7 +58,6 @@
                                             <th>#</th>
                                             <th>Tên chapter</th>
                                             <th>Slug chapter</th>
-                                            <th>Tóm tắt</th>
                                             <th>Nội dung</th>
                                             <th>Thuộc truyện</th>
                                             <th>Trạng thái </th>
@@ -92,18 +91,7 @@
                     }, {
                         data: 'slug_chapter',
                         name: 'slug_chapter'
-                    }, {
-                        data: 'tomtat',
-                        name: 'tomtat',
-                        render: function(data) {
-                            if (data.length > 10) {
-                                var truncatedData = data.substring(0, 10) + '...';
-                                return '<div>' + truncatedData +
-                                    ' <a href="#" class="view-more">Xem thêm</a></div>';
-                            }
-                            return data;
-                        }
-                    },
+                    }, 
                     {
                         data: 'noidung',
                         name: 'noidung',

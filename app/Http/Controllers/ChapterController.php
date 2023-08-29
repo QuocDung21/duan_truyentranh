@@ -53,7 +53,6 @@ class ChapterController extends Controller
         $data = $request->validate(
             [
                 'tieude' => 'required|unique:chapter|max:255',
-                'tomtat' => 'required',
                 'noidung' => 'required',
                 'kichhoat' => 'required',
                 'truyen_id' => 'required',
@@ -61,7 +60,6 @@ class ChapterController extends Controller
             [
                 'tieude.unique' => 'Tên chapter đã tổn tại',
                 'tieude.required' => 'Tên chapter không được trống',
-                'tomtat.required' => 'Mô tả không được trống',
                 'noidung.required' => 'Nội dung không được trống',
             ],
         );
@@ -69,7 +67,6 @@ class ChapterController extends Controller
         $chapter = new Chapter();
         $chapter->tieude = $data['tieude'];
         $chapter->slug_chapter = $slug;
-        $chapter->tomtat = $data['tomtat'];
         $chapter->noidung = $data['noidung'];
         $chapter->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $chapter->kichhoat = 1;
@@ -116,7 +113,6 @@ class ChapterController extends Controller
         $data = $request->validate(
             [
                 'tieude' => 'required|:chapter|max:255',
-                'tomtat' => 'required',
                 'noidung' => 'required',
                 'kichhoat' => 'required',
                 'truyen_id' => 'required',
@@ -124,7 +120,6 @@ class ChapterController extends Controller
             [
                 'tieude.unique' => 'Tên chapter đã tổn tại',
                 'tieude.required' => 'Tên chapter không được trống',
-                'tomtat.required' => 'Mô tả không được trống',
                 'noidung.required' => 'Nội dung không được trống',
             ],
         );
@@ -132,7 +127,6 @@ class ChapterController extends Controller
         $chapter = Chapter::find($id);
         $chapter->tieude = $data['tieude'];
         $chapter->slug_chapter = $slug;
-        $chapter->tomtat = $data['tomtat'];
         $chapter->noidung = $data['noidung'];
         // $chapter->kichhoat = 1;
         $chapter->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
