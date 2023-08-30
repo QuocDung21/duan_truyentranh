@@ -112,9 +112,9 @@
                                 <h3>{{ $truyen->tentruyen }}</h3>
                             </div>
                             <div class="truncate-text" id="truncatedText">
-                                <p style="color: white !important">
+                                {{-- <p style="color: white !important">
                                     {!! html_entity_decode($truyen->tomtat) !!}
-                                </p>
+                                </p> --}}
                             </div>
 
                             <div class="anime__details__widget">
