@@ -111,17 +111,9 @@
                             <div class="anime__details__title">
                                 <h3>{{ $truyen->tentruyen }}</h3>
                             </div>
-                            {{-- <div class="anime__details__rating">
-                                <div class="rating">
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
-                                </div>
-                                <span>1.029 Votes</span>
-                            </div> --}}
-                            <p>{!! html_entity_decode($truyen->tomtat) !!}</p>
+                            <div class="truncate-text" id="truncatedText">
+                                {!! html_entity_decode($truyen->tomtat) !!}
+                            </div>
 
                             <div class="anime__details__widget">
                                 <div class="row">
@@ -295,4 +287,20 @@
             </div>
         </div>
     </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const truncatedText = document.getElementById("truncatedText");
+            const originalText = truncatedText.innerHTML;
+
+            // Giới hạn số dòng
+            const lineLimit = 10;
+            const lineHeight = parseFloat(getComputedStyle(truncatedText).lineHeight);
+            truncatedText.style.maxHeight = lineHeight * lineLimit + "px";
+
+            // Thêm dấu chấm cuối cùng
+            if (truncatedText.scrollHeight > truncatedText.clientHeight) {
+                truncatedText.innerHTML = originalText + "...";
+            }
+        });
+    </script>
 @endsection
