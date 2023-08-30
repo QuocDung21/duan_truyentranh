@@ -7,8 +7,17 @@
             opacity: 0.5;
             text-decoration: none;
         }
+
+        .custom-text-color {
+            color: red;
+        }
+
+        .ckeditor-content {
+            font-size: 16px !important;
+            color: #333 !important;
+            line-height: 1.6 !important;
+        }
     </style>
-    <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -23,7 +32,6 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
     {{-- <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ url('/') }}">Trang chủ</a></li>
@@ -35,40 +43,16 @@
             </li>
         </ol>
     </nav> --}}
-
-    {{-- <div class="container text-center">
-        <?php
-        echo $max_id->id;
-        echo $chapter->id;
-        ?>
-        <div class="">
-            <h4>{{ $chapter->truyen->tentruyen }}</h4>
-            <p>Chương hiện tại : {{ $chapter->tieude }}</p>
-            <label class="" for="">Chọn chương</label>
-            <p><a class="btn btn-primary   {{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"
-                    href="{{ url('xem-chapter/' . $previous_chapter) }}">Tập trước</a></p>
-            <select name="select-chapter" class="form-select text-center select-chapter">
-                @foreach ($all_chapter as $allct)
-                    <option value="{{ url('xem-chapter/' . $allct->slug_chapter) }}">{{ $allct->tieude }}</option>
-                @endforeach
-            </select>
-            <p><a class="btn btn-primary  {{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}"
-                    href="{{ url('xem-chapter/' . $next_chapter) }}">Tập sau</a></p>
-            <div class="col-md-12">
-                <div class="container noidungchuong text-center">
-                    <p>
-                        {{ $chapter->noidung }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <section class="blog-details spad">
+    <?php
+    echo $max_id->id;
+    echo $chapter->id;
+    ?>
+    <section class="blog-details spad" style="background-color: rgb(244,244,244) ">
         <div class="container">
             <div class="row d-flex justify-content-center">
                 <div class="col-lg-8">
                     <div class="blog__details__title">
-                        <h2>{{ $chapter->tieude }}</h2>
+                        <h2 style="color: rgb(65, 64, 64)">{{ $chapter->tieude }}</h2>
                         <div class="blog__details__social">
                             <a href="{{ url('xem-chapter/' . $previous_chapter) }}"
                                 class="linkedin  {{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}">
@@ -88,10 +72,11 @@
                     </div>
                 </div>
                 <div class="col-lg-9">
-
                     <div class="blog__details__content">
                         <div class="blog__details__text" style="line-height: 20px">
-                            <p>{!! html_entity_decode($chapter->noidung) !!}</p>
+                            {{-- <p><span class="custom-text-color">{!! html_entity_decode($chapter->noidung) !!}</span></p> --}}
+                            <div class="ckeditor-content">
+                            </div>
                         </div>
                         <div class="blog__details__btns">
                             <div class="row">
@@ -117,6 +102,11 @@
             </div>
         </div>
     </section>
+    <script>
+        var contentFromCKEditor = {!! json_encode($chapter->noidung) !!};
+        var ckEditorContentDiv = document.querySelector('.ckeditor-content');
+        ckEditorContentDiv.innerHTML = contentFromCKEditor;
+    </script>
     <script>
         $('.prev-chapter').on('click', function() {
             var prevUrl = $(this).hasClass('isDisabled') ? null : '{{ url('xem-chapter/' . $previous_chapter) }}';

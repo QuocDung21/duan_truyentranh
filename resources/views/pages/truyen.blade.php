@@ -86,7 +86,6 @@
 
         #loadLess {
             display: none;
-            /* Ẩn nút "Ẩn bớt" ban đầu */
         }
     </style>
     <!-- Breadcrumb Begin -->
@@ -205,8 +204,8 @@
                                     <div id="content">
                                         <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}</p>
                                     </div>
-                                    <button id="loadMore">Xem thêm</button>
-                                    <button id="loadLess" style="display: none;">Ẩn bớt</button>
+                                    <button class="btn btn-link" id="loadMore">Xem thêm</button>
+                                    <button class="btn btn-link" id="loadLess" style="display: none;">Ẩn bớt</button>
                                 </div>
                             </div>
                         </div>
@@ -260,23 +259,18 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
                                     <div class="section-title">
                                         <h5>Bình luận :</h5>
                                     </div>
-                                    <div id="content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                        <p>Nulla facilisi. Curabitur vitae elit vel nunc placerat consectetur.</p>
-                                        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-                                            Curae.</p>
-                                    </div>
-                                    <button id="loadMore">Xem thêm</button>
-
+                                    <div class="fb-comments" style="background-color: white !important" data-mobile
+                                        data-href="{{ \URL::current() }}" data-width="100%" data-colorscheme="dark"
+                                        width="100%" data-numposts="5"></div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-8">
                         <div class="product__sidebar">
