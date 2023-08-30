@@ -110,6 +110,11 @@ class IndexController extends Controller
         $danhMucTruyen = $truyen->thuocnhieudanhmuctruyen;
         $theLoaiTruyen = $truyen->thuocnhieutheloaitruyen;
         $truyenId = Truyen::where('slug_truyen', $slug)->first();
+        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
+        ->take(5)
+            ->orderBy('updated_at', 'desc')
+            ->where('kichhoat', 0)
+            ->get();
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
@@ -130,7 +135,7 @@ class IndexController extends Controller
             ->get();
 
         return view('pages.truyen')
-            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi'))
+            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat'))
             ->with('theloai', $this->theloai)
             ->with('truyen_moicapnhat', $this->truyen_moicapnhat)
             ->with('danhmuc', $this->danhmuc);
