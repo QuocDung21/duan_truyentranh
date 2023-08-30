@@ -156,7 +156,6 @@ class IndexController extends Controller
             ->where('id', $truyen->id)
             ->first();
 
-        dd($truyen_breadcrumb);
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('slug_chapter', $slug)
