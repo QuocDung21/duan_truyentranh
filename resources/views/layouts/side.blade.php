@@ -52,7 +52,25 @@
                             </li>
                         </ul>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Cài đặt
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            @role('admin')
+                                <li class="nav-item">
+                                    <a href="{{ route('setting.index') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Cài đặt trang web</p>
+                                    </a>
+                                </li>
+                            @endrole
+                        </ul>
+                    </li>
                     <li class="nav-header">Quản lý</li>
                     <li class="nav-item">
                         <a href="#" class="nav-link">
@@ -100,7 +118,6 @@
                             </li>
                         </ul>
                     </li>
-
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-copy"></i>
@@ -160,8 +177,6 @@
                     <hr style="color: white">
                 </ul>
             </nav>
-            <!-- /.sidebar-menu -->
         </div>
-        <!-- /.sidebar -->
     </aside>
 @endauth

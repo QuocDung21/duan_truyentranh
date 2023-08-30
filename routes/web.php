@@ -1,15 +1,17 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\apiController;
+use App\Http\Controllers\DanhmucTruyen;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DanhmucController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TruyenController;
 use App\Http\Controllers\ChapterController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\DanhmucTruyen;
+use App\Http\Controllers\DanhmucController;
+use App\Http\Controllers\settingController;
 use App\Http\Controllers\TheloaiController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\apiController;
 
 Auth::routes();
 // Client
@@ -29,6 +31,7 @@ Route::post('/insert_per_permission', [UserController::class, 'insert_per_permis
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::resource('/setting', settingController::class);
     Route::resource('/danhmuc', DanhmucController::class);
     Route::resource('/chapter', ChapterController::class);
     Route::resource('/theloai', TheloaiController::class);

@@ -90,9 +90,6 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
-
-    <!-- Anime Section Begin -->
     <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
@@ -111,16 +108,6 @@
                             <div class="anime__details__title">
                                 <h3>{{ $truyen->tentruyen }}</h3>
                             </div>
-                            {{-- <div class="anime__details__rating">
-                                <div class="rating">
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star"></i></a>
-                                    <a href="#"><i class="fa fa-star-half-o"></i></a>
-                                </div>
-                                <span>1.029 Votes</span>
-                            </div> --}}
                             <p>{{ $truyen->tomtat }}</p>
                             <div class="anime__details__widget">
                                 <div class="row">

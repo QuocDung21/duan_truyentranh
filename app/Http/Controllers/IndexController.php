@@ -91,7 +91,6 @@ class IndexController extends Controller
             ->with('danhmuc', $this->danhmuc)
             ->with('theloai', $this->theloai);
     }
-
     public function danhmuc($slug)
     {
         $danhmuc_id = DanhmucTruyen::where('slug_danhmuc', $slug)->first();
@@ -140,7 +139,6 @@ class IndexController extends Controller
             ->whereNotIn('id', [$truyen->id])
             ->orderBy('id', 'DESC')
             ->get();
-
         return view('pages.truyen')
             ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat'))
             ->with('theloai', $this->theloai)
@@ -158,6 +156,7 @@ class IndexController extends Controller
             ->where('id', $truyen->id)
             ->first();
 
+        dd($truyen_breadcrumb);
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('slug_chapter', $slug)
@@ -180,10 +179,8 @@ class IndexController extends Controller
             ->first();
         $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
         if (!Session::has($hasViewedKey)) {
-            // Tăng lượt xem cho truyện
             $chapter->truyen->luotxem += 1;
             $chapter->truyen->save();
-            // Đánh dấu là đã xem trong session
             Session::put($hasViewedKey, true);
         }
         return view('pages.chapter')
