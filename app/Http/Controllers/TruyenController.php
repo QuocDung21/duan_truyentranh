@@ -89,7 +89,7 @@ class TruyenController extends Controller
         $truyen->tag = $data['tag'];
         $truyen->tacgia = $data['tacgia'];
         $truyen->slug_truyen = $slug;
-        $truyen->tomtat = $data['tomtat'];
+        $truyen->tomtat = $data['tomtat_truyen'];
         $truyen->kichhoat = 1;
         // $truyen->kichhoat = $data['kichhoat'];
         $truyen->created_at = Carbon::now('Asia/Ho_Chi_Minh');
@@ -149,7 +149,7 @@ class TruyenController extends Controller
                 'tentruyen' => 'required|max:255',
                 'tacgia' => 'required|max:255',
                 'hinhanh' => 'image|mimes:png,jpg,jpeg,gif,svg|max:2048|',
-                'tomtat' => 'required',
+                'tomtat_truyen' => 'required',
                 'kichhoat' => 'required',
                 'danhmuc' => 'required',
                 'theloai' => 'required',
@@ -160,7 +160,7 @@ class TruyenController extends Controller
                 'tentruyen.unique' => 'Tên danh mục đã tổn tại',
                 'tacgia.unique' => 'Tác giả không được trống',
                 'tentruyen.required' => 'Tên danh mục không được trống',
-                'tomtat.required' => 'Mô tả không được trống',
+                'tomtat_truyen.required' => 'Mô tả không được trống',
             ],
         );
         $slug = Str::slug($data['tentruyen']);
@@ -176,7 +176,7 @@ class TruyenController extends Controller
         $truyen->tag = $data['tag'];
         $truyen->tacgia = $data['tacgia'];
         $truyen->slug_truyen = $slug;
-        $truyen->tomtat = $data['tomtat'];
+        $truyen->tomtat = $data['tomtat_truyen'];
         $truyen->kichhoat = $data['kichhoat'];
         $get_image = $request->hinhanh;
         if ($get_image) {

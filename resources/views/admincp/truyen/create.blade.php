@@ -33,7 +33,7 @@
                                     <input type="text" value="{{ old('tentruyen') }}" placeholder="Tên truyện..."
                                         name="tentruyen" class="form-control" id="exampleInputEmail1">
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3 ">
                                     <label for="exampleInputEmail1" class="form-label">Tác giả</label>
                                     <input type="text" value="{{ old('tacgia') }}" placeholder="Tác giả..."
                                         name="tacgia" class="form-control" id="exampleInputEmail1">
@@ -43,9 +43,9 @@
                                     <textarea rows="2" type="text" value="{{ old('tag') }}" name="tag" placeholder="Từ khóa..."
                                         class="form-control" id="exampleInputEmail1"></textarea>
                                 </div>
-                                <div class="mb-3">
+                                <div class="mb-3 editor">
                                     <label for="exampleInputEmail1" class="form-label">Tóm tắt truyện</label>
-                                    <textarea rows="5" type="text" value="{{ old('tomtat') }}" name="tomtat" placeholder="Tóm tắt truyện..."
+                                    <textarea rows="5" type="text" value="{{ old('tomtat') }}" name="tomtat_truyen" placeholder="Tóm tắt truyện..."
                                         class="form-control" id="exampleInputEmail1"></textarea>
                                 </div>
                                 <div class="mb-3">

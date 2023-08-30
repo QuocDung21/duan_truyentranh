@@ -121,7 +121,8 @@
                                 </div>
                                 <span>1.029 Votes</span>
                             </div> --}}
-                            <p>{{ $truyen->tomtat }}</p>
+                            <p>{!! html_entity_decode($truyen->tomtat) !!}</p>
+
                             <div class="anime__details__widget">
                                 <div class="row">
                                     <div class="col-lg-6 col-md-6">
@@ -174,7 +175,6 @@
                         </div>
                     </div>
                     <div class="col-9" style="margin-top: 50px">
-
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="anime__details__episodes">
@@ -185,6 +185,16 @@
                                         <a
                                             href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
                                     @endforeach
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="anime__details__episodes">
+                                    <div class="section-title">
+                                        <h5>Nội dung :</h5>
+                                    </div>
+                                    <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}</p>
                                 </div>
                             </div>
                         </div>
