@@ -62,7 +62,7 @@ class TruyenController extends Controller
             [
                 'tentruyen' => 'required|unique:truyen|max:255',
                 'hinhanh' => 'required|image|mimes:png,jpg,jpeg,gif,svg|max:2048|',
-                'tomtat' => 'required|max:255',
+                'tomtat' => 'required',
                 'kichhoat' => 'required',
                 'danhmuc' => 'required',
                 'theloai' => 'required',
@@ -149,7 +149,7 @@ class TruyenController extends Controller
                 'tentruyen' => 'required|max:255',
                 'tacgia' => 'required|max:255',
                 'hinhanh' => 'image|mimes:png,jpg,jpeg,gif,svg|max:2048|',
-                'tomtat' => 'required|max:255',
+                'tomtat' => 'required',
                 'kichhoat' => 'required',
                 'danhmuc' => 'required',
                 'theloai' => 'required',
