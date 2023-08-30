@@ -57,34 +57,6 @@
                     @endforeach
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-8">
-                    {{-- <div class="product__sidebar">
-                        <div class="product__sidebar__comment">
-                            <div class="section-title">
-                                <h5>Yêu thích</h5>
-                            </div>
-                            @foreach ($truyenmoicapnhat as $tr)
-                                <div class="product__sidebar__comment__item" style=" height:150px">
-                                    <div class="product__sidebar__comment__item__pic">
-                                        <img style=" width:100px" src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                                            alt="">
-                                    </div>
-                                    <div class="product__sidebar__comment__item__text">
-                                        <ul>
-                                            @foreach ($tr->thuocnhieutheloaitruyen as $item)
-                                                <li>{{ $item->tentheloai }}</li>
-                                            @endforeach
-                                        </ul>
-                                        <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                style="font-size: 10px;font-weight: 600" href="#">
-                                                {{ $tr->tentruyen }}
-                                            </a></h5>
-                                        <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
-                                            xem</span>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div> --}}
                     <div class="product__sidebar">
                         <div class="product__sidebar__comment">
                             <div class="section-title">

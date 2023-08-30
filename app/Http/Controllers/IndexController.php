@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
-    protected $theloai, $danhmuc, $truyen_moicapnhat, $slide_truyen;
+    protected $theloai, $danhmuc, $truyen_moicapnhat, $slide_truyen, $truyenmoicapnhat;
 
     public function __construct()
     {
@@ -30,6 +30,11 @@ class IndexController extends Controller
             ->where('kichhoat', 0)
             ->take(4)
             ->get();
+        $this->truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
+            ->take(5)
+            ->orderBy('updated_at', 'desc')
+            ->where('kichhoat', 0)
+            ->get();
     }
 
     public function theloai($slug)
@@ -45,6 +50,7 @@ class IndexController extends Controller
             ->with(compact('truyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc)
+            ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
             ->with('theloai_id', $theloai_id);
     }
 
@@ -97,6 +103,7 @@ class IndexController extends Controller
             ->with(compact('truyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc)
+            ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
             ->with('tendanhmuc', $danhmuc_id->tendanhmuc);
     }
 
@@ -111,7 +118,7 @@ class IndexController extends Controller
         $theLoaiTruyen = $truyen->thuocnhieutheloaitruyen;
         $truyenId = Truyen::where('slug_truyen', $slug)->first();
         $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
-        ->take(5)
+            ->take(5)
             ->orderBy('updated_at', 'desc')
             ->where('kichhoat', 0)
             ->get();

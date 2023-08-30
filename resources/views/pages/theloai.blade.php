@@ -46,7 +46,7 @@
                                             <h4>{{ $theloai_id->tentheloai }}</h4>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                    {{-- <div class="col-lg-4 col-md-4 col-sm-6">
                                         <div class="product__page__filter">
                                             <p>Order by:</p>
                                             <select>
@@ -55,7 +55,7 @@
                                                 <option value="">10-50</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                             <div class="row">
@@ -86,63 +86,31 @@
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-8">
                         <div class="product__sidebar">
-                            <div class="product__sidebar__view">
-                                <div class="section-title">
-                                    <h5>Top Views</h5>
-                                </div>
-                                {{-- <ul class="filter__controls">
-                                <li class="active" data-filter="*">Day</li>
-                                <li data-filter=".week">Week</li>
-                                <li data-filter=".month">Month</li>
-                                <li data-filter=".years">Years</li>
-                            </ul> --}}
-                                <div class="filter__gallery">
-                                    @foreach ($truyen as $tr)
-                                        <div class="product__sidebar__comment__item" style=" height:150px">
-                                            <div class="product__sidebar__comment__item__pic">
-                                                <img style=" width:100px"
-                                                    src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="product__sidebar__comment__item__text">
-                                                <ul>
-                                                    <li>Active</li>
-                                                    <li>Movie</li>
-                                                </ul>
-                                                <h5 style="font-size: 13px"><a href="#">
-                                                        {{ $tr->tentruyen }}
-                                                    </a></h5>
-                                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
                             <div class="product__sidebar__comment">
                                 <div class="section-title">
-                                    <h5>New Comment</h5>
+                                    <h5>Mới cập nhật</h5>
                                 </div>
-                                <div class="product__sidebar__comment__item">
-                                    @foreach ($truyen as $tr)
-                                        <div class="product__sidebar__comment__item" style=" height:150px">
-                                            <div class="product__sidebar__comment__item__pic">
-                                                <img style=" width:100px"
-                                                    src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                                                    alt="">
-                                            </div>
-                                            <div class="product__sidebar__comment__item__text">
-                                                <ul>
-                                                    <li>Active</li>
-                                                    <li>Movie</li>
-                                                </ul>
-                                                <h5 style="font-size: 13px"><a href="#">
-                                                        {{ $tr->tentruyen }}
-                                                    </a></h5>
-                                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                                            </div>
+                                @foreach ($truyenmoicapnhat as $tr)
+                                    <div class="product__sidebar__comment__item" style=" height:150px">
+                                        <div class="product__sidebar__comment__item__pic">
+                                            <img style=" width:100px"
+                                                src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt="">
                                         </div>
-                                    @endforeach
-                                </div>
+                                        <div class="product__sidebar__comment__item__text">
+                                            <ul>
+                                                @foreach ($tr->thuocnhieutheloaitruyen as $item)
+                                                    <li>{{ $item->tentheloai }}</li>
+                                                @endforeach
+                                            </ul>
+                                            <h5 class="text-truncate" style="max-width: 300px;"><a class=""
+                                                    style="font-size: 10px;font-weight: 600" href="#">
+                                                    {{ $tr->tentruyen }}
+                                                </a></h5>
+                                            <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
+                                                xem</span>
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
