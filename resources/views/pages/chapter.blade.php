@@ -9,11 +9,10 @@
         }
 
         .ckeditor-content p {
-            font-size: 16px !important;
+            font-size: 26px !important;
             color: #333 !important;
             line-height: 1.6 !important;
         }
-        
     </style>
     <div class="breadcrumb-option">
         <div class="container">
@@ -79,7 +78,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="blog__details__btns__item">
-                                        <h5 class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"><a
+                                        <h5 style="" class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"><a
                                                 href="{{ url('xem-chapter/' . $previous_chapter) }} "><i
                                                     class="fas fa-arrow-left"></i> Tập trước</a>
                                         </h5>
@@ -99,6 +98,7 @@
             </div>
         </div>
     </section>
+    <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
     <script>
         var contentFromCKEditor = {!! json_encode($chapter->noidung) !!};
         var ckEditorContentDiv = document.querySelector('.ckeditor-content');
