@@ -13,7 +13,7 @@
             @foreach ($truyen as $tr)
                 <div class="custom-product-comment-item " style="width:200px;height: 300px">
                     <div class="custom-product-comment-item-pic" style="width:200px;height: 300px;">
-                        <img style="border-radius: 5px" src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
+                        <img style="border-radius: 5px;" src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}"
                             alt="">
                     </div>
                     <div class="custom-product-comment-item-text">

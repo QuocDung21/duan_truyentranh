@@ -39,10 +39,9 @@
             </li>
         </ol>
     </nav> --}}
-    <?php
-    echo $max_id->id;
-    echo $chapter->id;
-    ?>
+
+    {{-- {{ $next_chapter }} --}}
+    {{ $next_chapter }}
     <section class="blog-details spad" style="background-color: rgb(244,244,244) ">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -53,6 +52,7 @@
                             <a href="{{ url('xem-chapter/' . $previous_chapter) }}"
                                 class="linkedin  {{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}">
                                 Tập trước</a>
+
                             <a href="{{ url('xem-chapter/' . $next_chapter) }}"
                                 class="linkedin  {{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}"> Tập
                                 sau </a>
@@ -98,12 +98,6 @@
             </div>
         </div>
     </section>
-    <script src="//cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
-    <script>
-        var contentFromCKEditor = {!! json_encode($chapter->noidung) !!};
-        var ckEditorContentDiv = document.querySelector('.ckeditor-content');
-        ckEditorContentDiv.innerHTML = contentFromCKEditor;
-    </script>
     <script>
         $('.prev-chapter').on('click', function() {
             var prevUrl = $(this).hasClass('isDisabled') ? null : '{{ url('xem-chapter/' . $previous_chapter) }}';
@@ -118,5 +112,10 @@
                 window.location.href = nextUrl;
             }
         });
+    </script>
+    <script>
+        var contentFromCKEditor = {!! json_encode($chapter->noidung) !!};
+        var ckEditorContentDiv = document.querySelector('.ckeditor-content');
+        ckEditorContentDiv.innerHTML = contentFromCKEditor;
     </script>
 @endsection
