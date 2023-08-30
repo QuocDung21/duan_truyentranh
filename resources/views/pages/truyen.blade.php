@@ -257,7 +257,7 @@
                                 <div class="section-title">
                                     <h5>Mới cập nhật</h5>
                                 </div>
-                                @foreach ($truyen_moicapnhat as $tr)
+                                @foreach ($truyenmoicapnhat as $tr)
                                     <div class="product__sidebar__comment__item" style=" height:150px">
                                         <div class="product__sidebar__comment__item__pic">
                                             <img style=" width:100px"
@@ -265,27 +265,24 @@
                                         </div>
                                         <div class="product__sidebar__comment__item__text">
                                             <ul>
-                                                <li>Active</li>
-                                                <li>Movie</li>
+                                                @foreach ($tr->thuocnhieutheloaitruyen as $item)
+                                                    <li>{{ $item->tentheloai }}</li>
+                                                @endforeach
                                             </ul>
                                             <h5 class="text-truncate" style="max-width: 300px;"><a class=""
                                                     style="font-size: 10px;font-weight: 600" href="#">
                                                     {{ $tr->tentruyen }}
                                                 </a></h5>
-                                            <span><i class="fa fa-eye"></i> {{ $tr->luotxem == 0 ? 0 : $tr->luotxem }}
-                                                Viewes</span>
+                                            <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
+                                                xem</span>
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
                         </div>
                     </div>
-
-
                 </div>
-
             </div>
-
         </div>
     </section>
 @endsection
