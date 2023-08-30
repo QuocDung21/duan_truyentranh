@@ -1493,7 +1493,7 @@ ol {
 }
 
 .blog__details__text p {
-	color: #ffffff;
+	/* color: #ffffff; */
 	font-size: 17px;
 	line-height: 30px;
 }

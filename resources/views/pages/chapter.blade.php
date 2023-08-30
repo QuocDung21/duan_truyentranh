@@ -8,15 +8,12 @@
             text-decoration: none;
         }
 
-        .custom-text-color {
-            color: red;
-        }
-
-        .ckeditor-content {
+        .ckeditor-content p {
             font-size: 16px !important;
             color: #333 !important;
             line-height: 1.6 !important;
         }
+        
     </style>
     <div class="breadcrumb-option">
         <div class="container">
@@ -73,7 +70,7 @@
                 </div>
                 <div class="col-lg-9">
                     <div class="blog__details__content">
-                        <div class="blog__details__text" style="line-height: 20px">
+                        <div class="blog__details__texts" style="line-height: 20px">
                             {{-- <p><span class="custom-text-color">{!! html_entity_decode($chapter->noidung) !!}</span></p> --}}
                             <div class="ckeditor-content">
                             </div>
