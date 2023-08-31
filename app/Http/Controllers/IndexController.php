@@ -38,22 +38,7 @@ class IndexController extends Controller
             ->get();
     }
 
-    public function theloai($slug)
-    {
-        $theloai_id = Theloai::where('slug_theloai', $slug)->first();
-        $truyen = Truyen::with('danhmuctruyen', 'theloai')
-            ->orderBy('id', 'DESC')
-            ->where('kichhoat', 0)
-            ->where('theloai_id', $theloai_id->id)
-            ->get();
 
-        return view('pages.theloai')
-            ->with(compact('truyen'))
-            ->with('theloai', $this->theloai)
-            ->with('danhmuc', $this->danhmuc)
-            ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
-            ->with('theloai_id', $theloai_id);
-    }
 
     public function home()
     {
@@ -92,6 +77,24 @@ class IndexController extends Controller
             ->with('danhmuc', $this->danhmuc)
             ->with('theloai', $this->theloai);
     }
+
+    public function theloai($slug)
+    {
+        $theloai_id = Theloai::where('slug_theloai', $slug)->first();
+        $truyen = Truyen::with('thuocnhieutheloaitruyen', 'theloai')
+            ->orderBy('id', 'DESC')
+            ->where('kichhoat', 0)
+            ->where('theloai_id', $theloai_id->id)
+            ->get();
+
+        return view('pages.theloai')
+            ->with(compact('truyen'))
+            ->with('theloai', $this->theloai)
+            ->with('danhmuc', $this->danhmuc)
+            ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
+            ->with('theloai_id', $theloai_id);
+    }
+
 
     public function danhmuc($slug)
     {
