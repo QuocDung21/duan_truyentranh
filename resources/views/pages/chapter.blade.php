@@ -9,9 +9,9 @@
         }
 
         .ckeditor-content p {
-            font-size: 20px !important;
+            font-size: 24px !important;
             color: #333 !important;
-            line-height: 1.6 !important;
+            line-height: 1.7 !important;
         }
     </style>
     <div class="breadcrumb-option">
@@ -39,7 +39,6 @@
             </li>
         </ol>
     </nav> --}}
-    {{-- {{ $next_chapter }} --}}
     <section class="blog-details spad" style="background-color: rgb(244,244,244) ">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -72,14 +71,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{-- <div style="display: flex;justify-content: center;margin-top: 2px;" class="format-toolbar">
-                            <select id="font-size-select">
-                                <option value="">Chọn kích thước chữ</option>
-                                <option value="12px !important">Nhỏ</option>
-                                <option value="16px !important">Vừa</option>
-                                <option value="20px !important">Lớn</option>
-                            </select>
-                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -88,29 +79,48 @@
                             <div class="ckeditor-content">
                             </div>
                         </div>
-                        {{-- <div class="blog__details__btns">
+                        <div class="blog__details__btns">
                             <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="blog__details__btns__item">
-                                        <h5 class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"><a
-                                                style="color: black;cursor: pointer;"
-                                                href="{{ url('xem-chapter/' . $previous_chapter) }} "><i
-                                                    style="color: black" class="fas fa-arrow-left"></i> Tập
-                                                trước</a>
-                                        </h5>
+                                @if ($previous_chapter != null)
+                                    <div class="col-lg-6">
+                                        <div class="blog__details__btns__item">
+                                            <h5><a style="color: black;cursor: pointer;"
+                                                    href="{{ url('xem-chapter/' . $previous_chapter->slug_chapter) }}"><i
+                                                        style="color: black" class="fas fa-arrow-left"></i> Tập
+                                                    trước</a>
+                                            </h5>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="blog__details__btns__item next__btn">
-                                        <h5
-                                        class="{{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}"
-                                            ><a style="color: black"
-                                                href="{{ url('xem-chapter/' . $next_chapter) }} ">Tập
-                                                sau <i style="color: black" class="fas fa-arrow-right"></i></a></h5>
+                                @else
+                                    <div class="col-lg-6">
+                                        <div class="blog__details__btns__item">
+                                            <h5 class="isDisabled"><a style="color: black;cursor: pointer;"
+                                                    href="{{ url('xem-chapter/') }}"><i style="color: black"
+                                                        class="fas fa-arrow-left"></i> Tập
+                                                    trước</a>
+                                            </h5>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+                                @if ($next_chapter != null)
+                                    <div class="col-lg-6">
+                                        <div class="blog__details__btns__item next__btn">
+                                            <h5 class=""><a style="color: black"
+                                                    href="{{ url('xem-chapter/' . $next_chapter->slug_chapter) }} ">Tập
+                                                    sau <i style="color: black" class="fas fa-arrow-right"></i></a></h5>
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="col-lg-6">
+                                        <div class="blog__details__btns__item next__btn">
+                                            <h5 class="isDisabled"><a style="color: black"
+                                                    href="{{ url('xem-chapter/') }} ">Tập
+                                                    sau <i style="color: black" class="fas fa-arrow-right"></i></a></h5>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>
