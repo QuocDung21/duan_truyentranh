@@ -221,8 +221,9 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                            {{ $chapter->links() }}
-
+                                            <div class="flex justify-center ">
+                                                {{ $chapter->links() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
