@@ -140,7 +140,7 @@
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
                                             <li><span>Tác giả:</span> {{ $truyen->tacgia }}</li>
-                                            <li><span>Số chapter:</span>{{ count($chapter) }}</li>
+                                            <li><span>Số chapter:</span>{{ count($chapter_all) }}</li>
                                             <li><span>Lượt xem:</span> {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
                                             </li>
                                             <li><span>Trạng thái:</span> Đang cập nhật</li>
