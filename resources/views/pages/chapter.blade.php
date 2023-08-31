@@ -85,8 +85,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="blog__details__btns__item">
-                                        <h5 class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"><a
-                                                style="color: black;cursor: pointer;"
+                                        <h5 {{-- class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}" --}}><a style="color: black;cursor: pointer;"
                                                 href="{{ url('xem-chapter/' . $previous_chapter) }} "><i
                                                     style="color: black" class="fas fa-arrow-left"></i> Tập
                                                 trước</a>
@@ -95,8 +94,8 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="blog__details__btns__item next__btn">
-                                        <h5 class="{{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}"><a
-                                                style="color: black" href="{{ url('xem-chapter/' . $next_chapter) }} ">Tập
+                                        <h5 {{-- class="{{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}" --}}><a style="color: black"
+                                                href="{{ url('xem-chapter/' . $next_chapter) }} ">Tập
                                                 sau <i style="color: black" class="fas fa-arrow-right"></i></a></h5>
                                     </div>
                                 </div>

@@ -170,35 +170,44 @@ class IndexController extends Controller
 
     public function xemchapter($slug)
     {
-        $chapter = Chapter::where('slug_chapter', $slug)->first();
+        $truyenId = Chapter::where('slug_chapter', $slug)->first();
+        $truyen = Chapter::orderBy('id', 'DESC')
+            ->where('slug_chapter', $slug)
+            ->first();
         $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
-            ->where('id', $chapter->truyen_id)
+            ->where('id', $truyen->id)
             ->first();
 
+        $chapter = Chapter::with('truyen')
+            ->orderBy('id', 'ASC')
+            ->where('slug_chapter', $slug)
+            ->where('truyen_id', $truyenId->truyen_id)
+            ->first();
         $all_chapter = Chapter::orderBy('id', 'ASC')
-            ->where('truyen_id', $chapter->truyen_id)
+            ->where('truyen_id', $truyenId->truyen_id)
             ->get();
-
-        $next_chapter = Chapter::where('truyen_id', $chapter->truyen_id)
+        $next_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
             ->where('id', '>', $chapter->id)
-            ->orderBy('id', 'asc') // Sắp xếp theo id tăng dần
-            ->first();
-
-        $previous_chapter = Chapter::where('truyen_id', $chapter->truyen_id)
+            ->min('slug_chapter');
+        $previous_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
             ->where('id', '<', $chapter->id)
-            ->orderBy('id', 'desc') // Sắp xếp theo id giảm dần
+            ->max('slug_chapter');
+        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+            ->orderBy('id', 'DESC')
             ->first();
-
-        if (!Session::has('viewed_truyen_' . $chapter->slug_chapter)) {
+        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+            ->orderBy('id', 'ASC')
+            ->first();
+        $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
+        if (!Session::has($hasViewedKey)) {
             // Tăng lượt xem cho truyện
             $chapter->truyen->luotxem += 1;
             $chapter->truyen->save();
             // Đánh dấu là đã xem trong session
-            Session::put('viewed_truyen_' . $chapter->slug_chapter, true);
+            Session::put($hasViewedKey, true);
         }
-
         return view('pages.chapter')
-            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter'))
+            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc);
     }
