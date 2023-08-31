@@ -204,20 +204,6 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="anime__details__episodes">
-                                    <div class="section-title">
-                                        <h5>Nội dung :</h5>
-                                    </div>
-                                    <div id="content">
-                                        <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}</p>
-                                    </div>
-                                    <button class="btn btn-link" id="loadMore">Xem thêm</button>
-                                    <button class="btn btn-link" id="loadLess" style="display: none;">Ẩn bớt</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
                                     <div class="section-title">
@@ -238,12 +224,35 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
+                                            <div
+                                                class="product__pagination col-lg-12 col-md-12 d-flex justify-content-center">
+                                                <a href="#" class="current-page">1</a>
+                                                <a href="#">2</a>
+                                                <a href="#">3</a>
+                                                <a href="#">4</a>
+                                                <a href="#">5</a>
+                                                <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="anime__details__episodes">
+                                    <div class="section-title">
+                                        <h5>Nội dung :</h5>
+                                    </div>
+                                    <div id="content">
+                                        <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}</p>
+                                    </div>
+                                    <button class="btn btn-link" id="loadMore">Xem thêm</button>
+                                    <button class="btn btn-link" id="loadLess" style="display: none;">Ẩn bớt</button>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
@@ -305,7 +314,8 @@
                                                     style="font-size: 10px;font-weight: 600" href="#">
                                                     {{ $tr->tentruyen }}
                                                 </a></h5>
-                                            <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
+                                            <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }}
+                                                lượt
                                                 xem</span>
                                         </div>
                                     </div>
