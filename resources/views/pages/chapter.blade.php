@@ -64,7 +64,7 @@
                                     sau </a>
                             @endif
                         </div>
-                        <div class="blog__details__social mt-3 d-flex justify-content-center " >
+                        <div class="blog__details__social mt-3 d-flex justify-content-center ">
                             <select class="text-center select-chapter select-columns">
                                 @foreach ($all_chapter as $allct)
                                     <option value="{{ url('xem-chapter/' . $allct->slug_chapter) }}">{{ $allct->tieude }}

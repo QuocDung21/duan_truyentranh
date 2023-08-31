@@ -8,7 +8,7 @@
 
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg')}}" >
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg') }}">
 
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -28,7 +28,7 @@
 
 <body>
     <div class="loader" style="z-index: 9999"></div>
-</div>
+    </div>
     <header class="header">
         <div class="container">
             <div class="row">
@@ -135,9 +135,9 @@
     @yield('slide')
     @yield('content')
     <!-- Footer Section Begin -->
-    {{-- <footer class="footer">
+    <footer class="footer">
         <div class="page-up">
-            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+            <a href="#" id="scrollToTopButton"><i class="fa-solid fa-arrow-up"></i></a>
         </div>
         <div class="container">
             <div class="row">
@@ -149,47 +149,29 @@
                 <div class="col-lg-6">
                     <div class="footer__nav">
                         <ul>
-                            <li class="active"><a href="./index.html">Homepage</a></li>
-                            <li><a href="./categories.html">Categories</a></li>
-                            <li><a href="./blog.html">Our Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
+                            <li class="active"><a href="{{ url('/') }}">Trang chủ</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="fa fa-heart"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
 
                 </div>
             </div>
-        </div>
-    </footer> --}}
-    <!-- Footer Section End -->
-    {{-- <footer class="text-muted">
-            <div class="container">
-                <p class="float-right">
-                    <a href="">Back to top</a>
-                </p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia eaque ullam, quam consequuntur
-                    corrupti odio sequi. Voluptate fugiat nam dolore.</p>
+            <div class="row" style="display: flex;justify-content: center;text-align: center;margin-top: 15px;">
                 <p>
-                    Lorem, ipsum dolor.?
-                    <a href="../../">
-                        Lorem, ipsum.
-                    </a>or read our <a href=""> Lorem ipsum dolor sit.</a>
+                    Đọc truyện online, đọc truyện chữ, truyện hay. Website luôn cập nhật những bộ truyện mới thuộc
+                    các thể loại đặc sắc như truyện tiên hiệp, truyện kiếm hiệp, hay truyện ngôn tình một cách nhanh
+                    nhất. Hỗ trợ mọi thiết bị như di động và máy tính bảng.
                 </p>
             </div>
-        </footer> --}}
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script> --}}
-    <!-- Js Plugins -->
+            {{-- <div class="row" style="display: flex;justify-content: center;text-align: center;margin-top: 5px;">
+                <p>
+                    @design by : quocdung
+                </p>
+            </div> --}}
+        </div>
+    </footer>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/player.js') }}"></script>
     <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
