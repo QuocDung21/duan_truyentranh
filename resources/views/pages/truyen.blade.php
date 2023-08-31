@@ -91,7 +91,7 @@
         .truncate-text {
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 6;
             -webkit-box-orient: vertical;
             margin-bottom: 20px;
         }
