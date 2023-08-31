@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>TruyenhayHt</title>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5013472995722361"
+        crossorigin="anonymous"></script>
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg') }}">
