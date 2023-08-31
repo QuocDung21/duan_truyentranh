@@ -230,7 +230,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__episodes">
                                     <div class="section-title">
                                         <h5>Nội dung :</h5>
