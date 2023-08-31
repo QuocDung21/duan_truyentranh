@@ -81,10 +81,12 @@ class IndexController extends Controller
     public function theloai($slug)
     {
         $theloai_id = Theloai::where('slug_theloai', $slug)->first();
-        $truyen = Truyen::with('thuocnhieutheloaitruyen', 'theloai')
+        $truyen = Truyen::with('thuocnhieutheloaitruyen')
             ->orderBy('id', 'DESC')
             ->where('kichhoat', 0)
-            ->where('theloai_id', $theloai_id->id)
+            ->whereHas('thuocnhieutheloaitruyen', function ($query) use ($theloai_id) {
+                $query->where('theloai_id', $theloai_id->id);
+            })
             ->get();
 
         return view('pages.theloai')
