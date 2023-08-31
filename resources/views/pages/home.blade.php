@@ -82,7 +82,8 @@
                                                     style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
                                                         class="fa fa-eye"></i>
                                                     {{ $tr->luotxem == 0 ? 0 : $tr->luotxem }}</div>
-                                                <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
+                                                <div class="comment text-truncate"> {{ $tr->tentruyen }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

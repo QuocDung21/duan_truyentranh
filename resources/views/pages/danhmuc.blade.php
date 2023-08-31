@@ -30,16 +30,6 @@
                                         <h4>{{ $tendanhmuc }}</h4>
                                     </div>
                                 </div>
-                                {{-- <div class="col-lg-4 col-md-4 col-sm-6">
-                                    <div class="product__page__filter">
-                                        <p>Order by:</p>
-                                        <select>
-                                            <option value="">A-Z</option>
-                                            <option value="">1-10</option>
-                                            <option value="">10-50</option>
-                                        </select>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                         <div class="row">
@@ -47,12 +37,15 @@
                                 <a href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                     <div class="col-lg-2 col-md-6 col-4">
                                         <div class="product__item">
-                                            <div class="product__item__pic set-bg" style="height: 200px; width: 130px;"
+                                            <div class="product__item__pic set-bg" style="height: 200px;width: 130px; "
                                                 data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
-                                                <div class="ep">18 / 18</div>
-                                                <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
+                                                <div class="view"
+                                                    style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
+                                                        class="fa fa-eye"></i>
+                                                    {{ $tr->luotxem == 0 ? 0 : $tr->luotxem }}</div>
+                                                <div class="comment text-truncate"> {{ $tr->tentruyen }}
+                                                </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </a>
@@ -87,7 +80,8 @@
                                             @endforeach
                                         </ul>
                                         <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                style="font-size: 10px;font-weight: 600" href="#">
+                                                style="font-size: 10px;font-weight: 600"
+                                                href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                                 {{ $tr->tentruyen }}
                                             </a></h5>
                                         <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
