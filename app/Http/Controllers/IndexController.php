@@ -168,26 +168,6 @@ class IndexController extends Controller
             ->with('danhmuc', $this->danhmuc);
     }
 
-    // public function xemchapter($slug)
-    // {
-    //     $category = DanhmucTruyen::orderBy('id', 'desc')->get();
-
-    //     //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
-    //     $truyen = Chapter::where('slug_chapter', $slug)->first();
-
-    //     // lấy ra dữ liệu của chapter sau
-    //     $chapter_next = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '>', $truyen->id)->min('id');
-    //     // lấy ra dữ liệu của chapter trước
-    //     $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
-    //     //Kết nối với dữ liệu bảng book
-    //     $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
-    //     // Lấy ra số chapter
-    //     $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
-    //     return view('pages.chapter')->with(compact('category', 'chapter', 'chapter_number', 'truyen'))
-    //         ->with('next_chapter ', Chapter::find($chapter_next))
-    //         ->with('previous_chapter', Chapter::find($chapter_previous));
-    // }
-
     public function xemchapter($slug)
     {
 
@@ -211,9 +191,8 @@ class IndexController extends Controller
             ->where('slug_chapter', $slug)
             ->first();
         $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
-            ->where('id', $truyen->id)
+            ->where('id', $truyen->truyen_id)
             ->first();
-
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('slug_chapter', $slug)
