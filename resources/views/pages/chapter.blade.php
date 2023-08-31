@@ -40,7 +40,6 @@
         </ol>
     </nav> --}}
     {{-- {{ $next_chapter }} --}}
-    {{ $next_chapter }}
     <section class="blog-details spad" style="background-color: rgb(244,244,244) ">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -49,13 +48,21 @@
                     <div class="blog__details__title">
                         <h2 style="color: rgb(65, 64, 64)">{{ $chapter->tieude }}</h2>
                         <div class="blog__details__social">
-                            <a href="{{ url('xem-chapter/' . $previous_chapter) }}"
-                                class="linkedin  {{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}">
-                                Tập trước</a>
+                            @if ($previous_chapter != null)
+                                <a href="{{ url('xem-chapter/' . $previous_chapter->slug_chapter) }}" class="linkedin">
+                                    Tập trước</a>
+                            @else
+                                <a href="{{ url('xem-chapter/') }}" class="linkedin  isDisabled }}">
+                                    Tập trước</a>
+                            @endif
 
-                            <a href="{{ url('xem-chapter/' . $next_chapter) }}"
-                                class="linkedin  {{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}"> Tập
-                                sau </a>
+                            @if ($next_chapter != null)
+                                <a href="{{ url('xem-chapter/' . $next_chapter->slug_chapter) }}" class="linkedin"> Tập
+                                    sau </a>
+                            @else
+                                <a href="{{ url('xem-chapter/') }}" class="linkedin  isDisabled }}"> Tập
+                                    sau </a>
+                            @endif
                         </div>
                         <div class="blog__details__social mt-3 d-flex justify-content-center">
                             <select name="select-chapter" class=" text-center select-chapter">
@@ -81,11 +88,12 @@
                             <div class="ckeditor-content">
                             </div>
                         </div>
-                        <div class="blog__details__btns">
+                        {{-- <div class="blog__details__btns">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="blog__details__btns__item">
-                                        <h5 {{-- class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}" --}}><a style="color: black;cursor: pointer;"
+                                        <h5 class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"><a
+                                                style="color: black;cursor: pointer;"
                                                 href="{{ url('xem-chapter/' . $previous_chapter) }} "><i
                                                     style="color: black" class="fas fa-arrow-left"></i> Tập
                                                 trước</a>
@@ -94,13 +102,15 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="blog__details__btns__item next__btn">
-                                        <h5 {{-- class="{{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}" --}}><a style="color: black"
+                                        <h5
+                                        class="{{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}"
+                                            ><a style="color: black"
                                                 href="{{ url('xem-chapter/' . $next_chapter) }} ">Tập
                                                 sau <i style="color: black" class="fas fa-arrow-right"></i></a></h5>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

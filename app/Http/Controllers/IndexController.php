@@ -168,8 +168,44 @@ class IndexController extends Controller
             ->with('danhmuc', $this->danhmuc);
     }
 
+    // public function xemchapter($slug)
+    // {
+    //     $category = DanhmucTruyen::orderBy('id', 'desc')->get();
+
+    //     //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
+    //     $truyen = Chapter::where('slug_chapter', $slug)->first();
+
+    //     // lấy ra dữ liệu của chapter sau
+    //     $chapter_next = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '>', $truyen->id)->min('id');
+    //     // lấy ra dữ liệu của chapter trước
+    //     $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
+    //     //Kết nối với dữ liệu bảng book
+    //     $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
+    //     // Lấy ra số chapter
+    //     $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
+    //     return view('pages.chapter')->with(compact('category', 'chapter', 'chapter_number', 'truyen'))
+    //         ->with('next_chapter ', Chapter::find($chapter_next))
+    //         ->with('previous_chapter', Chapter::find($chapter_previous));
+    // }
+
     public function xemchapter($slug)
     {
+
+
+        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
+
+        //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
+        $truyen = Chapter::where('slug_chapter', $slug)->first();
+
+        // lấy ra dữ liệu của chapter sau
+        $chapter_next = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '>', $truyen->id)->min('id');
+        // lấy ra dữ liệu của chapter trước
+        $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
+        //Kết nối với dữ liệu bảng book
+        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
+        // Lấy ra số chapter
+        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
+
         $truyenId = Chapter::where('slug_chapter', $slug)->first();
         $truyen = Chapter::orderBy('id', 'DESC')
             ->where('slug_chapter', $slug)
@@ -186,12 +222,12 @@ class IndexController extends Controller
         $all_chapter = Chapter::orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->truyen_id)
             ->get();
-        $next_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
-            ->where('id', '>', $chapter->id)
-            ->min('slug_chapter');
-        $previous_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
-            ->where('id', '<', $chapter->id)
-            ->max('slug_chapter');
+        // $next_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
+        //     ->where('id', '>', $chapter->id)
+        //     ->min('slug_chapter');
+        // $previous_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
+        //     ->where('id', '<', $chapter->id)
+        //     ->max('slug_chapter');
         $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
             ->orderBy('id', 'DESC')
             ->first();
@@ -206,10 +242,17 @@ class IndexController extends Controller
             // Đánh dấu là đã xem trong session
             Session::put($hasViewedKey, true);
         }
+        $next_chapter = Chapter::find($chapter_next);
+        $previous_chapter = Chapter::find($chapter_previous);
+        // dd($next_chapter->slug_chapter);
+
+
         return view('pages.chapter')
             ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc);
+        // ->with('chapter_next ', Chapter::find($chapter_next))
+        // ->with('chapter_previous', Chapter::find($chapter_previous));
     }
 
     public function timkiem()
