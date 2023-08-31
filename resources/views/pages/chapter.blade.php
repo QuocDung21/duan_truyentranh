@@ -13,6 +13,18 @@
             color: #333 !important;
             line-height: 1.7 !important;
         }
+
+        .select-columns {
+            display: block !important;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px !important;
+            padding: 10px;
+            border-radius: 5px
+        }
+
+        .nice-select {
+            display: none !important;
+        }
     </style>
     <div class="breadcrumb-option">
         <div class="container">
@@ -28,17 +40,6 @@
             </div>
         </div>
     </div>
-    {{-- <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ url('/') }}">Trang chủ</a></li>
-            <li class="breadcrumb-item"><a
-                    href="{{ route('danh-muc', [$truyen_breadcrumb->danhmuctruyen->slug_danhmuc]) }}">{{ $truyen_breadcrumb->danhmuctruyen != null ? $truyen_breadcrumb->danhmuctruyen->tendanhmuc : 'Đang cập nhật' }}</a>
-            </li>
-            <li class="breadcrumb-item active" aria-current="page">
-                {{ $chapter->truyen->tentruyen }}
-            </li>
-        </ol>
-    </nav> --}}
     <section class="blog-details spad" style="background-color: rgb(244,244,244) ">
         <div class="container">
             <div class="row d-flex justify-content-center">
@@ -63,14 +64,17 @@
                                     sau </a>
                             @endif
                         </div>
-                        <div class="blog__details__social mt-3 d-flex justify-content-center">
-                            <select name="select-chapter" class=" text-center select-chapter">
+                        <div class="blog__details__social mt-3 d-flex justify-content-center " >
+                            <select class="text-center select-chapter select-columns">
                                 @foreach ($all_chapter as $allct)
                                     <option value="{{ url('xem-chapter/' . $allct->slug_chapter) }}">{{ $allct->tieude }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
+
+
+
                     </div>
                 </div>
                 <div class="col-lg-9">
@@ -155,13 +159,6 @@
         ckEditorContentDiv.innerHTML = contentFromCKEditor;
 
 
-
-        // var fontSizeSelect = document.querySelector('#font-size-select');
-        // fontSizeSelect.addEventListener('change', function() {
-        //     alert("height");
-        // })
-
-        // Lắng nghe sự kiện khi người dùng thay đổi tùy chọn
         $('#test').on('change', async function() {
             var selectedValue = fontSizeSelect.value;
             // Lưu giá trị vào localStorage
