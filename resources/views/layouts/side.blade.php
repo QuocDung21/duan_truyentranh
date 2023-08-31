@@ -160,8 +160,6 @@
                     <hr style="color: white">
                 </ul>
             </nav>
-            <!-- /.sidebar-menu -->
         </div>
-        <!-- /.sidebar -->
     </aside>
 @endauth
