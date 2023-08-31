@@ -33,8 +33,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('hom
-        e')
+        return view('home')
             ->with('theloai', $this->theloai)
             ->with('truyen', $this->truyen)
             ->with('user', $this->user)
