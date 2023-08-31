@@ -1,7 +1,3 @@
-<style>
-
-</style>
-
 <section class="mt-5">
     <div class="container">
         <div class="col-lg-8 col-md-8 col-sm-8">

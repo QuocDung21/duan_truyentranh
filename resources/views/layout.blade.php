@@ -27,6 +27,14 @@
 </head>
 
 <body>
+    <style>
+        .dropdown-scroll {
+            max-height: 50vh;
+            /* Chiều cao tối đa của danh sách dropdown */
+            overflow-y: auto;
+            /* Hiển thị thanh cuộn khi nội dung vượt quá max-height */
+        }
+    </style>
     <div class="loader" style="z-index: 9999"></div>
     </div>
     <header class="header">
@@ -47,22 +55,24 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="{{ url('/') }}">Trang chủ</a></li>
-                                <li><a href="#">Danh mục <i class="fa-solid fa-caret-down"></i></a>
-                                    <ul class="dropdown">
+                                <li><a href="{{ url('/') }}">Trang chủ</a></li>
+                                <li>
+                                    <a href="#">Danh mục <i class="fa-solid fa-caret-down"></i></a>
+                                    <ul style="width: 200px !important" class="dropdown dropdown-scroll">
                                         @foreach ($danhmuc as $dmuc)
                                             <li>
                                                 <a class="dropdown-item"
-                                                    href="{{ url('danh-muc/' . $dmuc->slug_danhmuc) }}">{{ $dmuc->tendanhmuc }}
-                                                </a>
+                                                    href="{{ url('danh-muc/' . $dmuc->slug_danhmuc) }}">{{ $dmuc->tendanhmuc }}</a>
                                             </li>
                                         @endforeach
                                     </ul>
                                 </li>
-                                <li><a href="#">Thể loại <i class="fa-solid fa-caret-down"></i></a>
-                                    <ul class="dropdown">
+                                <li>
+                                    <a href="#">Thể loại <i class="fa-solid fa-caret-down"></i></a>
+                                    <ul style="width: 200px !important" class="dropdown dropdown-scroll">
                                         @foreach ($theloai as $tloai)
-                                            <li><a class="dropdown-item"
+                                            <li>
+                                                <a class="dropdown-item"
                                                     href="{{ url('the-loai/' . $tloai->slug_theloai) }}">{{ $tloai->tentheloai }}</a>
                                             </li>
                                         @endforeach
