@@ -97,14 +97,15 @@
         }
 
         @media (max-width: 768px) {
-
-            /* Điều chỉnh giới hạn chiều rộng tùy theo thiết kế của bạn */
             .truncate-text {
                 display: none;
             }
+
+            /* ul.grid-list {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                } */
         }
     </style>
-    <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -219,7 +220,7 @@
                                             <div class="col-lg-12 col-md-12">
                                                 <ul
                                                     style="display: grid !important;
-                                                            grid-template-columns: repeat(3, 1fr) !important;
+                                                            grid-template-columns: repeat(3, 1fr) ;
                                                             grid-gap: 10px !important;">
                                                     @foreach ($chapter as $cter)
                                                         <li>
@@ -310,7 +311,8 @@
                                                 @endforeach
                                             </ul>
                                             <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                    style="font-size: 10px;font-weight: 600" href="#">
+                                                    style="font-size: 10px;font-weight: 600"
+                                                    href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                                     {{ $tr->tentruyen }}
                                                 </a></h5>
                                             <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }}
