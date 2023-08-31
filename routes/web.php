@@ -1,15 +1,16 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\apiController;
+use App\Http\Controllers\DanhmucTruyen;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\DanhmucController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\TruyenController;
 use App\Http\Controllers\ChapterController;
-use App\Http\Controllers\IndexController;
-use App\Http\Controllers\DanhmucTruyen;
+use App\Http\Controllers\DanhmucController;
 use App\Http\Controllers\TheloaiController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\apiController;
 
 Auth::routes();
 // Client

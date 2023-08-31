@@ -87,6 +87,14 @@
         #loadLess {
             display: none;
         }
+
+        .truncate-text {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            margin-bottom: 20px;
+        }
     </style>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
@@ -124,8 +132,8 @@
                             <div class="anime__details__title">
                                 <h3>{{ $truyen->tentruyen }}</h3>
                             </div>
-                            <div class="truncate-text" id="truncatedText">
-                                <p style="color: white !important">
+                            <div class="truncate-text">
+                                <p style="color: white !important;">
                                     {!! html_entity_decode($truyen->tomtat) !!}
                                 </p>
                             </div>
