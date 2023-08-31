@@ -39,7 +39,6 @@
             </li>
         </ol>
     </nav> --}}
-
     {{-- {{ $next_chapter }} --}}
     {{ $next_chapter }}
     <section class="blog-details spad" style="background-color: rgb(244,244,244) ">

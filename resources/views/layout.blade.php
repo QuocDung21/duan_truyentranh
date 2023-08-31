@@ -38,7 +38,7 @@
 
 <body>
     <div class="loader" style="z-index: 9999"></div>
-    </div>
+</div>
     <header class="header">
         <div class="container">
             <div class="row">

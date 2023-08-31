@@ -126,8 +126,8 @@
                             </div>
                             <div class="truncate-text" id="truncatedText">
                                 {{-- <p style="color: white !important">
-                                    {!! html_entity_decode($truyen->tomtat) !!}
-                                </p> --}}
+                                {!! html_entity_decode($truyen->tomtat) !!}
+                            </p> --}}
                             </div>
 
                             <div class="anime__details__widget">
@@ -218,7 +218,10 @@
                                     <div class="anime__details__widget">
                                         <div class="row">
                                             <div class="col-lg-12 col-md-12">
-                                                <ul>
+                                                <ul
+                                                    style="display: grid !important;
+                                                            grid-template-columns: repeat(3, 1fr) !important;
+                                                            grid-gap: 10px !important;">
                                                     @foreach ($chapter as $cter)
                                                         <li>
                                                             <a style="color: white"
@@ -229,6 +232,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
