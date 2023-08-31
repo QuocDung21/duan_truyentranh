@@ -95,6 +95,14 @@
             -webkit-box-orient: vertical;
             margin-bottom: 20px;
         }
+
+        @media (max-width: 768px) {
+
+            /* Điều chỉnh giới hạn chiều rộng tùy theo thiết kế của bạn */
+            .truncate-text {
+                display: none;
+            }
+        }
     </style>
     <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
