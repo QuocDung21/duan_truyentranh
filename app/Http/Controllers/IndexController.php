@@ -45,19 +45,26 @@ class IndexController extends Controller
         $danhMucList = DanhmucTruyen::where('kichhoat', 0)
             ->orderBy('id', 'ASC')
             ->take(5)
-            ->get();;
+            ->get();
+
         foreach ($danhMucList as $key => $dm) {
-            $danhSachTruyen = Truyen::where('danhmuc_id', $dm->id)
+            $danhSachTruyen = Truyen::with('thuocnhieudanhmuctruyen')
+                ->whereHas('thuocnhieudanhmuctruyen', function ($query) use ($dm) {
+                    $query->where('danhmuc_id', $dm->id);
+                })
                 ->where('kichhoat', 0)
                 ->orderBy('id', 'DESC')
-                ->take(10)
+                ->take(20)
                 ->get();
+
             if ($danhSachTruyen->isEmpty()) {
                 unset($danhMucList[$key]);
             } else {
                 $dm->danhSachTruyen = $danhSachTruyen;
             }
         }
+
+
         $truyen = Truyen::orderBy('luotxem', 'DESC')
             ->with('theloai')
             ->where('kichhoat', 0)
