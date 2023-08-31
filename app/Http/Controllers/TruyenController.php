@@ -62,7 +62,7 @@ class TruyenController extends Controller
             [
                 'tentruyen' => 'required|unique:truyen|max:255',
                 'hinhanh' => 'required|image|mimes:png,jpg,jpeg,gif,svg|max:2048|',
-                'tomtat' => 'required',
+                'tomtat_truyen' => 'required',
                 'kichhoat' => 'required',
                 'danhmuc' => 'required',
                 'theloai' => 'required',
@@ -72,7 +72,7 @@ class TruyenController extends Controller
             [
                 'tentruyen.unique' => 'Tên danh mục đã tổn tại',
                 'tentruyen.required' => 'Tên danh mục không được trống',
-                'tomtat.required' => 'Mô tả không được trống',
+                'tomtat_truyen.required' => 'Mô tả không được trống',
                 'hinhanh.required' => 'Hình ảnh không được trống',
                 'tacgia.required' => 'Tác giả không được trống',
             ],

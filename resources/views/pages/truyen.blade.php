@@ -111,9 +111,6 @@
             </div>
         </div>
     </div>
-    <!-- Breadcrumb End -->
-
-    <!-- Anime Section Begin -->
     <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
@@ -224,15 +221,8 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
-                                            <div
-                                                class="product__pagination col-lg-12 col-md-12 d-flex justify-content-center">
-                                                <a href="#" class="current-page">1</a>
-                                                <a href="#">2</a>
-                                                <a href="#">3</a>
-                                                <a href="#">4</a>
-                                                <a href="#">5</a>
-                                                <a href="#"><i class="fa fa-angle-double-right"></i></a>
-                                            </div>
+                                            {{ $chapter->links() }}
+
                                         </div>
                                     </div>
                                 </div>

@@ -125,7 +125,7 @@ class IndexController extends Controller
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
-            ->get();
+            ->paginate(10);
         $chapter_moi = Chapter::with('truyen')
             ->orderBy('id', 'DESC')
             ->where('truyen_id', $truyenId->id)
