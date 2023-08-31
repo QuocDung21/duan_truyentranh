@@ -9,7 +9,7 @@
         }
 
         .ckeditor-content p {
-            font-size: 26px !important;
+            font-size: 20px !important;
             color: #333 !important;
             line-height: 1.6 !important;
         }
@@ -45,6 +45,7 @@
     <section class="blog-details spad" style="background-color: rgb(244,244,244) ">
         <div class="container">
             <div class="row d-flex justify-content-center">
+
                 <div class="col-lg-8">
                     <div class="blog__details__title">
                         <h2 style="color: rgb(65, 64, 64)">{{ $chapter->tieude }}</h2>
@@ -65,12 +66,19 @@
                                 @endforeach
                             </select>
                         </div>
+                        {{-- <div style="display: flex;justify-content: center;margin-top: 2px;" class="format-toolbar">
+                            <select id="font-size-select">
+                                <option value="">Chọn kích thước chữ</option>
+                                <option value="12px !important">Nhỏ</option>
+                                <option value="16px !important">Vừa</option>
+                                <option value="20px !important">Lớn</option>
+                            </select>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="col-lg-9">
                     <div class="blog__details__content">
                         <div class="blog__details__texts" style="line-height: 20px">
-                            {{-- <p><span class="custom-text-color">{!! html_entity_decode($chapter->noidung) !!}</span></p> --}}
                             <div class="ckeditor-content">
                             </div>
                         </div>
@@ -78,17 +86,19 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="blog__details__btns__item">
-                                        <h5 style="" class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"><a
+                                        <h5 class="{{ $chapter->id == $min_id->id ? 'isDisabled' : '' }}"><a
+                                                style="color: black;cursor: pointer;"
                                                 href="{{ url('xem-chapter/' . $previous_chapter) }} "><i
-                                                    class="fas fa-arrow-left"></i> Tập trước</a>
+                                                    style="color: black" class="fas fa-arrow-left"></i> Tập
+                                                trước</a>
                                         </h5>
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="blog__details__btns__item next__btn">
                                         <h5 class="{{ $chapter->id == $max_id->id ? 'isDisabled' : '' }}"><a
-                                                href="{{ url('xem-chapter/' . $next_chapter) }} ">Tập sau <i
-                                                    class="fas fa-arrow-right"></i></a></h5>
+                                                style="color: black" href="{{ url('xem-chapter/' . $next_chapter) }} ">Tập
+                                                sau <i style="color: black" class="fas fa-arrow-right"></i></a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -112,10 +122,58 @@
                 window.location.href = nextUrl;
             }
         });
-    </script>
-    <script>
+
+        $('#test').on('change', function() {
+            // Lưu giá trị vào localStorage
+            localStorage.setItem('font-size', $(this).val());
+
+            // Áp dụng giá trị font-size vào phần tử p (ví dụ)
+            var pElement = document.querySelector('.ckeditor-content p');
+            pElement.style.fontSize = selectedValue;
+        });
+
         var contentFromCKEditor = {!! json_encode($chapter->noidung) !!};
         var ckEditorContentDiv = document.querySelector('.ckeditor-content');
         ckEditorContentDiv.innerHTML = contentFromCKEditor;
+
+
+
+        // var fontSizeSelect = document.querySelector('#font-size-select');
+        // fontSizeSelect.addEventListener('change', function() {
+        //     alert("height");
+        // })
+
+        // Lắng nghe sự kiện khi người dùng thay đổi tùy chọn
+        $('#test').on('change', async function() {
+            var selectedValue = fontSizeSelect.value;
+            // Lưu giá trị vào localStorage
+            localStorage.setItem('font-size', selectedValue);
+
+            // Áp dụng giá trị font-size vào phần tử p (ví dụ)
+            var pElement = document.querySelector('.ckeditor-content p');
+
+            await pElements.forEach(function(pElement) {
+                pElement.style.fontSize = selectedValue;
+                if (selectedValue === "") {
+                    pElement.removeAttribute("style");
+                }
+            });
+
+            pElements.forEach(function(pElement) {
+                pElement.style.fontSize = selectedValue;
+            });
+        });
+
+
+
+        // Lấy giá trị font-size từ localStorage
+        var fontSize = localStorage.getItem('font-size');
+
+        // Kiểm tra xem có giá trị trong localStorage hay không
+        if (fontSize) {
+            // Áp dụng giá trị font-size vào phần tử p
+            var pElement = document.querySelector('.ckeditor-content p');
+            pElement.style.fontSize = fontSize + 'px';
+        }
     </script>
 @endsection
