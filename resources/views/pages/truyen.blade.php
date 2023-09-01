@@ -102,8 +102,8 @@
             }
 
             /* ul.grid-list {
-                    grid-template-columns: repeat(2, 1fr) !important;
-                } */
+                                    grid-template-columns: repeat(2, 1fr) !important;
+                                } */
         }
     </style>
     <div class="breadcrumb-option">
@@ -152,7 +152,9 @@
                                             <li><span>Số chapter:</span>{{ count($chapter_all) }}</li>
                                             <li><span>Lượt xem:</span> {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
                                             </li>
-                                            <li><span>Trạng thái:</span> Đang cập nhật</li>
+                                            <li><span>Trạng thái:</span>
+                                                {{ $truyen->trangthai_truyen == 1 ? 'Đang cập nhật' : 'Đã hoàn thành' }}
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-6 col-md-6">

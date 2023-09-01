@@ -59,6 +59,18 @@
                                     <input type="file" class="form-control" name="hinhanh" />
                                 </div>
                                 <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Trạng thái truyện</label>
+                                    <select name="trangthai_truyen" class="form-select" aria-label="Default select example">
+                                        @if ($truyen->trangthai_truyen == 0)
+                                            <option value={{ 0 }} selected>Hoàn thành</option>
+                                            <option value={{ 1 }}>Đang cập nhật</option>
+                                        @else
+                                            <option value={{ 0 }}>Hoàn thành</option>
+                                            <option selected value={{ 1 }}>Đang cập nhật</option>
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="mb-3">
                                     <select name="kichhoat" class="form-select" aria-label="Default select example">
                                         @if ($truyen->kichhoat == 0)
                                             <option value={{ 0 }} selected>Kích hoạt</option>

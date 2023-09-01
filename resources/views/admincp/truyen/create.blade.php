@@ -60,6 +60,13 @@
                                     </select>
                                 </div>
                                 <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Trạng thái truyện</label>
+                                    <select name="trangthai_truyen" class="form-select" aria-label="Default select example">
+                                        <option value={{ 0 }} selected>Hoàn thành</option>
+                                        <option selected value={{ 1 }}>Đang cập nhật</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Danh mục truyện</label>
                                     <br>
                                     @foreach ($danhmuc as $dmuc)

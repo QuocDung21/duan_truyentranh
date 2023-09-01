@@ -72,7 +72,8 @@ class TruyenController extends Controller
                 'danhmuc' => 'required',
                 'theloai' => 'required',
                 'tacgia' => 'required',
-                'tag' => ''
+                'trangthai_truyen' => '',
+                'tag' => '',
             ],
             [
                 'tentruyen.unique' => 'Tên danh mục đã tổn tại',
@@ -96,7 +97,7 @@ class TruyenController extends Controller
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat_truyen'];
         $truyen->kichhoat = 1;
-        // $truyen->kichhoat = $data['kichhoat'];
+        $truyen->trangthai_truyen = $data['trangthai_truyen'];
         $truyen->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         $get_image = $request->hinhanh;
         $path = base_path() . '/public/uploads/truyen/';
@@ -160,7 +161,8 @@ class TruyenController extends Controller
                 'kichhoat' => 'required',
                 'danhmuc' => 'required',
                 'theloai' => 'required',
-                'tag' => ''
+                'tag' => '',
+                'trangthai_truyen' => '',
                 // 'danhmuc_id' => 'required',
             ],
             [
@@ -181,6 +183,7 @@ class TruyenController extends Controller
         $truyen->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
         $truyen->tentruyen = $data['tentruyen'];
         $truyen->tag = $data['tag'];
+        $truyen->trangthai_truyen = $data['trangthai_truyen'];
         $truyen->tacgia = $data['tacgia'];
         $truyen->slug_truyen = $slug;
         $truyen->tomtat = $data['tomtat_truyen'];
