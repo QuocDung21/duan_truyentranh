@@ -78,60 +78,59 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card card-primary">
-                                            <div class="card-header">
-                                                <h3 class="card-title">Tùy chỉnh web</h3>
-                                            </div>
-                                            <form method="POST"
-                                                action="{{ route('update_info_website', [$info_websites->id]) }}"
-                                                enctype="multipart/form-data">
-                                                @csrf
-                                                <div class="card-body">
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Tên web</label>
-                                                        <input type="text" name="name"
-                                                            value="{{ $info_websites->name }}" class="form-control"
-                                                            id="exampleInputEmail1" placeholder="Nhập tên trang web">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Liên hệ (Email)</label>
-                                                        <input type="text" name="contact"
-                                                            value="{{ $info_websites->contact }}" class="form-control"
-                                                            id="exampleInputPassword1" placeholder="Nhập liên hệ">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Thông tin (Footer)</label>
-                                                        <textarea rows={{ 5 }} type="text" name="website_info" class="form-control" id="exampleInputPassword1"
-                                                            placeholder="Nhập thông tin ">
+                                    @role('admin')
+                                        <div class="col-md-6">
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                    <h3 class="card-title">Tùy chỉnh web</h3>
+                                                </div>
+                                                <form method="POST"
+                                                    action="{{ route('update_info_website', [$info_websites->id]) }}"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="card-body">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Tên web</label>
+                                                            <input type="text" name="name"
+                                                                value="{{ $info_websites->name }}" class="form-control"
+                                                                id="exampleInputEmail1" placeholder="Nhập tên trang web">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Liên hệ (Email)</label>
+                                                            <input type="text" name="contact"
+                                                                value="{{ $info_websites->contact }}" class="form-control"
+                                                                id="exampleInputPassword1" placeholder="Nhập liên hệ">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputPassword1">Thông tin (Footer)</label>
+                                                            <textarea rows={{ 5 }} type="text" name="website_info" class="form-control" id="exampleInputPassword1"
+                                                                placeholder="Nhập thông tin ">
                                                             {{ $info_websites->website_info }}
                                                         </textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputFile">Logo trang web</label>
-                                                        <div class="input-group">
-                                                            <div class="custom-file">
-                                                                <input type="file" name="logo"
-                                                                    class="custom-file-input" id="exampleInputFile">
-                                                                <label class="custom-file-label"
-                                                                    for="exampleInputFile">Choose file</label>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputFile">Logo trang web</label>
+                                                            <div class="input-group">
+                                                                <div class="custom-file">
+                                                                    <input type="file" name="logo"
+                                                                        class="custom-file-input" id="exampleInputFile">
+                                                                    <label class="custom-file-label"
+                                                                        for="exampleInputFile">Choose file</label>
+                                                                </div>
                                                             </div>
-                                                            <div class="input-group-append">
-                                                                <span class="input-group-text">Upload</span>
+                                                            <div class="m-3">
+                                                                <img src="{{ asset('public/uploads/info/logo/' . $info_websites->logo) }}"
+                                                                    width="150" height="150" alt="">
                                                             </div>
                                                         </div>
-                                                        <div class="m-3">
-                                                            <img src="{{ asset('public/uploads/info/logo/logo.png') }}"
-                                                                width="150" height="150" alt="">
-                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
-                                                </div>
-                                            </form>
+                                                    <div class="card-footer">
+                                                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
+                                    @endrole
                                     <div class="col-md-6">
                                         <div class="card card-info">
                                             <div class="card-header">

@@ -34,6 +34,8 @@ class apiController extends Controller
         $this->middleware('permission:check chapter', ['only' => ['getDataCheckTruyen', 'checkTruyen']]);
         $this->middleware('permission:check articles', ['only' => ['getDataCheckChapter', 'checkChapter']]);
 
+
+
         $this->middleware('role:admin', ['only' => ['destroyUserApi']]);
     }
     public function destroyTheloaiApi($id)

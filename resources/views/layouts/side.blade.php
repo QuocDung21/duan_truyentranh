@@ -3,9 +3,9 @@
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="user-panel ">
-                <div class=" mb-2 mt-2  d-flex justify-content-center">
-                    <img style="width: 80%;height: 100%;" src="{{ asset('public/uploads/background/user.jpg') }}"
-                        class="  img-circle elevation-2" alt="User Image">
+                <div class="d-flex justify-content-center">
+                    <img style="width: 100%;height: 100%;object-fit: fill"
+                        src="{{ asset('public/uploads/info/logo/' . $info_websites->logo) }}" class="" alt="User Image">
                 </div>
             </div>
             <nav class="mt-2">
@@ -38,6 +38,7 @@
                                     </a>
                                 </li>
                             @endrole
+
                             <li class="nav-item">
                                 <a href="{{ route('truyen_check.data') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>

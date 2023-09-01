@@ -24,12 +24,7 @@ Route::get('/xem-chapter/{slug}', [IndexController::class, 'xemchapter'])->name(
 Route::get('/xem-truyen/{slug}', [IndexController::class, 'xemtruyen'])->name('xem-truyen');
 Route::get('/the-loai/{slug}', [IndexController::class, 'theloai'])->name('the-loai');
 Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
-Route::get('/phan-quyen/{id}', [UserController::class, 'phanquyen'])->name('phan-quyen');
-Route::get('/vai-tro/{id}', [UserController::class, 'vaitro'])->name('vai-tro');
-Route::post('/insert_roles/{id}', [UserController::class, 'insert_roles'])->name('insert_roles');
-Route::post('/insert_add_roles', [UserController::class, 'insert_add_roles'])->name('insert_add_roles');
-Route::post('/insert_permission/{id}', [UserController::class, 'insert_permission'])->name('insert_permission');
-Route::post('/insert_per_permission', [UserController::class, 'insert_per_permission']);
+
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
@@ -71,6 +66,16 @@ Route::middleware(['auth'])->group(function () {
 
 
 
+    // Phan quyen
+    Route::get('/phan-quyen/{id}', [UserController::class, 'phanquyen'])->name('phan-quyen');
+    Route::get('/vai-tro/{id}', [UserController::class, 'vaitro'])->name('vai-tro');
+    Route::post('/insert_roles/{id}', [UserController::class, 'insert_roles'])->name('insert_roles');
+    Route::post('/insert_add_roles', [UserController::class, 'insert_add_roles'])->name('insert_add_roles');
+    Route::post('/insert_permission/{id}', [UserController::class, 'insert_permission'])->name('insert_permission');
+    Route::post('/insert_per_permission', [UserController::class, 'insert_per_permission']);
+
+
+
 
 
     // Change password
@@ -79,9 +84,9 @@ Route::middleware(['auth'])->group(function () {
         return view('auth.login');
     });
 
-    Fortify::registerView(function () {
-        return view('auth.register');
-    });
+    // Fortify::registerView(function () {
+    //     return view('auth.register');
+    // });
 
     Fortify::requestPasswordResetLinkView(function () {
         return view('auth.forgot-password');

@@ -8,15 +8,17 @@ use App\Models\Chapter;
 use App\Models\Theloai;
 use Illuminate\Http\Request;
 use App\Models\DanhmucTruyen;
+use App\Models\InfoWebsites;
 use App\Models\Truyen_Danhmuc;
 use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
 {
-    protected $theloai, $danhmuc, $truyen_moicapnhat, $slide_truyen, $truyenmoicapnhat;
+    protected $theloai, $danhmuc, $truyen_moicapnhat, $slide_truyen, $truyenmoicapnhat, $info_web;
 
     public function __construct()
     {
+        $this->info_web = InfoWebsites::first();
         $this->slide_truyen = Truyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->take(8)
@@ -38,14 +40,13 @@ class IndexController extends Controller
             ->get();
     }
 
-
-
     public function home()
     {
         $danhMucList = DanhmucTruyen::where('kichhoat', 0)
             ->orderBy('id', 'ASC')
             ->take(5)
             ->get();
+
 
         foreach ($danhMucList as $key => $dm) {
             $danhSachTruyen = Truyen::with('thuocnhieudanhmuctruyen')
@@ -63,8 +64,6 @@ class IndexController extends Controller
                 $dm->danhSachTruyen = $danhSachTruyen;
             }
         }
-
-
         $truyen = Truyen::orderBy('luotxem', 'DESC')
             ->with('theloai')
             ->where('kichhoat', 0)
@@ -82,7 +81,8 @@ class IndexController extends Controller
         return view('pages.home')
             ->with(compact('truyen', 'danhMucList', 'truyenmoicapnhat'))
             ->with('danhmuc', $this->danhmuc)
-            ->with('theloai', $this->theloai);
+            ->with('theloai', $this->theloai)
+            ->with('info_webs', $this->info_web);
     }
 
     public function theloai($slug)
@@ -170,8 +170,6 @@ class IndexController extends Controller
 
     public function xemchapter($slug)
     {
-
-
         $category = DanhmucTruyen::orderBy('id', 'desc')->get();
 
         //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
@@ -201,12 +199,6 @@ class IndexController extends Controller
         $all_chapter = Chapter::orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->truyen_id)
             ->get();
-        // $next_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
-        //     ->where('id', '>', $chapter->id)
-        //     ->min('slug_chapter');
-        // $previous_chapter = Chapter::where('truyen_id', $truyenId->truyen_id)
-        //     ->where('id', '<', $chapter->id)
-        //     ->max('slug_chapter');
         $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
             ->orderBy('id', 'DESC')
             ->first();

@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>TruyenhayHt</title>
+    <title>{{ $info_webs->name }}</title>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5013472995722361"
         crossorigin="anonymous"></script>
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/background/user.jpg') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}">
 
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -32,12 +32,12 @@
     <style>
         .dropdown-scroll {
             max-height: 50vh;
-            /* Chiều cao tối đa của danh sách dropdown */
             overflow-y: auto;
-            /* Hiển thị thanh cuộn khi nội dung vượt quá max-height */
         }
     </style>
-    <div class="loader" style="z-index: 9999"></div>
+
+    <div>
+        <div class="loader" style="z-index: 9999"></div>
     </div>
     <header class="header">
         <div class="container">
@@ -47,9 +47,8 @@
                         style="height: 50px;width: 50px; display: flex;justify-content: center;align-items: center;margin-top: 4px;text-align: center;">
                         <a href="{{ url('/') }}"
                             style="display: flex;justify-content: center;align-items: center">
-                            <img style="border-radius: 50%;"
-                                src="https://img.freepik.com/free-vector/flat-design-ninja-logo-template_23-2149008851.jpg?w=2000"
-                                alt="">
+                            <img style="border-radius: 50%;height: 50px;width: 50px;object-fit: fill"
+                                src="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -80,7 +79,6 @@
                                         @endforeach
                                     </ul>
                                 </li>
-                                {{-- <li><a href="./blog.html">Our Blog</a></li> --}}
                                 <li><a href="#">Liên hệ</a></li>
                             </ul>
                         </nav>
@@ -96,92 +94,34 @@
             <div id="mobile-menu-wrap"></div>
         </div>
     </header>
-    <!-- Header End -->
-    <!-- Hero Section Begin -->
-    {{-- <section class="hero">
-        <div class="container">
-            <div class="hero__slider owl-carousel">
-                <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg" data-setbg="img/hero/hero-1.jpg">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- Product Section Begin -->
-
-    <!-- Product Section End -->
-    <!-- Hero Section End -->
     @yield('slide')
     @yield('content')
-    <!-- Footer Section Begin -->
     <footer class="footer">
         <div class="page-up">
             <a href="#" id="scrollToTopButton"><i class="fa-solid fa-arrow-up"></i></a>
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="footer__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
+                <div class="col-lg-4">
+
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="footer__nav">
                         <ul>
                             <li class="active"><a href="{{ url('/') }}">Trang chủ</a></li>
                             <li><a href="#">Liên hệ</a></li>
                         </ul>
+                        <p>
+                            {{ $info_webs->website_info }}
+                        </p>
+                        <p>
+                            @Contact : {{ $info_webs->contact }}
+                        </p>
                     </div>
                 </div>
-                <div class="col-lg-3">
-
+                <div class="col-lg-4">
                 </div>
             </div>
-            <div class="row" style="display: flex;justify-content: center;text-align: center;margin-top: 15px;">
-                <p>
-                    Đọc truyện online, đọc truyện chữ, truyện hay. Website luôn cập nhật những bộ truyện mới thuộc
-                    các thể loại đặc sắc như truyện tiên hiệp, truyện kiếm hiệp, hay truyện ngôn tình một cách nhanh
-                    nhất. Hỗ trợ mọi thiết bị như di động và máy tính bảng.
-                </p>
-            </div>
-            {{-- <div class="row" style="display: flex;justify-content: center;text-align: center;margin-top: 5px;">
-                <p>
-                    @design by : quocdung
-                </p>
-            </div> --}}
         </div>
     </footer>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>

@@ -9,6 +9,7 @@ use App\Models\Truyen;
 use App\Models\Chapter;
 use App\Models\InfoWebsites;
 use App\Models\User;
+use Validator;
 
 class HomeController extends Controller
 {
@@ -52,7 +53,7 @@ class HomeController extends Controller
                 'name' => 'required',
                 'contact' => 'required',
                 'website_info' => 'required',
-                'logo' => 'require'
+                'logo' => 'required'
             ],
             [
                 'name.required' => 'Tên web không được trống',
@@ -65,6 +66,30 @@ class HomeController extends Controller
         $info_websites->name = $data['name'];
         $info_websites->contact = $data['contact'];
         $info_websites->website_info = $data['website_info'];
+        $get_image = $request->logo;
+        if ($get_image) {
+            $path = 'public/uploads/info/logo/' . $info_websites->logo;
+            if (file_exists($path)) {
+                unlink($path);
+            }
+            $path = 'public/uploads/info/logo/';
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.', $get_name_image));
+            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+            $get_image->move($path, $new_image);
+            $info_websites->logo = $new_image;
+        }
+
+
+        // $get_image = $request->logo;
+        // $path = base_path() . 'public/uploads/info/logo/';
+        // $get_name_image = $get_image->getClientOriginalName();
+        // $name_image = current(explode('.', $get_name_image));
+        // $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+        // $get_image->move($path, $new_image);
+        // $info_websites->logo = $new_image;
+
+
         $info_websites->save();
         return redirect()
             ->back()
