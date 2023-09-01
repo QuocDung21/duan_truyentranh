@@ -256,6 +256,7 @@ class IndexController extends Controller
     public function timkiem_ajax(Request $request)
     {
         $data = $request->all();
+        dd($data);
         if ($data['keywords']) {
             $truyen = Truyen::with('danhmuctruyen', 'theloai')
                 ->where('tentruyen', 'LIKE', '%' . $data['keywords'] . '%')

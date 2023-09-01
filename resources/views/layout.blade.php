@@ -47,7 +47,7 @@
                         style="height: 50px;width: 50px; display: flex;justify-content: center;align-items: center;margin-top: 4px;text-align: center;">
                         <a href="{{ url('/') }}"
                             style="display: flex;justify-content: center;align-items: center">
-                            <img style="border-radius: 50%;height: 50px;width: 50px;object-fit: fill"
+                            <img loading="lazy" style="border-radius: 50%;height: 50px;width: 50px;object-fit: fill"
                                 src="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}" alt="">
                         </a>
                     </div>
@@ -86,8 +86,11 @@
                 </div>
                 <div class="col-lg-3 d-flex justify-content-center align-item-center">
                     <div class="input-group rounded mt-2">
-                        <input id="keywords" type="search" class="form-control rounded" placeholder="Tìm kiếm"
-                            aria-label="Search" aria-describedby="search-addon" />
+                        <form action="{{ route('timkiem-ajax') }}" method="POST">
+                            @csrf
+                            <input id="keywords" type="search" class="form-control rounded" placeholder="Tìm kiếm"
+                                aria-label="Search" aria-describedby="search-addon" />
+                        </form>
                     </div>
                 </div>
             </div>
@@ -135,6 +138,8 @@
         $('#keywords').keyup(function() {
             var keywords = $(this).val();
             console.log(keywords);
+            console.log(_token);
+
             if (keywords != '') {
                 var _token = $('input[name="_token"]').val();
                 $.ajax({

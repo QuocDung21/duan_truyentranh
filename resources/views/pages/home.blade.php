@@ -42,6 +42,7 @@
                                         <div class="col-lg-2 col-md-6 col-4">
                                             <div class="product__item">
                                                 <div class="product__item__pic set-bg" style="height: 200px;width: 130px; "
+                                                    loading="lazy"
                                                     data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
                                                     <div class="view"
                                                         style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
@@ -83,7 +84,8 @@
                                 <a href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                     <div class="col-lg-2 col-md-6 col-4">
                                         <div class="product__item">
-                                            <div class="product__item__pic set-bg" style="height: 200px;width: 130px; "
+                                            <div loading="lazy" class="product__item__pic set-bg"
+                                                style="height: 200px;width: 130px; "
                                                 data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
                                                 <div class="view"
                                                     style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
