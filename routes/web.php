@@ -1,5 +1,6 @@
 <?php
 
+use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\apiController;
@@ -11,6 +12,8 @@ use App\Http\Controllers\TruyenController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\DanhmucController;
 use App\Http\Controllers\TheloaiController;
+use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Auth::routes();
 // Client
@@ -28,8 +31,13 @@ Route::post('/insert_add_roles', [UserController::class, 'insert_add_roles'])->n
 Route::post('/insert_permission/{id}', [UserController::class, 'insert_permission'])->name('insert_permission');
 Route::post('/insert_per_permission', [UserController::class, 'insert_per_permission']);
 
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::post('/update_info_websites/{id}', [HomeController::class, 'update_info_websites'])->name('update_info_website');
+
     Route::resource('/danhmuc', DanhmucController::class);
     Route::resource('/chapter', ChapterController::class);
     Route::resource('/theloai', TheloaiController::class);
@@ -60,4 +68,35 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('truyen-destroy/{id}', [apiController::class, 'destroyTruyenApi']);
     Route::resource('/user', UserController::class);
     Route::resource('/users', UserController::class);
+
+
+
+
+
+    // Change password
+
+    Fortify::loginView(function () {
+        return view('auth.login');
+    });
+
+    Fortify::registerView(function () {
+        return view('auth.register');
+    });
+
+    Fortify::requestPasswordResetLinkView(function () {
+        return view('auth.forgot-password');
+    });
+
+    Fortify::resetPasswordView(function ($request) {
+        return view('auth.reset-password', ['request' => $request]);
+    });
+
+    Fortify::verifyEmailView(function () {
+        return view('auth.verify-email');
+    });
+
+
+    // Route for changing password
+    Route::get('/change-password', [ChangePasswordController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/change-password', [ChangePasswordController::class, 'changePassword']);
 });
