@@ -14,6 +14,26 @@
     @include('pages.slide')
 @endsection
 @section('content')
+    <style>
+        .flash {
+            animation: flash 2s infinite;
+            color: green
+        }
+
+        @keyframes flash {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+    </style>
     <section class="product spad">
         <div class="container">
             <div class="row">
@@ -83,6 +103,12 @@
                                                     style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
                                                         class="fa fa-eye"></i>
                                                     {{ $tr->luotxem == 0 ? 0 : $tr->luotxem }}</div>
+                                                <div
+                                                    class="views mt-1 ml-2"style="top: 5px; height: 20px; left: 1px; font-size: 13px">
+                                                    @if ($tr->trangthai_truyen == 0)
+                                                        <span class="flash">Full</span>
+                                                    @endif
+                                                </div>
                                                 <div class="comment text-truncate"> {{ $tr->tentruyen }}
                                                 </div>
                                             </div>
