@@ -6,11 +6,14 @@ use Carbon\Carbon;
 use App\Models\Truyen;
 use App\Models\Chapter;
 use Illuminate\Support\Str;
+use App\Models\InfoWebsites;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
 class ChapterController extends Controller
 {
+    protected
+        $info_web;
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +24,7 @@ class ChapterController extends Controller
         $this->middleware('permission:publish chapter|edit chapter|delete chapter|add chapter', ['only' => ['index', 'show']]);
         $this->middleware('permission:add chapter|publish chapter|public', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit chapter|publish chapter|public', ['only' => ['edit', 'update']]);
+        $this->info_web = InfoWebsites::first();
         // $this->middleware('permission:view chapter|publish chapter | public', ['only' => ['index']]);
     }
     public function index()
@@ -28,7 +32,9 @@ class ChapterController extends Controller
         $chapter = Chapter::with('truyen')
             ->orderBy('id', 'DESC')
             ->get();
-        return view('admincp.chapter.index')->with(compact('chapter'));
+        return view('admincp.chapter.index')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('chapter'));
     }
 
     /**
@@ -39,7 +45,10 @@ class ChapterController extends Controller
     public function create()
     {
         $truyen = Truyen::orderBy('id', 'DESC')->get();
-        return view('admincp.chapter.create')->with(compact('truyen'));
+        return view('admincp.chapter.create')
+            ->with('info_websites', $this->info_web)
+
+            ->with(compact('truyen'));
     }
 
     /**
@@ -98,7 +107,9 @@ class ChapterController extends Controller
     {
         $chapter = Chapter::find($id);
         $truyen = Truyen::orderBy('id', 'DESC')->get();
-        return view('admincp.chapter.edit')->with(compact('chapter', 'truyen'));
+        return view('admincp.chapter.edit')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('chapter', 'truyen'));
     }
 
     /**

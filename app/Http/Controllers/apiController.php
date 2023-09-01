@@ -7,6 +7,7 @@ use App\Models\Truyen;
 use App\Models\Chapter;
 use App\Models\Theloai;
 use Illuminate\Support\Str;
+use App\Models\InfoWebsites;
 use Illuminate\Http\Request;
 use App\Models\DanhmucTruyen;
 use Yajra\Datatables\Datatables;
@@ -15,6 +16,8 @@ use Yajra\DataTables\Exceptions\Exception;
 
 class apiController extends Controller
 {
+    protected
+        $info_web;
     /**
      * Display a listing of the resource.
      *
@@ -37,6 +40,8 @@ class apiController extends Controller
 
 
         $this->middleware('role:admin', ['only' => ['destroyUserApi']]);
+
+        $this->info_web = InfoWebsites::first();
     }
     public function destroyTheloaiApi($id)
     {
@@ -79,7 +84,8 @@ class apiController extends Controller
                 })
                 ->make(true);
         }
-        return view('admincp.check.truyen');
+        return view('admincp.check.truyen')
+            ->with('info_websites', $this->info_web);
     }
 
     public function getDataCheckChapter(Request $request)
@@ -105,7 +111,8 @@ class apiController extends Controller
                 })
                 ->make(true);
         }
-        return view('admincp.check.chapter');
+        return view('admincp.check.chapter')
+            ->with('info_websites', $this->info_web);
     }
 
     public function getTheloaiApi(Request $request)
@@ -115,13 +122,14 @@ class apiController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($data) {
-                    $button = '<a href=' . route('danhmuc.edit', [$data->id]) . ' type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Sửa</a>';
+                    $button = '<a href=' . route('theloai.edit', [$data->id]) . ' type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Sửa</a>';
                     $button .= '   <a  type="button"  name="edit" id="' . $data->id . '" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Xóa</a>';
                     return $button;
                 })
                 ->make(true);
         }
-        return view('admincp.theloai.index');
+        return view('admincp.theloai.index')
+            ->with('info_websites', $this->info_web);
     }
 
     public function getDataDanhmuc(Request $request)
@@ -137,7 +145,8 @@ class apiController extends Controller
                 })
                 ->make(true);
         }
-        return view('admincp.danhmuctruyen.index');
+        return view('admincp.danhmuctruyen.index')
+            ->with('info_websites', $this->info_web);
     }
 
     public function destroyDanhmucApi($id)
@@ -184,7 +193,8 @@ class apiController extends Controller
                 })
                 ->make(true);
         }
-        return view('admincp.truyen.index');
+        return view('admincp.truyen.index')
+            ->with('info_websites', $this->info_web);
     }
 
     // Api
@@ -227,7 +237,8 @@ class apiController extends Controller
                 })
                 ->make(true);
         }
-        return view('admincp.chapter.index');
+        return view('admincp.chapter.index')
+            ->with('info_websites', $this->info_web);
     }
 
     public function getListUsers(Request $request)
@@ -264,14 +275,17 @@ class apiController extends Controller
                 })
                 ->make(true);
         }
-        return view('admincp.users.index');
+        return view('admincp.users.index')
+            ->with('info_websites', $this->info_web);
     }
 
     public function viewChapter($id)
     {
         $chapter = Chapter::find($id);
         $truyen = Truyen::orderBy('id', 'DESC')->get();
-        return view('admincp.chapter.view')->with(compact('chapter', 'truyen'));
+        return view('admincp.chapter.view')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('chapter', 'truyen'));
     }
 
     public function checkChapter($id)

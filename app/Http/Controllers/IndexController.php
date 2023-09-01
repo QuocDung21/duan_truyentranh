@@ -101,6 +101,7 @@ class IndexController extends Controller
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc)
             ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
+            ->with('info_webs', $this->info_web)
             ->with('theloai_id', $theloai_id);
     }
 
@@ -120,6 +121,7 @@ class IndexController extends Controller
             ->with('theloai', $this->theloai)
             ->with('danhmuc', $this->danhmuc)
             ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
+            ->with('info_webs', $this->info_web)
             ->with('tendanhmuc', $danhmuc_id->tendanhmuc);
     }
 
@@ -165,6 +167,7 @@ class IndexController extends Controller
             ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat', 'chapter_all'))
             ->with('theloai', $this->theloai)
             ->with('truyen_moicapnhat', $this->truyen_moicapnhat)
+            ->with('info_webs', $this->info_web)
             ->with('danhmuc', $this->danhmuc);
     }
 
@@ -221,6 +224,7 @@ class IndexController extends Controller
         return view('pages.chapter')
             ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
             ->with('theloai', $this->theloai)
+            ->with('info_webs', $this->info_web)
             ->with('danhmuc', $this->danhmuc);
         // ->with('chapter_next ', Chapter::find($chapter_next))
         // ->with('chapter_previous', Chapter::find($chapter_previous));

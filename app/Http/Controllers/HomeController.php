@@ -18,7 +18,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    protected $theloai, $danhmuc, $truyen, $user;
+    protected $theloai, $danhmuc, $truyen, $user, $info_web;
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,6 +26,7 @@ class HomeController extends Controller
         $this->theloai = Theloai::orderBy('id', 'DESC')->get();
         $this->truyen = Truyen::orderBy('id', 'DESC')->get();
         $this->user = User::orderBy('id', 'DESC')->get();
+        $this->info_web = InfoWebsites::first();
     }
 
     /**
@@ -35,9 +36,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $info_websites = InfoWebsites::first();
+        // $info_websites = InfoWebsites::first();
         return view('home')
-            ->with(compact('info_websites'))
+            // ->with(compact('info_websites'))
+            ->with('info_websites', $this->info_web)
             ->with('theloai', $this->theloai)
             ->with('truyen', $this->truyen)
             ->with('user', $this->user)

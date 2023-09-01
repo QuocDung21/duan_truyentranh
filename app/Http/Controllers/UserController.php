@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\InfoWebsites;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use Spatie\Permission\Models\Role;
@@ -12,6 +13,8 @@ use Yajra\DataTables\Exceptions\Exception;
 
 class UserController extends Controller
 {
+    protected
+        $info_web;
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +24,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('role:admin');
+        $this->info_web = InfoWebsites::first();
     }
     public function phanquyen($id)
     {
@@ -30,7 +34,8 @@ class UserController extends Controller
         $all_column_roles = $user->roles->first();
         $get_permission_via_role = $user->getPermissionsViaRoles();
         $get_permissions = $user->permissions->first();
-        return view('admincp.users.phanquyen', compact('user', 'role', 'all_column_roles', 'permission', 'get_permission_via_role', 'get_permissions'));
+        return view('admincp.users.phanquyen', compact('user', 'role', 'all_column_roles', 'permission', 'get_permission_via_role', 'get_permissions'))
+            ->with('info_websites', $this->info_web);
     }
     public function vaitro($id)
     {
@@ -38,7 +43,8 @@ class UserController extends Controller
         $user = User::find($id);
         $all_column_roles = $user->roles->first();
         $permission = Permission::orderBy('id', 'DESC')->get();
-        return view('admincp.users.vaitro', compact('user', 'permission', 'role', 'all_column_roles'));
+        return view('admincp.users.vaitro', compact('user', 'permission', 'role', 'all_column_roles'))
+            ->with('info_websites', $this->info_web);
     }
     public function insert_roles(Request $request, $id)
     {
@@ -105,7 +111,9 @@ class UserController extends Controller
         // auth()
         //     ->user()
         //     ->syncRoles(['admin', 'user']);
-        return view('admincp.users.index')->with(compact('list_user'));
+        return view('admincp.users.index')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('list_user'));
     }
 
     /**

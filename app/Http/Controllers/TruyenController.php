@@ -2,23 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DanhmucTruyen;
+use Carbon\Carbon;
 use App\Models\Truyen;
 use App\Models\Theloai;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Carbon\Carbon;
+use App\Models\InfoWebsites;
+use Illuminate\Http\Request;
+use App\Models\DanhmucTruyen;
 
 class TruyenController extends Controller
 {
-    protected $theloai, $danhmuc;
+    protected $theloai, $danhmuc, $info_web;
 
     public function __construct()
     {
         $this->middleware('permission:publish articles|edit articles|delete articles|add articles', ['only' => ['index', 'show']]);
         $this->middleware('permission:add articles|publish articles', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit articles|publish articles', ['only' => ['edit', 'update']]);
-
+        $this->info_web = InfoWebsites::first();
         $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->get();
@@ -31,7 +32,9 @@ class TruyenController extends Controller
         $truyen = Truyen::with('danhmuctruyen', 'theloai')
             ->orderBy('id', 'DESC')
             ->get();
-        return view('admincp.truyen.index')->with(compact('truyen'));
+        return view('admincp.truyen.index')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('truyen'));
     }
 
     /**
@@ -43,7 +46,9 @@ class TruyenController extends Controller
     {
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
         $theloai = Theloai::orderBy('id', 'DESC')->get();
-        return view('admincp.truyen.create')->with(compact('danhmuc', 'theloai'));
+        return view('admincp.truyen.create')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('danhmuc', 'theloai'));
     }
 
     /**
@@ -132,7 +137,9 @@ class TruyenController extends Controller
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
         $danhmucCuaTruyen = $truyen->thuocnhieudanhmuctruyen;
         $theloaiCuaTruyen = $truyen->thuocnhieutheloaitruyen;
-        return view('admincp.truyen.edit')->with(compact('truyen', 'danhmuc', 'theloai', 'danhmucCuaTruyen', 'theloaiCuaTruyen'));
+        return view('admincp.truyen.edit')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('truyen', 'danhmuc', 'theloai', 'danhmucCuaTruyen', 'theloaiCuaTruyen'));
     }
 
     /**

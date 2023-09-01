@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Yajra\Datatables\Datatables;
+use Illuminate\Support\Str;
+use App\Models\InfoWebsites;
 use Illuminate\Http\Request;
 use App\Models\DanhmucTruyen;
-use Illuminate\Support\Str;
+use Yajra\Datatables\Datatables;
 
 class DanhmucController extends Controller
 {
+    protected
+        $info_web;
     /**
      * Display a listing of the resource.
      *
@@ -20,11 +23,14 @@ class DanhmucController extends Controller
         $this->middleware('permission:add category|publish category|public', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit category|publish category|public', ['only' => ['edit', 'update']]);
         $this->middleware('permission:delete category|publish category|public', ['only' => ['destroy']]);
+        $this->info_web = InfoWebsites::first();
     }
     public function index()
     {
         $danhmuctruyen = DanhmucTruyen::orderBy('id', 'DESC')->get();
-        return view('admincp.danhmuctruyen.index')->with(compact('danhmuctruyen'));
+        return view('admincp.danhmuctruyen.index')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('danhmuctruyen'));
     }
 
     /**
@@ -37,7 +43,9 @@ class DanhmucController extends Controller
     {
         //
         $danhmuctruyen = DanhmucTruyen::orderBy('id', 'DESC')->get();
-        return view('admincp.danhmuctruyen.create')->with(compact('danhmuctruyen'));
+        return view('admincp.danhmuctruyen.create')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('danhmuctruyen'));
     }
 
     /**
@@ -92,7 +100,9 @@ class DanhmucController extends Controller
     public function edit($id)
     {
         $danhmuc = DanhmucTruyen::find($id);
-        return view('admincp.danhmuctruyen.edit')->with(compact('danhmuc'));
+        return view('admincp.danhmuctruyen.edit')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('danhmuc'));
     }
 
     /**

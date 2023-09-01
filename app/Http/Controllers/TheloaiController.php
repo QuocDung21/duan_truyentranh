@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Yajra\Datatables\Datatables;
-use Illuminate\Http\Request;
 use App\Models\Theloai;
 use Illuminate\Support\Str;
+use App\Models\InfoWebsites;
+use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class TheloaiController extends Controller
 {
+    protected  $info_web;
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +18,7 @@ class TheloaiController extends Controller
      */
     public function __construct()
     {
+        $this->info_web = InfoWebsites::first();
         $this->middleware('permission:publish genre|edit genre|delete genre|add genre|publish genre|public', ['only' => ['index', 'show']]);
         $this->middleware('permission:add genre|public|publish genre', ['only' => ['create', 'store']]);
         $this->middleware('permission:edit genre|public|publish genre', ['only' => ['edit', 'update']]);
@@ -23,7 +26,9 @@ class TheloaiController extends Controller
     public function index()
     {
         $theloai = Theloai::orderBy('id', 'DESC')->get();
-        return view('admincp.theloai.index')->with(compact('theloai'));
+        return view('admincp.theloai.index')
+            ->with('info_websites', $this->info_web)
+            ->with(compact('theloai'));
     }
 
     /**
@@ -33,7 +38,8 @@ class TheloaiController extends Controller
      */
     public function create()
     {
-        return view('admincp.theloai.create');
+        return view('admincp.theloai.create')
+            ->with('info_websites', $this->info_web);
     }
 
     /**
@@ -88,7 +94,10 @@ class TheloaiController extends Controller
     public function edit($id)
     {
         //
-        return view('admincp.theloai.edit');
+        $theloai = Theloai::find($id);
+        return view('admincp.theloai.edit')
+            ->with(compact('theloai'))
+            ->with('info_websites', $this->info_web);
     }
 
     /**
@@ -101,6 +110,27 @@ class TheloaiController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data = $request->validate(
+            [
+                'tentheloai' => 'required|max:255',
+                'mota' => 'required|max:255',
+                'kichhoat' => 'required',
+            ],
+            [
+                'tentheloai.required' => 'Tên thể loại không được trống',
+                'mota.required' => 'Mô tả không được trống',
+            ],
+        );
+        $slug = Str::slug($data['tentheloai']);
+        $theloaitruyen = Theloai::find($id);
+        $theloaitruyen->tentheloai = $data['tentheloai'];
+        $theloaitruyen->slug_theloai = $slug;
+        $theloaitruyen->mota = $data['mota'];
+        $theloaitruyen->kichhoat = $data['kichhoat'];
+        $theloaitruyen->save();
+        return redirect()
+            ->back()
+            ->with('status', 'Cập nhật thành công');
     }
 
     /**
