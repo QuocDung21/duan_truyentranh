@@ -127,6 +127,9 @@
             </div>
         </div>
     </footer>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0"
+        nonce="IbgOvxgk"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/player.js') }}"></script>
     <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>

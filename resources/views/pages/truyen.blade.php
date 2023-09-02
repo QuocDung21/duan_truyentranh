@@ -102,8 +102,8 @@
             }
 
             /* ul.grid-list {
-                                    grid-template-columns: repeat(2, 1fr) !important;
-                                } */
+                                        grid-template-columns: repeat(2, 1fr) !important;
+                                    } */
         }
     </style>
     <div class="breadcrumb-option">
