@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $info_webs->name }}</title>
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5013472995722361"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9210329578977590"
         crossorigin="anonymous"></script>
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
