@@ -102,8 +102,8 @@
             }
 
             /* ul.grid-list {
-                                        grid-template-columns: repeat(2, 1fr) !important;
-                                    } */
+                                            grid-template-columns: repeat(2, 1fr) !important;
+                                        } */
         }
     </style>
     <div class="breadcrumb-option">
@@ -254,7 +254,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">

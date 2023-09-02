@@ -2,7 +2,7 @@
     <nav>
         <ul class="pagination">
             {{-- Previous Page Link --}}
-            {{-- @if ($paginator->onFirstPage())
+            @if ($paginator->onFirstPage())
                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
                     <span aria-hidden="true">&lsaquo;</span>
                 </li>
@@ -10,7 +10,7 @@
                 <li>
                     <a href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
                 </li>
-            @endif --}}
+            @endif
 
             {{-- Pagination Elements --}}
             @foreach ($elements as $element)
@@ -32,7 +32,7 @@
             @endforeach
 
             {{-- Next Page Link --}}
-            {{-- @if ($paginator->hasMorePages())
+            @if ($paginator->hasMorePages())
                 <li>
                     <a href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
                 </li>
@@ -40,7 +40,7 @@
                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
                     <span aria-hidden="true">&rsaquo;</span>
                 </li>
-            @endif --}}
+            @endif
         </ul>
     </nav>
 @endif

@@ -15,3 +15,7 @@
 # /.vscode
 
 
+# Ignore .htaccess files
+.htaccess
+
+
