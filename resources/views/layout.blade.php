@@ -2,12 +2,11 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9582999796357564"
+        crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $info_webs->name }}</title>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9210329578977590"
-        crossorigin="anonymous"></script>
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}">
