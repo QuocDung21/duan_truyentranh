@@ -17,8 +17,7 @@
     <section class="product spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10 col-sm-12 col-md-12">
+                <div class="col-lg-9 col-sm-12 col-md-12">
                     @foreach ($danhMucList as $dmuc)
                         <div class="trending__product ">
                             <div class="row">
@@ -105,7 +104,36 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-1"></div>
+                <div class="col-lg-3 col-md-6 col-sm-8">
+                    <div class="product__sidebar">
+                        <div class="product__sidebar__comment">
+                            <div class="section-title">
+                                <h5>Mới cập nhật</h5>
+                            </div>
+                            @foreach ($truyenmoicapnhat as $tr)
+                                <div class="product__sidebar__comment__item" style=" height:150px">
+                                    <div class="product__sidebar__comment__item__pic">
+                                        <img style=" width:100px" src="{{  $tr->hinhanh }}"
+                                             alt="">
+                                    </div>
+                                    <div class="product__sidebar__comment__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5 class="text-truncate" style="max-width: 300px;"><a class=""
+                                                                                               style="font-size: 10px;font-weight: 600" href="#">
+                                                {{ $tr->tentruyen }}
+                                            </a></h5>
+                                        <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
             </div>
+        </div>
     </section>
 @endsection
