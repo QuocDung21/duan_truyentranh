@@ -100,10 +100,6 @@
             .truncate-text {
                 display: none;
             }
-
-            /* ul.grid-list {
-                                            grid-template-columns: repeat(2, 1fr) !important;
-                                        } */
         }
     </style>
     <div class="breadcrumb-option">
@@ -127,7 +123,6 @@
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg "
                             data-setbg="{{ filter_var($truyen->hinhanh, FILTER_VALIDATE_URL) ? $truyen->hinhanh : asset('public/uploads/truyen/' . $truyen->hinhanh) }}">
-                            {{-- <div class="comment"><i class="fa fa-comments"></i> 11</div> --}}
                             <div class="view" style="top: 5px;height: 26px;"><i class="fa fa-eye"></i>
                                 {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
                             </div>
@@ -185,7 +180,8 @@
                             @if (count($chapter) != 0)
                                 <div class="anime__details__btn">
                                     <a href="{{ route('xem-chapter', [$chapter_dau->slug_chapter]) }}"
-                                        class="watch-btn"><span>Xem ngay</span>
+                                       title="{{$chapter_dau->tieude}}}"
+                                       class="watch-btn"><span>Xem ngay</span>
                                         <i class="fa fa-angle-right"></i></a>
                                 </div>
                             @else
@@ -206,6 +202,7 @@
                                     </div>
                                     @foreach ($chapter_moi as $cter)
                                         <a
+                                            title="{{$cter->tieude}}"
                                             href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
                                     @endforeach
                                 </div>
@@ -227,7 +224,8 @@
                                                     @foreach ($chapter as $cter)
                                                         <li>
                                                             <a style="color: white"
-                                                                href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
+                                                               title="{{$cter->tieude}}"
+                                                               href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>

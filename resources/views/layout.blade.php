@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $info_webs->name }}</title>
 
+
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}">
 
@@ -34,7 +35,6 @@
             overflow-y: auto;
         }
     </style>
-
     <div>
         <div class="loader" style="z-index: 9999"></div>
     </div>
@@ -62,6 +62,7 @@
                                         @foreach ($danhmuc as $dmuc)
                                             <li>
                                                 <a class="dropdown-item"
+                                                   title="{{$dmuc->tendanhmuc}}"
                                                     href="{{ url('danh-muc/' . $dmuc->slug_danhmuc) }}">{{ $dmuc->tendanhmuc }}</a>
                                             </li>
                                         @endforeach
@@ -73,6 +74,7 @@
                                         @foreach ($theloai as $tloai)
                                             <li>
                                                 <a class="dropdown-item"
+                                                    title="{{$tloai->tentheloai}}"
                                                     href="{{ url('the-loai/' . $tloai->slug_theloai) }}">{{ $tloai->tentheloai }}</a>
                                             </li>
                                         @endforeach
