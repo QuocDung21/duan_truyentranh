@@ -6,9 +6,10 @@
             crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $info_webs->name }}</title>
 
+{{--    <title>{{ Truện hot nhât }}</title>--}}
 
+    <title>Truện hot nhất</title>
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 
     <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}">
