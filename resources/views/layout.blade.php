@@ -10,7 +10,10 @@
 
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+
     <link rel="icon" type="image/x-icon" href="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}">
+    <link rel="shortcut icon" href="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}" type="image/x-icon">
+
 
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
