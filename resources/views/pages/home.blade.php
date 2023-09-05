@@ -113,19 +113,24 @@
                             @foreach ($truyenmoicapnhat as $tr)
                                 <div class="product__sidebar__comment__item" style=" height:150px">
                                     <div class="product__sidebar__comment__item__pic">
-                                        <img style=" width:100px" src="{{  $tr->hinhanh }}"
-                                             alt="">
+                                        <img style=" width:100px"
+                                             src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt=""
+                                        >
                                     </div>
                                     <div class="product__sidebar__comment__item__text">
                                         <ul>
-                                            <li>Active</li>
-                                            <li>Movie</li>
+                                            @foreach ($tr->thuocnhieutheloaitruyen as $item)
+                                                <li>{{ $item->tentheloai }}</li>
+                                            @endforeach
                                         </ul>
                                         <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                                                               style="font-size: 10px;font-weight: 600" href="#">
+                                                                                               style="font-size: 10px;font-weight: 600"
+                                                                                               href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                                 {{ $tr->tentruyen }}
                                             </a></h5>
-                                        <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+                                        <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }}
+                                                lượt
+                                                xem</span>
                                     </div>
                                 </div>
                             @endforeach

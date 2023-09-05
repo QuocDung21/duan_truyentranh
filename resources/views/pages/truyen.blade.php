@@ -126,7 +126,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg "
-                            data-setbg="{{ asset('public/uploads/truyen/' . $truyen->hinhanh) }}">
+                            data-setbg="{{ filter_var($truyen->hinhanh, FILTER_VALIDATE_URL) ? $truyen->hinhanh : asset('public/uploads/truyen/' . $truyen->hinhanh) }}">
                             {{-- <div class="comment"><i class="fa fa-comments"></i> 11</div> --}}
                             <div class="view" style="top: 5px;height: 26px;"><i class="fa fa-eye"></i>
                                 {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
@@ -303,7 +303,8 @@
                                     <div class="product__sidebar__comment__item" style=" height:150px">
                                         <div class="product__sidebar__comment__item__pic">
                                             <img style=" width:100px"
-                                                src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt="">
+                                                src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt=""
+                                            >
                                         </div>
                                         <div class="product__sidebar__comment__item__text">
                                             <ul>
