@@ -157,14 +157,16 @@ class IndexController extends Controller
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
             ->first();
-        $cungdanhmuc = Truyen::with('danhmuctruyen')
-            ->where('danhmuc_id', $truyen->danhmuctruyen->id)
-            ->whereNotIn('id', [$truyen->id])
-            ->orderBy('id', 'DESC')
-            ->get();
+        $tendanhmuc_dau  = $danhMucTruyen->first();
+
+//        $cungdanhmuc = Truyen::with('danhmuctruyen')
+//            ->where('danhmuc_id', $truyen->danhmuctruyen->id)
+//            ->whereNotIn('id', [$truyen->id])
+//            ->orderBy('id', 'DESC')
+//            ->get();
 
         return view('pages.truyen')
-            ->with(compact('truyen', 'chapter', 'cungdanhmuc', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat', 'chapter_all'))
+            ->with(compact('truyen', 'chapter','tendanhmuc_dau',  'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat', 'chapter_all'))
             ->with('theloai', $this->theloai)
             ->with('truyen_moicapnhat', $this->truyen_moicapnhat)
             ->with('info_webs', $this->info_web)

@@ -7,8 +7,8 @@
                     <div class="breadcrumb__links">
                         <a  href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a>
                         <a
-                            title="{{ $truyen->danhmuctruyen->tendanhmuc}}"
-                            href="{{ route('danh-muc', [$truyen->danhmuctruyen->slug_danhmuc]) }}">{{ $truyen->danhmuctruyen->tendanhmuc }}</a>
+                            title="{{ $tendanhmuc_dau->tendanhmuc}}"
+                            href="{{ route('danh-muc', [$tendanhmuc_dau->slug_danhmuc]) }}">{{ $tendanhmuc_dau->tendanhmuc }}</a>
                         <span  >{{ $truyen->tentruyen }}</span>
                     </div>
                 </div>
