@@ -36,6 +36,9 @@
                                 <p style="color: white !important;">
                                     {!! html_entity_decode($truyen->tomtat) !!}
                                 </p>
+                                <span>
+                                    Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3
+                                </span>
                             </div>
 
                             <div class="anime__details__widget">
@@ -144,7 +147,11 @@
                                         <h5>Nội dung :</h5>
                                     </div>
                                     <div id="content">
-                                        <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}</p>
+                                        <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}
+                                        <span>
+                                            Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3
+                                        </span>
+                                        </p>
                                     </div>
                                     <button class="btn btn-link" id="loadMore">Xem thêm</button>
                                     <button class="btn btn-link" id="loadLess" style="display: none;">Ẩn bớt</button>
