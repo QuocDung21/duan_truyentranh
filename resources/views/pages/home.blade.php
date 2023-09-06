@@ -44,7 +44,9 @@
                                                 <div
                                                     class="product__item__pic set-bg"
                                                     style="height: 200px; width: 130px;"
-                                                    data-setbg="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}">
+{{--                                                    data-setbg="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"--}}
+                                                >
+                                                    <img  loading="lazy" style="height: 200px; width: 130px;" src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" />
                                                     <span class="sr-only">{{$tr->tentruyen}}</span>
                                                     <div class="view"
                                                          style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
@@ -77,6 +79,7 @@
                                 <div class="product__sidebar__comment__item" style=" height:150px">
                                     <div class="product__sidebar__comment__item__pic">
                                         <img
+                                            loading="lazy"
                                             title="{{$tr->tentruyen}}"
                                             alt="{{$tr->tentruyen}}"
                                             style=" width:100px"
