@@ -86,6 +86,7 @@
         text-transform: uppercase;
 
     }
+
 </style>
 <div>
     <div class="loader" style="z-index: 9999"></div>
@@ -254,6 +255,21 @@
         }
     })
 </script>
+
+
+<script>
+    document.addEventListener('click', function(event) {
+        const searchDiv = document.getElementById('search_ajax');
+        const keywordsInput = document.getElementById('keywords');
+
+        // Check if the clicked element is not the search div or the keywords input
+        if (event.target !== searchDiv && event.target !== keywordsInput) {
+            // Hide the search div
+            searchDiv.style.display = 'none';
+        }
+    });
+</script>
+
 
 <script type="text/javascript">
     $('.select-chapter').on('change', function () {
