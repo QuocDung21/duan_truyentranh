@@ -181,12 +181,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 col-md-12">
-                                <div class="anime__details__review">
+                            <div class="col-lg-12 col-md-12 ">
+                                <div class="anime__details__review ">
                                     <div class="section-title">
                                         <h5>Bình luận :</h5>
                                     </div>
-                                    <div class="fb-comments" style="background-color: white !important" data-mobile
+                                    <div class="fb-comments bg-white" style="background-color: white !important" data-mobile
                                         data-href="{{ \URL::current() }}" data-width="100%" data-colorscheme="dark"
                                         width="100%" data-numposts="5"></div>
                                 </div>
