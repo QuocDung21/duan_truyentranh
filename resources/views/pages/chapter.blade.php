@@ -67,8 +67,9 @@
                                     sau </a>
                             @endif
                         </div>
-                        <div class="blog__details__social mt-3 d-flex justify-content-center ">
-                            <select class="text-center select-chapter select-columns">
+                        <div class="blog__details__social mt-3 d-flex justify-content-center">
+                            <select class="text-center select-chapter select-columns" id="lazy-load-select">
+                                <option value="" disabled selected hidden>Chọn chương</option>
                                 @foreach ($all_chapter as $allct)
                                     @php
                                         $parts = explode('-', $allct->tieude);
@@ -134,6 +135,40 @@
             </div>
         </div>
     </section>
+    <script>
+        const selectElement = document.getElementById('lazy-load-select');
+        const options = @json($all_chapter); // Chuyển dữ liệu từ PHP sang JavaScript
+
+        function loadOptions(start, end) {
+            for (let i = start; i < end; i++) {
+                const option = document.createElement('option');
+                option.value = options[i].slug_chapter;
+                option.textContent = options[i].display_data; // Thay bằng cột dữ liệu bạn muốn hiển thị
+                selectElement.appendChild(option);
+            }
+        }
+
+        const batchSize = 50; // Số lượng option được tải mỗi lần cuộn
+
+        selectElement.addEventListener('focus', function () {
+            if (selectElement.childElementCount === 1) {
+                loadOptions(0, batchSize);
+            }
+        });
+
+        selectElement.addEventListener('scroll', function () {
+            const scrollPosition = selectElement.scrollTop;
+            const totalOptions = selectElement.childElementCount;
+
+            if (scrollPosition >= selectElement.scrollHeight - selectElement.clientHeight) {
+                const currentOptions = selectElement.querySelectorAll('option').length;
+                if (currentOptions < totalOptions) {
+                    const nextBatchEnd = currentOptions + batchSize;
+                    loadOptions(currentOptions, nextBatchEnd);
+                }
+            }
+        });
+    </script>
     <script>
         $('.prev-chapter').on('click', function() {
             var prevUrl = $(this).hasClass('isDisabled') ? null : '{{ url('xem-chapter/' . $previous_chapter) }}';
