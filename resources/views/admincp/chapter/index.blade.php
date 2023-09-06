@@ -92,23 +92,6 @@
                         data: 'slug_chapter',
                         name: 'slug_chapter'
                     },
-                    // {
-                    //     data: 'noidung',
-                    //     name: 'noidung',
-                    //     render: function(data) {
-                    //         if (data.length > 10) {
-                    //             var truncatedData = data.substring(0, 10) + '...';
-                    //             return '<div>' + truncatedData +
-                    //                 ' <a href="#" class="view-more">Xem thêm</a></div>';
-                    //         }
-                    //         return data;
-                    //     }
-                    // },
-                    // {
-                    //     data: 'thuoctruyen',
-                    //     name: 'thuoctruyen'
-                    // },
-
                     {
                         data: 'kichhoat',
                         name: 'Kích hoạt',
