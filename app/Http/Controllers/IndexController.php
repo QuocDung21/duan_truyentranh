@@ -276,7 +276,7 @@ class IndexController extends Controller
             if ($truyen->count() > 0) {
                 foreach ($truyen as $key => $tr) {
                     $imagePath = asset('public/uploads/truyen/' . $tr->hinhanh);;
-                    $output .= '<li class="li_search_ajax d-flex flex-row justify-content-center "><div><img style="width: 80px;height: 80px" src="' . $imagePath . '" /></div> <div class="d-flex flex-column justify-content-center "><a  href=""> ' . $tr->tentruyen . '</a><a href="">Tác giả: ' . $tr->tacgia . '</a></div></li>';
+                    $output .= '<li class="li_search_ajax d-flex flex-row justify-content-center  "><div><img style="width: 80px;height: 80px" src="' . $imagePath . '" /></div> <div class="d-flex flex-column justify-content-center "><a  href=""> ' . $tr->tentruyen . '</a><a href="">Tác giả: ' . $tr->tacgia . '</a></div></li>';
                     $output .= '<hr/>';
                 }
             } else {
