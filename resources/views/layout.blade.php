@@ -140,11 +140,12 @@
             {{--        Tìm kiếm        --}}
             <div class="col-lg-3 d-flex justify-content-center align-item-center">
                 <div class="input-group rounded mt-2">
-                    <form autocomplete="off" action="{{ route('tim-kiem') }}" method="GET">
+                    <form class="d-flex " style="height: 38px" autocomplete="off" action="{{ route('tim-kiem') }}" method="GET">
                         @csrf
                         <input id="keywords" name="keywords" type="search" class="form-control rounded"
                                placeholder="Tìm kiếm"
                                aria-label="Search" aria-describedby="search-addon"/>
+                        <button type="submit" class="btn btn-outline-secondary">Tìm</button>
                     </form>
                     <div id="search_ajax"></div>
                 </div>

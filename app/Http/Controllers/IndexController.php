@@ -272,13 +272,13 @@ class IndexController extends Controller
                 ->orWhere('tag', 'LIKE', $keywords)
                 ->get();
 
-            $output = '<ul class="dropdown-menu overflow-hidden " style="display:block; width: 400px;">';
+            $output = '<ul class="dropdown-menu " style="display:block; width: 400px;">';
 
             // Check if any books were found
             if ($truyen->count() > 0) {
                 foreach ($truyen as $key => $tr) {
                     $imagePath = asset('public/uploads/truyen/' . $tr->hinhanh);
-                    $output .= '<li class="li_search_ajax d-flex flex-row justify-content-center  "><div><img style="width: 80px;height: 80px" src="' . $imagePath . '" /></div> <div class="d-flex flex-column justify-content-center "><a  href=""> ' . $tr->tentruyen . '</a><a href="">Tác giả: ' . $tr->tacgia . '</a></div></li>';
+                    $output .= '<li class="li_search_ajax d-flex flex-row justify-content-start  "><div><img loading="lazy"  class="mr-3 object-fit-cover" style="width: 50px;height: 50px" src="' . $imagePath . '" /></div> <div class="d-flex flex-column justify-content-center "><a  href=""> ' . $tr->tentruyen . '</a><a href="">Tác giả: ' . $tr->tacgia . '</a></div></li>';
                     $output .= '<hr/>';
                 }
             } else {
