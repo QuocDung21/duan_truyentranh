@@ -278,15 +278,15 @@ class IndexController extends Controller
             if ($truyen->count() > 0) {
                 foreach ($truyen as $key => $tr) {
                     $imagePath = asset('public/uploads/truyen/' . $tr->hinhanh);
-                    $output .= '<li class="li_search_ajax d-flex flex-row justify-content-start  "><div><img loading="lazy"  class="mr-3 object-fit-cover" style="width: 50px;height: 50px" src="' . $imagePath . '" /></div> <div class="d-flex flex-column justify-content-center "><a  href=""> ' . $tr->tentruyen . '</a><a href="">Tác giả: ' . $tr->tacgia . '</a></div></li>';
+                    $output .= '<li class="li_search_ajax"><a class="d-flex flex-row justify-content-start   " href="/"><div><img loading="lazy"  class="mr-3 object-fit-cover" style="width: 50px;height: 50px" src="' . $imagePath . '" /> </div><div class="d-flex flex-column justify-content-center "><h6 style="font-size: 14px;font-weight: bold" class=""> ' . $tr->tentruyen . '</h6><h6 style="font-size: 14px;font-weight: bold"  >Tác giả: ' . $tr->tacgia . '</h6></div></a></li>';
                     $output .= '<hr/>';
                 }
             } else {
                 // No books found
-                $output .= '<li class="li_search_ajax">Không tìm thấy kết quả.</li>';
+                $output .= '<li  class="li_search_ajax font-weight-bold">Không tìm thấy kết quả.</li>';
             }
 
-            $output .= '<li class="li_search_ajax d-flex justify-content-center"><a href="#">Tìm kiếm kết quả khác</a></li>';
+            $output .= '<li class="li_search_ajax d-flex justify-content-center font-weight-bold"><a href="#">Tìm kiếm kết quả khác</a></li>';
             $output .= '</ul>';
             echo $output;
         }
