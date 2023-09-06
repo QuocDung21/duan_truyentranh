@@ -19,11 +19,11 @@ Auth::routes();
 // Client
 Route::get('/', [IndexController::class, 'home']);
 Route::post('/timkiem-ajax', [IndexController::class, 'timkiem_ajax'])->name('timkiem-ajax');
+Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
 Route::get('/danh-muc/{slug}', [IndexController::class, 'danhmuc'])->name('danh-muc');
 Route::get('/xem-chapter/{slug}', [IndexController::class, 'xemchapter'])->name('xem-chapter');
 Route::get('/xem-truyen/{slug}', [IndexController::class, 'xemtruyen'])->name('xem-truyen');
 Route::get('/the-loai/{slug}', [IndexController::class, 'theloai'])->name('the-loai');
-Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
 
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');

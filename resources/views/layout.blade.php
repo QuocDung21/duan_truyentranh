@@ -39,6 +39,39 @@
             max-height: 50vh;
             overflow-y: auto;
         }
+        .dropdown-menu::-webkit-scrollbar {
+            width: 8px;
+            border-radius: 4px; /* Góc bo tròn của thanh cuộn */
+        }
+
+        .dropdown-menu::-webkit-scrollbar {
+            width: 8px; /* Độ rộng của thanh cuộn */
+        }
+
+        .dropdown-menu::-webkit-scrollbar-thumb {
+            background-color: #888; /* Màu của thanh cuộn */
+        }
+
+        .dropdown-menu::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* Màu khi hover */
+        }
+        .dropdown-menu {
+            padding: 12px;
+            max-height: 50vh;
+            overflow-y: auto;
+        }
+        .dropdown-menu   .custom_hr {
+            background: yellow;
+            height: 1px;
+            width: 100%;
+        }
+        .li_search_ajax a {
+            color: black;
+            font-size: 12px;
+            cursor: pointer;
+            text-transform: uppercase;
+
+        }
     </style>
     <div>
         <div class="loader" style="z-index: 9999"></div>
@@ -90,15 +123,18 @@
                         </nav>
                     </div>
                 </div>
+                {{--        Tìm kiếm        --}}
                 <div class="col-lg-3 d-flex justify-content-center align-item-center">
                     <div class="input-group rounded mt-2">
-                        <form action="{{ route('timkiem-ajax') }}" method="POST">
+                        <form autocomplete="off" action="{{ route('tim-kiem') }}" method="GET">
                             @csrf
-                            <input id="keywords" type="search" class="form-control rounded" placeholder="Tìm kiếm"
+                            <input id="keywords" name="keywords" type="search" class="form-control rounded" placeholder="Tìm kiếm"
                                 aria-label="Search" aria-describedby="search-addon" />
                         </form>
+                        <div  id="search_ajax"></div>
                     </div>
                 </div>
+                {{--        End tìm kiếm         --}}
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>
@@ -159,9 +195,9 @@
                         _token: _token
                     },
                     success: function(data) {
-                        $("#search_ajax").empty(); // Xóa dữ liệu tìm kiếm trước đó
-                        $("#search_ajax").fadeIn(); // Hiển thị phần tử
-                        $("#search_ajax").html(data); // Hiển thị dữ liệu mới
+                        $("#search_ajax").empty();
+                        $("#search_ajax").fadeIn();
+                        $("#search_ajax").html(data);
                     }
                 });
             } else {

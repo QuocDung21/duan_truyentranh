@@ -232,15 +232,18 @@ class IndexController extends Controller
 
     public function timkiem()
     {
-        $tukhoa = $_GET['tukhoa'];
+        $tukhoa = $_GET['keywords'];
         $truyen = Truyen::with('danhmuctruyen', 'theloai')
             ->where('tentruyen', 'LIKE', '%' . $tukhoa . '%')
             ->orWhere('tomtat', 'LIKE', '%' . $tukhoa . '%')
             ->orWhere('tacgia', 'LIKE', '%' . $tukhoa . '%')
+            ->orWhere('tag', 'LIKE', '%' . $tukhoa . '%')
             ->get();
         return view('pages.timkiem')
             ->with(compact('tukhoa', 'truyen'))
             ->with('theloai', $this->theloai)
+            ->with('info_webs', $this->info_web)
+            ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
             ->with('danhmuc', $this->danhmuc);
     }
 
@@ -256,18 +259,32 @@ class IndexController extends Controller
     public function timkiem_ajax(Request $request)
     {
         $data = $request->all();
-        dd($data);
+
         if ($data['keywords']) {
+            $keywords = '%' . $data['keywords'] . '%';
+
             $truyen = Truyen::with('danhmuctruyen', 'theloai')
-                ->where('tentruyen', 'LIKE', '%' . $data['keywords'] . '%')
-                ->orWhere('tomtat', 'LIKE', '%' . $data['keywords'] . '%')
-                ->orWhere('tacgia', 'LIKE', '%' . $data['keywords'] . '%')
+                ->where('tentruyen', 'LIKE', $keywords)
+                ->orWhere('tomtat', 'LIKE', $keywords)
+                ->orWhere('tacgia', 'LIKE', $keywords)
+                ->orWhere('tag', 'LIKE', $keywords)
                 ->get();
-            $output = '<ul class="dropdown-menu" style="display:block;">';
-            foreach ($truyen as $key => $tr) {
-                $output .= '<li class="li_search_ajax"><a href="">' . $tr->tentruyen . '</a></li>';
+
+            $output = '<ul class="dropdown-menu overflow-hidden " style="display:block; width: 400px;">';
+
+            // Check if any books were found
+            if ($truyen->count() > 0) {
+                foreach ($truyen as $key => $tr) {
+                    $imagePath = asset('public/uploads/truyen/' . $tr->hinhanh);;
+                    $output .= '<li class="li_search_ajax d-flex flex-row justify-content-center "><div><img style="width: 80px;height: 80px" src="' . $imagePath . '" /></div> <div class="d-flex flex-column justify-content-center "><a  href=""> ' . $tr->tentruyen . '</a><a href="">Tác giả: ' . $tr->tacgia . '</a></div></li>';
+                    $output .= '<hr/>';
+                }
+            } else {
+                // No books found
+                $output .= '<li class="li_search_ajax">Không tìm thấy kết quả.</li>';
             }
-            $output .= '<li class="li_search_ajax"><a href="#">Tìm kiếm kết quả khác</a></li>';
+
+            $output .= '<li class="li_search_ajax d-flex justify-content-center"><a href="#">Tìm kiếm kết quả khác</a></li>';
             $output .= '</ul>';
             echo $output;
         }
