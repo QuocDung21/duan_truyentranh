@@ -35,10 +35,8 @@
                             <div class="truncate-text">
                                 <p style="color: white !important;">
                                     {!! html_entity_decode($truyen->tomtat) !!}
-                                </p>
-                                <span>
                                     Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3
-                                </span>
+                                </p>
                             </div>
 
                             <div class="anime__details__widget">
