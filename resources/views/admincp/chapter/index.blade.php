@@ -60,7 +60,7 @@
                                             <th>Slug chapter</th>
 {{--                                            <th>Nội dung</th>--}}
 {{--                                            <th>Thuộc truyện</th>--}}
-                                            <th>Trạng thái </th>
+{{--                                            <th>Trạng thái </th>--}}
                                             <th width="180px">Action</th>
                                         </tr>
                                     </thead>
@@ -88,19 +88,20 @@
                     {
                         data: 'tieude',
                         name: 'tieude'
-                    }, {
+                    },
+                    {
                         data: 'slug_chapter',
                         name: 'slug_chapter'
                     },
-                    {
-                        data: 'kichhoat',
-                        name: 'Kích hoạt',
-                        render: function(data) {
-                            var status = data != 0 ? 'Chưa kích hoạt' : 'Đã kích hoạt';
-                            var colorClass = data != 0 ? 'text-danger' : 'text-success';
-                            return '<span class="' + colorClass + '">' + status + '</span>';
-                        }
-                    },
+                    // {
+                    //     data: 'kichhoat',
+                    //     name: 'Kích hoạt',
+                    //     render: function(data) {
+                    //         var status = data != 0 ? 'Chưa kích hoạt' : 'Đã kích hoạt';
+                    //         var colorClass = data != 0 ? 'text-danger' : 'text-success';
+                    //         return '<span class="' + colorClass + '">' + status + '</span>';
+                    //     }
+                    // },
                     {
                         data: 'action',
                         name: 'action',
