@@ -148,9 +148,7 @@
                                     </div>
                                     <div id="content">
                                         <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}
-                                        <span>
                                             Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3
-                                        </span>
                                         </p>
                                     </div>
                                     <button class="btn btn-link" id="loadMore">Xem thêm</button>
