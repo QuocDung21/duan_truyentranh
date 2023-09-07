@@ -57,8 +57,8 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Tên chapter</th>
-                                            <th>Slug chapter</th>
-                                            <th>Nội dung</th>
+{{--                                            <th>Slug chapter</th>--}}
+{{--                                            <th>Nội dung</th>--}}
                                             <th>Thuộc truyện</th>
                                             <th>Trạng thái </th>
                                             <th width="180px">Action</th>
@@ -88,22 +88,23 @@
                     {
                         data: 'tieude',
                         name: 'tieude'
-                    }, {
-                        data: 'slug_chapter',
-                        name: 'slug_chapter'
                     },
-                    {
-                        data: 'noidung',
-                        name: 'noidung',
-                        render: function(data) {
-                            if (data.length > 10) {
-                                var truncatedData = data.substring(0, 10) + '...';
-                                return '<div>' + truncatedData +
-                                    ' <a href="#" class="view-more">Xem thêm</a></div>';
-                            }
-                            return data;
-                        }
-                    },
+                    // {
+                    //     data: 'slug_chapter',
+                    //     name: 'slug_chapter'
+                    // },
+                    // {
+                    //     data: 'noidung',
+                    //     name: 'noidung',
+                    //     render: function(data) {
+                    //         if (data.length > 10) {
+                    //             var truncatedData = data.substring(0, 10) + '...';
+                    //             return '<div>' + truncatedData +
+                    //                 ' <a href="#" class="view-more">Xem thêm</a></div>';
+                    //         }
+                    //         return data;
+                    //     }
+                    // },
                     {
                         data: 'thuoctruyen',
                         name: 'thuoctruyen'
