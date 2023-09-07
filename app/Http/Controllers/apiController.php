@@ -221,16 +221,15 @@ class apiController extends Controller
     public function getChaptersApi(Request $request)
     {
         if ($request->ajax()) {
-//            $data = Chapter::with('truyen')
-            $data = Chapter::all()
+            $data = Chapter::with('truyen')
                 ->orderBy('id', 'DESC')
                 ->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-//                ->addColumn('thuoctruyen', function ($data) {
-//                    // return $data->truyen->tentruyen;
-//                    return $data->truyen->tentruyen;
-//                })
+                ->addColumn('thuoctruyen', function ($data) {
+                    // return $data->truyen->tentruyen;
+                    return $data->truyen->tentruyen;
+                })
                 ->addColumn('action', function ($data) {
                     $button = '<a type="button" href=' . route('chapter.edit', [$data->id]) . '  name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm"> <i class="bi bi-pencil-square"></i>Sửa</a>';
                     $button .= '   <a type="button" name="edit" id="' . $data->id . '" class="delete btn btn-danger btn-sm"> <i class="bi bi-backspace-reverse-fill"></i> Xóa</a>';
