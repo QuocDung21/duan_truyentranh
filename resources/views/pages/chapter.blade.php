@@ -70,11 +70,11 @@
                         <div class="blog__details__social mt-3 d-flex justify-content-center ">
                             <select class="text-center select-chapter select-columns">
                                 @foreach ($all_chapter as $allct)
-                                    @php
-                                        $parts = explode('-', $allct->tieude);
-                                        $data_to_display = trim($parts[0]);
-                                    @endphp
-                                    <option value="{{ url('xem-chapter/' . $allct->slug_chapter) }}">{{ $data_to_display }}
+{{--                                    @php--}}
+{{--                                        $parts = explode('-', $allct->tieude);--}}
+{{--                                        $data_to_display = trim($parts[0]);--}}
+{{--                                    @endphp--}}
+                                    <option value="{{ url('xem-chapter/' . $allct->slug_chapter) }}">{{ $allct->tieude }}
                                     </option>
                                 @endforeach
                             </select>
