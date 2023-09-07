@@ -53,10 +53,10 @@
                                                             class="fa fa-eye"></i>
                                                         {{ $tr->luotxem == 0 ? 0 : $tr->luotxem }}</div>
                                                     <div
-                                                        class="views mt-1 ml-2"
-                                                        style="top: 5px; height: 20px; left: 1px; font-size: 14px;font-weight: bold;">
+                                                        class="view mt-1 ml-2"
+                                                        style="top: 0;background:none; ; height: 20px; left: 0; font-size: 14px;font-weight: bold;">
                                                         @if ($tr->trangthai_truyen == 0)
-                                                            <span class="flash">Full</span>
+                                                            <span class="flash ">Full</span>
                                                         @endif
                                                     </div>
                                                     <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
@@ -104,7 +104,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
