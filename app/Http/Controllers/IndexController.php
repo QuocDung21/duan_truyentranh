@@ -55,7 +55,7 @@ class IndexController extends Controller
                 })
                 ->where('kichhoat', 0)
                 ->orderBy('id', 'DESC')
-                ->take(20)
+                ->take(15)
                 ->get();
 
             if ($danhSachTruyen->isEmpty()) {
@@ -157,13 +157,8 @@ class IndexController extends Controller
             ->orderBy('id', 'ASC')
             ->where('truyen_id', $truyenId->id)
             ->first();
-        $tendanhmuc_dau  = $danhMucTruyen->first();
 
-//        $cungdanhmuc = Truyen::with('danhmuctruyen')
-//            ->where('danhmuc_id', $truyen->danhmuctruyen->id)
-//            ->whereNotIn('id', [$truyen->id])
-//            ->orderBy('id', 'DESC')
-//            ->get();
+        $tendanhmuc_dau  = $danhMucTruyen->first();
 
         return view('pages.truyen')
             ->with(compact('truyen', 'chapter','tendanhmuc_dau',  'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat', 'chapter_all'))
