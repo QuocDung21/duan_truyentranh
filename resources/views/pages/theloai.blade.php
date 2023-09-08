@@ -16,16 +16,16 @@
                                             <h4>Truyện đang cập nhật</h4>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <div class="product__page__filter">
-                                            <p>Order by:</p>
-                                            <select>
-                                                <option value="">A-Z</option>
-                                                <option value="">1-10</option>
-                                                <option value="">10-50</option>
-                                            </select>
-                                        </div>
-                                    </div>
+{{--                                    <div class="col-lg-4 col-md-4 col-sm-6">--}}
+{{--                                        <div class="product__page__filter">--}}
+{{--                                            <p>Order by:</p>--}}
+{{--                                            <select>--}}
+{{--                                                <option value="">A-Z</option>--}}
+{{--                                                <option value="">1-10</option>--}}
+{{--                                                <option value="">10-50</option>--}}
+{{--                                            </select>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
@@ -53,20 +53,25 @@
                                     <a href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                         <div class="col-lg-2 col-md-6 col-4">
                                             <div class="product__item">
-                                                <div class="product__item__pic set-bg" style="height: 200px;width: 130px; "
-                                                    data-setbg="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}">
+                                                <div
+                                                    class="product__item__pic set-bg"
+                                                    style="height: 200px; width: 130px;"
+                                                    {{--                                                    data-setbg="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"--}}
+                                                >
+                                                    <img alt="{{$tr->tentruyen}}"  loading="lazy" style="height: 200px; width: 130px;" src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" />
+                                                    <span class="sr-only">{{$tr->tentruyen}}</span>
                                                     <div class="view"
-                                                        style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
+                                                         style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
                                                             class="fa fa-eye"></i>
                                                         {{ $tr->luotxem == 0 ? 0 : $tr->luotxem }}</div>
                                                     <div
-                                                        class="views mt-1 ml-2"style="top: 5px; height: 20px; left: 1px; font-size: 14px;font-weight: bold;">
+                                                        class="view mt-1 ml-2"
+                                                        style="top: 0;background:none; ; height: 20px; left: 0; font-size: 14px;font-weight: bold;">
                                                         @if ($tr->trangthai_truyen == 0)
-                                                            <span class="flash">Full</span>
+                                                            <span class="flash ">Full</span>
                                                         @endif
                                                     </div>
-                                                    <div class="comment text-truncate"> {{ $tr->tentruyen }}
-                                                    </div>
+                                                    <div class="comment text-truncate"> {{ $tr->tentruyen }}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,8 +97,13 @@
                                 @foreach ($truyenmoicapnhat as $tr)
                                     <div class="product__sidebar__comment__item" style=" height:150px">
                                         <div class="product__sidebar__comment__item__pic">
-                                            <img style=" width:100px"
-                                                src="{{ asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt="">
+                                            <img
+                                                loading="lazy"
+                                                title="{{$tr->tentruyen}}"
+                                                alt="{{$tr->tentruyen}}"
+                                                style=" width:100px"
+                                                src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
+                                            >
                                         </div>
                                         <div class="product__sidebar__comment__item__text">
                                             <ul>
@@ -101,12 +111,11 @@
                                                     <li>{{ $item->tentheloai }}</li>
                                                 @endforeach
                                             </ul>
-                                            <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                    style="font-size: 10px;font-weight: 600"
-                                                    href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
+                                            <h5 class="text-truncate" style="max-width: 300px;"><a class="" style="font-size: 10px;font-weight: 600" href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                                     {{ $tr->tentruyen }}
                                                 </a></h5>
-                                            <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }} lượt
+                                            <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }}
+                                                lượt
                                                 xem</span>
                                         </div>
                                     </div>
