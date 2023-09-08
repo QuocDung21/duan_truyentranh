@@ -9,11 +9,10 @@
             @foreach ($truyen as $tr)
                 <div class="custom-product-comment-item " style="width:200px;height: 300px">
                     <div class="custom-product-comment-item-pic" style="width:200px;height: 300px;">
-                        <img style="border-radius: 5px;object-fit: fill;width:200px;height: 300px;"
+                        <img style="border-radius: 5px; object-fit: fill; width:200px;height: 300px;"
                              title="{{$tr->tentruyen}}"
                              alt="{{$tr->tentruyen}}"
                              src="{{  filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                             alt=""
                             loading="lazy"
                         >
                     </div>

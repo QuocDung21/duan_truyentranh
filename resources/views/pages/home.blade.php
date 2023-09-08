@@ -46,7 +46,7 @@
                                                     style="height: 200px; width: 130px;"
 {{--                                                    data-setbg="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"--}}
                                                 >
-                                                    <img  loading="lazy" style="height: 200px; width: 130px;" src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" />
+                                                    <img alt="{{$tr->tentruyen}}"  loading="lazy" style="height: 200px; width: 130px;" src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" />
                                                     <span class="sr-only">{{$tr->tentruyen}}</span>
                                                     <div class="view"
                                                          style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
