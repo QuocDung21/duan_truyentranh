@@ -2632,3 +2632,49 @@ Footer
         display: none;
     }
 }
+
+
+
+
+
+.dropdown-scroll {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 8px;
+    border-radius: 4px; /* Góc bo tròn của thanh cuộn */
+}
+
+.dropdown-menu::-webkit-scrollbar {
+    width: 8px; /* Độ rộng của thanh cuộn */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #888; /* Màu của thanh cuộn */
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Màu khi hover */
+}
+
+.dropdown-menu {
+    padding: 12px;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.dropdown-menu .custom_hr {
+    background: yellow;
+    height: 1px;
+    width: 100%;
+}
+
+.li_search_ajax a {
+    color: black;
+    font-size: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+
+}

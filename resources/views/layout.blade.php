@@ -23,13 +23,11 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-
         gtag('config', 'G-9KCR1BMGYK');
     </script>
 
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-{{--    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">--}}
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
     <!-- Css Styles -->
@@ -40,50 +38,6 @@
 </head>
 
 <body>
-<style>
-    .dropdown-scroll {
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-
-    .dropdown-menu::-webkit-scrollbar {
-        width: 8px;
-        border-radius: 4px; /* Góc bo tròn của thanh cuộn */
-    }
-
-    .dropdown-menu::-webkit-scrollbar {
-        width: 8px; /* Độ rộng của thanh cuộn */
-    }
-
-    .dropdown-menu::-webkit-scrollbar-thumb {
-        background-color: #888; /* Màu của thanh cuộn */
-    }
-
-    .dropdown-menu::-webkit-scrollbar-thumb:hover {
-        background-color: #555; /* Màu khi hover */
-    }
-
-    .dropdown-menu {
-        padding: 12px;
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-
-    .dropdown-menu .custom_hr {
-        background: yellow;
-        height: 1px;
-        width: 100%;
-    }
-
-    .li_search_ajax a {
-        color: black;
-        font-size: 12px;
-        cursor: pointer;
-        text-transform: uppercase;
-
-    }
-
-</style>
 <div>
     <div class="loader" style="z-index: 9999"></div>
 </div>
