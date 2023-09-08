@@ -185,9 +185,87 @@ class IndexController extends Controller
             ->with('danhmuc', $this->danhmuc);
     }
 
+//    public function xemchapter($slug)
+//    {
+////        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
+//
+//        //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
+//        $truyen = Chapter::where('slug_chapter', $slug)->first();
+//
+//        // lấy ra dữ liệu của chapter sau
+//        $chapter_next = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '>', $truyen->id)->min('id');
+//        // lấy ra dữ liệu của chapter trước
+//        $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
+//        //Kết nối với dữ liệu bảng book
+////        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
+//        // Lấy ra số chapter
+////        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
+//
+//        $truyenId = Chapter::where('slug_chapter', $slug)->first();
+////        $truyen = Chapter::orderBy('id', 'DESC')
+////            ->where('slug_chapter', $slug)
+////            ->first();
+//        $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
+//            ->where('id', $truyen->truyen_id)
+//            ->first();
+//
+////        Thay đổi lấy các select cần thiết
+//        $chapter = Chapter::select('noidung', 'id', 'slug_chapter', 'tieude')
+//            ->with('truyen')
+//            ->orderBy('id', 'ASC')
+//            ->where('slug_chapter', $slug)
+//            ->where('truyen_id', $truyenId->truyen_id)
+//            ->first();
+////        $all_chapter = Chapter::orderBy('id', 'ASC')
+////            ->where('truyen_id', $truyenId->truyen_id)
+////            ->get();
+//        $all_chapter = cache('all_chapter', function () use ($truyenId) {
+//            return Chapter::orderBy('id', 'ASC')
+//                ->where('truyen_id', $truyenId->truyen_id)
+//                ->get();
+//        }, 60);
+//
+////        $specificChapter = null;
+////        if ($all_chapter) {
+////            foreach ($all_chapter as $chapterItem) {
+////                if ($chapterItem->slug_chapter === $slug) {
+////                    $specificChapter = $chapterItem;
+////                    break;
+////                }
+////            }
+////        }
+//
+////        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+////            ->orderBy('id', 'DESC')
+////            ->first();
+////        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+////            ->orderBy('id', 'ASC')
+////            ->first();
+//        $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
+//        if (!Session::has($hasViewedKey)) {
+//            // Tăng lượt xem cho truyện
+//            $chapter->truyen->luotxem += 1;
+//            $chapter->truyen->save();
+//            // Đánh dấu là đã xem trong session
+//            Session::put($hasViewedKey, true);
+//        }
+//        $next_chapter = Chapter::find($chapter_next);
+//        $previous_chapter = Chapter::find($chapter_previous);
+//        // dd($next_chapter->slug_chapter);
+//
+//        return view('pages.chapter')
+//            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'truyen'))
+////            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
+//            ->with('theloai', $this->theloai)
+//            ->with('info_webs', $this->info_web)
+//            ->with('danhmuc', $this->danhmuc);
+//        // ->with('chapter_next ', Chapter::find($chapter_next))
+//        // ->with('chapter_previous', Chapter::find($chapter_previous));
+//    }
+
     public function xemchapter($slug)
     {
-//        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
+        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
 
         //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
         $truyen = Chapter::where('slug_chapter', $slug)->first();
@@ -197,50 +275,31 @@ class IndexController extends Controller
         // lấy ra dữ liệu của chapter trước
         $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
         //Kết nối với dữ liệu bảng book
-//        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
+        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
         // Lấy ra số chapter
-//        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
+        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
 
         $truyenId = Chapter::where('slug_chapter', $slug)->first();
-//        $truyen = Chapter::orderBy('id', 'DESC')
-//            ->where('slug_chapter', $slug)
-//            ->first();
+        $truyen = Chapter::orderBy('id', 'DESC')
+            ->where('slug_chapter', $slug)
+            ->first();
         $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
             ->where('id', $truyen->truyen_id)
             ->first();
-
-//        Thay đổi lấy các select cần thiết
-        $chapter = Chapter::select('noidung', 'id', 'slug_chapter', 'tieude')
-            ->with('truyen')
+        $chapter = Chapter::with('truyen')
             ->orderBy('id', 'ASC')
             ->where('slug_chapter', $slug)
             ->where('truyen_id', $truyenId->truyen_id)
             ->first();
-//        $all_chapter = Chapter::orderBy('id', 'ASC')
-//            ->where('truyen_id', $truyenId->truyen_id)
-//            ->get();
-        $all_chapter = cache('all_chapter', function () use ($truyenId) {
-            return Chapter::orderBy('id', 'ASC')
-                ->where('truyen_id', $truyenId->truyen_id)
-                ->get();
-        }, 60);
-
-//        $specificChapter = null;
-//        if ($all_chapter) {
-//            foreach ($all_chapter as $chapterItem) {
-//                if ($chapterItem->slug_chapter === $slug) {
-//                    $specificChapter = $chapterItem;
-//                    break;
-//                }
-//            }
-//        }
-
-//        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
-//            ->orderBy('id', 'DESC')
-//            ->first();
-//        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
-//            ->orderBy('id', 'ASC')
-//            ->first();
+        $all_chapter = Chapter::orderBy('id', 'ASC')
+            ->where('truyen_id', $truyenId->truyen_id)
+            ->get();
+        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+            ->orderBy('id', 'DESC')
+            ->first();
+        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+            ->orderBy('id', 'ASC')
+            ->first();
         $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
         if (!Session::has($hasViewedKey)) {
             // Tăng lượt xem cho truyện
@@ -253,9 +312,9 @@ class IndexController extends Controller
         $previous_chapter = Chapter::find($chapter_previous);
         // dd($next_chapter->slug_chapter);
 
+
         return view('pages.chapter')
-            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'truyen'))
-//            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
+            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
             ->with('theloai', $this->theloai)
             ->with('info_webs', $this->info_web)
             ->with('danhmuc', $this->danhmuc);
