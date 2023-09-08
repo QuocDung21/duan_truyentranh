@@ -47,7 +47,6 @@ class IndexController extends Controller
             ->take(5)
             ->get();
 
-
         foreach ($danhMucList as $key => $dm) {
             $danhSachTruyen = Truyen::with('thuocnhieudanhmuctruyen')
                 ->whereHas('thuocnhieudanhmuctruyen', function ($query) use ($dm) {
@@ -55,14 +54,14 @@ class IndexController extends Controller
                 })
                 ->where('kichhoat', 0)
                 ->orderBy('id', 'DESC')
-                ->take(15)
+                ->take(10)
                 ->get();
-
-            if ($danhSachTruyen->isEmpty()) {
-                unset($danhMucList[$key]);
-            } else {
-                $dm->danhSachTruyen = $danhSachTruyen;
-            }
+            $dm->danhSachTruyen = $danhSachTruyen;
+//            if ($danhSachTruyen->isEmpty()) {
+//                unset($danhMucList[$key]);
+//            } else {
+//                $dm->danhSachTruyen = $danhSachTruyen;
+//            }
         }
         $truyen = Truyen::orderBy('luotxem', 'DESC')
             ->with('theloai')
@@ -75,9 +74,9 @@ class IndexController extends Controller
             ->orderBy('updated_at', 'desc')
             ->where('kichhoat', 0)
             ->get();
-        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')
-            ->where('kichhoat', 0)
-            ->get();
+//        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')
+//            ->where('kichhoat', 0)
+//            ->get();
         return view('pages.home')
             ->with(compact('truyen', 'danhMucList', 'truyenmoicapnhat'))
             ->with('danhmuc', $this->danhmuc)
@@ -158,10 +157,10 @@ class IndexController extends Controller
             ->where('truyen_id', $truyenId->id)
             ->first();
 
-        $tendanhmuc_dau  = $danhMucTruyen->first();
+        $tendanhmuc_dau = $danhMucTruyen->first();
 
         return view('pages.truyen')
-            ->with(compact('truyen', 'chapter','tendanhmuc_dau',  'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat', 'chapter_all'))
+            ->with(compact('truyen', 'chapter', 'tendanhmuc_dau', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat', 'chapter_all'))
             ->with('theloai', $this->theloai)
             ->with('truyen_moicapnhat', $this->truyen_moicapnhat)
             ->with('info_webs', $this->info_web)
@@ -170,7 +169,7 @@ class IndexController extends Controller
 
     public function xemchapter($slug)
     {
-        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
+//        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
 
         //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
         $truyen = Chapter::where('slug_chapter', $slug)->first();
@@ -180,14 +179,14 @@ class IndexController extends Controller
         // lấy ra dữ liệu của chapter trước
         $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
         //Kết nối với dữ liệu bảng book
-        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
+//        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
         // Lấy ra số chapter
-        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
+//        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
 
         $truyenId = Chapter::where('slug_chapter', $slug)->first();
-        $truyen = Chapter::orderBy('id', 'DESC')
-            ->where('slug_chapter', $slug)
-            ->first();
+//        $truyen = Chapter::orderBy('id', 'DESC')
+//            ->where('slug_chapter', $slug)
+//            ->first();
         $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
             ->where('id', $truyen->truyen_id)
             ->first();
@@ -196,15 +195,21 @@ class IndexController extends Controller
             ->where('slug_chapter', $slug)
             ->where('truyen_id', $truyenId->truyen_id)
             ->first();
-        $all_chapter = Chapter::orderBy('id', 'ASC')
-            ->where('truyen_id', $truyenId->truyen_id)
-            ->get();
-        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
-            ->orderBy('id', 'DESC')
-            ->first();
-        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
-            ->orderBy('id', 'ASC')
-            ->first();
+//        $all_chapter = Chapter::orderBy('id', 'ASC')
+//            ->where('truyen_id', $truyenId->truyen_id)
+//            ->get();
+        $all_chapter = cache('all_chapter', function () use ($truyenId) {
+            return Chapter::orderBy('id', 'ASC')
+                ->where('truyen_id', $truyenId->truyen_id)
+                ->get();
+        }, 60);
+
+//        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+//            ->orderBy('id', 'DESC')
+//            ->first();
+//        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+//            ->orderBy('id', 'ASC')
+//            ->first();
         $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
         if (!Session::has($hasViewedKey)) {
             // Tăng lượt xem cho truyện
@@ -217,9 +222,9 @@ class IndexController extends Controller
         $previous_chapter = Chapter::find($chapter_previous);
         // dd($next_chapter->slug_chapter);
 
-
         return view('pages.chapter')
-            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
+            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'truyen'))
+//            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
             ->with('theloai', $this->theloai)
             ->with('info_webs', $this->info_web)
             ->with('danhmuc', $this->danhmuc);
