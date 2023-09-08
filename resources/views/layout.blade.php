@@ -50,7 +50,7 @@
                     <a href="{{ url('/') }}"
                        style="display: flex;justify-content: center;align-items: center">
                         <img loading="lazy" style="border-radius: 50%;height: 50px;width: 50px;object-fit: fill"
-                             src="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}" alt="">
+                             src="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}" alt="{{$info_webs->name}}">
                     </a>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                 </div>
             </div>
             {{--        Tìm kiếm        --}}
-            <div class="col-lg-3 d-flex justify-content-center align-item-center">
+            <div class="col-lg-3 col-sm-12 d-flex justify-content-center align-item-center">
                 <div class="input-group rounded mt-2">
                     <form class="d-flex " style="height: 38px" autocomplete="off" action="{{ route('tim-kiem') }}" method="GET">
                         @csrf
