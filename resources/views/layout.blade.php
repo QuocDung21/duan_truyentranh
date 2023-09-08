@@ -29,15 +29,15 @@
 
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+{{--    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">--}}
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
     <!-- Css Styles -->
     <link rel="stylesheet" href="{{ url('css/bootstrap.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url('css/elegant-icons.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url('css/plyr.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ url('css/nice-select.css') }}" type="text/css">
+{{--    <link rel="stylesheet" href="{{ url('css/font-awesome.min.css') }}" type="text/css">--}}
+{{--    <link rel="stylesheet" href="{{ url('css/elegant-icons.css') }}" type="text/css">--}}
+{{--    <link rel="stylesheet" href="{{ url('css/plyr.css') }}" type="text/css">--}}
+{{--    <link rel="stylesheet" href="{{ url('css/nice-select.css') }}" type="text/css">--}}
     <link rel="stylesheet" href="{{ url('css/owl.carousel.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url('css/style.css') }}" type="text/css">
