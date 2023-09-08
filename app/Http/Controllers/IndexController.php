@@ -11,6 +11,7 @@ use App\Models\DanhmucTruyen;
 use App\Models\InfoWebsites;
 use App\Models\Truyen_Danhmuc;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cache;
 
 class IndexController extends Controller
 {
@@ -18,21 +19,38 @@ class IndexController extends Controller
 
     public function __construct()
     {
-        $this->info_web = InfoWebsites::first();
+//        $this->info_web = InfoWebsites::first();
+        $this->info_web = Cache::remember('info_web', now()->addHours(6), function () {
+            return InfoWebsites::first();
+        });
+
         $this->slide_truyen = Truyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->take(8)
             ->first();
-        $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
-            ->where('kichhoat', 0)
-            ->get();
-        $this->theloai = Theloai::orderBy('id', 'DESC')
-            ->where('kichhoat', 0)
-            ->get();
+//        $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
+//            ->where('kichhoat', 0)
+//            ->get();
+//        $this->theloai = Theloai::orderBy('id', 'DESC')
+//            ->where('kichhoat', 0)
+//            ->get();
+        $this->danhmuc = Cache::remember('danhmuc', now()->addHours(6), function () {
+            return DanhmucTruyen::orderBy('id', 'DESC')
+                ->where('kichhoat', 0)
+                ->get();
+        });
+
+        $this->theloai = Cache::remember('theloai', now()->addHours(6), function () {
+            return Theloai::orderBy('id', 'DESC')
+                ->where('kichhoat', 0)
+                ->get();
+        });
+
         $this->truyen_moicapnhat = Truyen::orderBy('id', 'DESC')
             ->where('kichhoat', 0)
             ->take(4)
             ->get();
+
         $this->truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
             ->take(5)
             ->orderBy('updated_at', 'desc')
@@ -190,7 +208,10 @@ class IndexController extends Controller
         $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
             ->where('id', $truyen->truyen_id)
             ->first();
-        $chapter = Chapter::with('truyen')
+
+//        Thay đổi lấy các select cần thiết
+        $chapter = Chapter::select('noidung', 'id', 'slug_chapter', 'tieude')
+            ->with('truyen')
             ->orderBy('id', 'ASC')
             ->where('slug_chapter', $slug)
             ->where('truyen_id', $truyenId->truyen_id)
@@ -203,6 +224,17 @@ class IndexController extends Controller
                 ->where('truyen_id', $truyenId->truyen_id)
                 ->get();
         }, 60);
+
+//        $specificChapter = null;
+//        if ($all_chapter) {
+//            foreach ($all_chapter as $chapterItem) {
+//                if ($chapterItem->slug_chapter === $slug) {
+//                    $specificChapter = $chapterItem;
+//                    break;
+//                }
+//            }
+//        }
+
 
 //        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
 //            ->orderBy('id', 'DESC')
