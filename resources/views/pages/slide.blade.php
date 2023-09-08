@@ -8,7 +8,7 @@
         <div class="owl-carousel owl-theme mt-5">
             @foreach ($truyen as $tr)
                 <div class="custom-product-comment-item " style="width:200px;height: 300px">
-                    <div class="custom-product-comment-item-pic" style="width:200px;height: 300px;">
+                    <div class="custom-product-comment-item-pic" style="max-width:200px;max-height: 300px;">
                         <img style="border-radius: 5px;object-fit: fill;width:200px;height: 300px;"
                              title="{{$tr->tentruyen}}"
                              alt="{{$tr->tentruyen}}"

@@ -235,7 +235,6 @@ class IndexController extends Controller
 //            }
 //        }
 
-
 //        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
 //            ->orderBy('id', 'DESC')
 //            ->first();
