@@ -13,7 +13,7 @@
                              title="{{$tr->tentruyen}}"
                              alt="{{$tr->tentruyen}}"
                              src="{{  filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                            loading="lazy"
+                                loading="lazy"
                         >
                     </div>
                     <div class="custom-product-comment-item-text">

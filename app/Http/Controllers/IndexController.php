@@ -20,14 +20,27 @@ class IndexController extends Controller
     public function __construct()
     {
 //        $this->info_web = InfoWebsites::first();
+        $this->truyenmoicapnhat = Cache::remember('truyenmoicapnhat', now()->addMinutes(10), function () {
+            return Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
+                ->take(5)
+                ->orderBy('updated_at', 'desc')
+                ->where('kichhoat', 0)
+                ->get();
+        });
         $this->info_web = Cache::remember('info_web', now()->addHours(6), function () {
             return InfoWebsites::first();
         });
+        $this->slide_truyen = Cache::remember('slide_truyen', now()->addMinutes(10), function () {
+            return Truyen::orderBy('id', 'DESC')
+                ->where('kichhoat', 0)
+                ->take(8)
+                ->first();
+        });
 
-        $this->slide_truyen = Truyen::orderBy('id', 'DESC')
-            ->where('kichhoat', 0)
-            ->take(8)
-            ->first();
+//        $this->slide_truyen = Truyen::orderBy('id', 'DESC')
+//            ->where('kichhoat', 0)
+//            ->take(8)
+//            ->first();
 //        $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
 //            ->where('kichhoat', 0)
 //            ->get();
@@ -51,11 +64,11 @@ class IndexController extends Controller
             ->take(4)
             ->get();
 
-        $this->truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
-            ->take(5)
-            ->orderBy('updated_at', 'desc')
-            ->where('kichhoat', 0)
-            ->get();
+//        $this->truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
+//            ->take(5)
+//            ->orderBy('updated_at', 'desc')
+//            ->where('kichhoat', 0)
+//            ->get();
     }
 
     public function home()
@@ -87,18 +100,19 @@ class IndexController extends Controller
             ->take(5)
             ->get();
 
-        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
-            ->take(5)
-            ->orderBy('updated_at', 'desc')
-            ->where('kichhoat', 0)
-            ->get();
+//        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
+//            ->take(5)
+//            ->orderBy('updated_at', 'desc')
+//            ->where('kichhoat', 0)
+//            ->get();
 //        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')
 //            ->where('kichhoat', 0)
 //            ->get();
         return view('pages.home')
-            ->with(compact('truyen', 'danhMucList', 'truyenmoicapnhat'))
+            ->with(compact('truyen', 'danhMucList'))
             ->with('danhmuc', $this->danhmuc)
             ->with('theloai', $this->theloai)
+            ->with('truyenmoicapnhat', $this->truyenmoicapnhat)
             ->with('info_webs', $this->info_web);
     }
 
