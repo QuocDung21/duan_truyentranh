@@ -170,7 +170,7 @@
                                                 <div class="tagcloud05">
                                                     <ul>
                                                         @foreach ($tukhoa as $key => $tu)
-                                                            <li><a href="#"><span>{{ $tu }}</span></a></li>
+                                                            <li><a title="{{$tu}}" href="#"><span>{{ $tu }}</span></a></li>
                                                         @endforeach
                                                     </ul>
                                                 </div>
@@ -212,7 +212,7 @@
                                                 loading="lazy"
                                                 style=" width:100px"
                                                 src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                                                alt=""
+                                                alt="{{$tr->hinhanh}}"
                                             >
                                         </div>
                                         <div class="product__sidebar__comment__item__text">

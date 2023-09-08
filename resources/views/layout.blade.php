@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ $info_webs->name }}</title>
-
+    <meta name="description">
     <meta name="ROBOTS" content="INDEX,FOLLOW"/>
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
