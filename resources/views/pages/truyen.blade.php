@@ -5,11 +5,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a  href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a>
                         <a
                             title="{{ $tendanhmuc_dau->tendanhmuc}}"
                             href="{{ route('danh-muc', [$tendanhmuc_dau->slug_danhmuc]) }}">{{ $tendanhmuc_dau->tendanhmuc }}</a>
-                        <span  >{{ $truyen->tentruyen }}</span>
+                        <span>{{ $truyen->tentruyen }}</span>
                     </div>
                 </div>
             </div>
@@ -21,7 +21,7 @@
                 <div class="row">
                     <div class="col-lg-3">
                         <div class="anime__details__pic set-bg "
-                            data-setbg="{{ filter_var($truyen->hinhanh, FILTER_VALIDATE_URL) ? $truyen->hinhanh : asset('public/uploads/truyen/' . $truyen->hinhanh) }}">
+                             data-setbg="{{ filter_var($truyen->hinhanh, FILTER_VALIDATE_URL) ? $truyen->hinhanh : asset('public/uploads/truyen/' . $truyen->hinhanh) }}">
                             <div class="view" style="top: 5px;height: 26px;"><i class="fa fa-eye"></i>
                                 {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
                             </div>
@@ -35,7 +35,7 @@
                             <div class="truncate-text">
                                 <p style="color: white !important;">
                                     {!! html_entity_decode($truyen->tomtat) !!}
-                                    <span class="text-white" >Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3</span>
+                                    <span class="text-white">Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3</span>
                                 </p>
                             </div>
 
@@ -44,8 +44,9 @@
                                     <div class="col-lg-6 col-md-6">
                                         <ul>
                                             <li><span>Tác giả:</span> {{ $truyen->tacgia }}</li>
-{{--                                            <li><span>Số chapter:</span>{{ count($chapter_all) }}</li>--}}
-                                            <li><span>Lượt xem:</span> {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
+                                            {{--                                            <li><span>Số chapter:</span>{{ count($chapter_all) }}</li>--}}
+                                            <li>
+                                                <span>Lượt xem:</span> {{ $truyen->luotxem == 0 ? 0 : $truyen->luotxem }}
                                             </li>
                                             <li><span>Trạng thái:</span>
                                                 {{ $truyen->trangthai_truyen == 1 ? 'Đang cập nhật' : 'Đã hoàn thành' }}
@@ -146,7 +147,7 @@
                                     </div>
                                     <div id="content">
                                         <p style="color: white">{!! html_entity_decode($truyen->tomtat) !!}
-                                            <span class="text-white" >Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3</span>
+                                            <span class="text-white">Cảm ơn bạn đã ghé website: https://truyenhayht.com/ đọc truyện online. Mãi Yêu <3</span>
                                         </p>
                                     </div>
                                     <button class="btn btn-link" id="loadMore">Xem thêm</button>
@@ -186,9 +187,14 @@
                                     <div class="section-title">
                                         <h5>Bình luận :</h5>
                                     </div>
-                                    <div class="fb-comments bg-white" style="background-color: white !important" data-mobile
-                                        data-href="{{ \URL::current() }}" data-width="100%" data-colorscheme="dark"
-                                        width="100%" data-numposts="5"></div>
+                                    <div class="fb-comments bg-white" style="background-color: white !important"
+                                         data-mobile
+                                         data-lazy="true"
+                                         data-href="{{ \URL::current() }}"
+                                         data-width="100%"
+                                         data-colorscheme="light"
+                                         data-numposts="5">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +209,8 @@
                                     <div class="product__sidebar__comment__item" style=" height:150px">
                                         <div class="product__sidebar__comment__item__pic">
                                             <img style=" width:100px"
-                                                src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" alt=""
+                                                 src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
+                                                 alt=""
                                             >
                                         </div>
                                         <div class="product__sidebar__comment__item__text">
@@ -213,8 +220,8 @@
                                                 @endforeach
                                             </ul>
                                             <h5 class="text-truncate" style="max-width: 300px;"><a class=""
-                                                    style="font-size: 10px;font-weight: 600"
-                                                    href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
+                                                                                                   style="font-size: 10px;font-weight: 600"
+                                                                                                   href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                                     {{ $tr->tentruyen }}
                                                 </a></h5>
                                             <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }}
@@ -231,13 +238,13 @@
         </div>
     </section>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const content = document.getElementById("content");
             const loadMoreButton = document.getElementById("loadMore");
             const loadLessButton = document.getElementById("loadLess");
             const paragraphs = content.getElementsByTagName("p");
 
-            const showMore = function() {
+            const showMore = function () {
                 for (let i = 0; i < paragraphs.length; i++) {
                     paragraphs[i].classList.add("show");
                 }
@@ -245,7 +252,7 @@
                 loadLessButton.style.display = "block";
             };
 
-            const showLess = function() {
+            const showLess = function () {
                 for (let i = 3; i < paragraphs.length; i++) {
                     paragraphs[i].classList.remove("show");
                 }
