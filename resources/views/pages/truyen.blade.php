@@ -208,9 +208,11 @@
                                 @foreach ($truyenmoicapnhat as $tr)
                                     <div class="product__sidebar__comment__item" style=" height:150px">
                                         <div class="product__sidebar__comment__item__pic">
-                                            <img style=" width:100px"
-                                                 src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                                                 alt=""
+                                            <img
+                                                loading="lazy"
+                                                style=" width:100px"
+                                                src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
+                                                alt=""
                                             >
                                         </div>
                                         <div class="product__sidebar__comment__item__text">
