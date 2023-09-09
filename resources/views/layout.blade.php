@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" amp>
 
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9582999796357564"
             crossorigin="anonymous"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
 
     @if (isset($data_seo))
         <title>{{ $data_seo->tentruyen ? $data_seo->tentruyen : $info_webs->name }}</title>
