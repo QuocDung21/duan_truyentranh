@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Từ khóa</label>
-                                    <textarea rows="2" type="text" value="{{ $truyen->tag }}" name="tag" placeholder="Từ khóa..."
+                                    <textarea rows="2" type="text"  name="tag" placeholder="Từ khóa..."
                                         class="form-control" id="exampleInputEmail1">
                                         {{ $truyen->tag }}
 
@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="mb-3 editor">
                                     <label for="exampleInputEmail1" class="form-label">Tóm tắt truyện</label>
-                                    <textarea rows="5" type="text" value="{{ $truyen->tomtat }}" name="tomtat_truyen"
+                                    <textarea rows="5" type="text"  name="tomtat_truyen"
                                         placeholder="Tóm tắt truyện..." class="form-control" id="exampleInputEmail1">{{ $truyen->tomtat }}</textarea>
                                 </div>
                                 <div class="mb-3">
