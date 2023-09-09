@@ -9,8 +9,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a>
-                        <a href="#">Danh mục</a>
+                        <a title="{{$tendanhmuc}}" href="{{ url('/') }}"><i class="fa fa-home"></i> Trang chủ</a>
+                        <a title="{{$tendanhmuc}}}" href="#">Danh mục</a>
                         <span>{{ $tendanhmuc }}</span>
                     </div>
                 </div>
@@ -42,7 +42,8 @@
                                                 style="height: 200px; width: 130px;"
                                                 {{--                                                    data-setbg="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"--}}
                                             >
-                                                <img alt="{{$tr->tentruyen}}" loading="lazy"
+                                                <img alt="{{$tr->tentruyen}}"
+                                                     loading="lazy"
                                                      style="height: 200px; width: 130px;"
                                                      src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"/>
                                                 <span class="sr-only">{{$tr->tentruyen}}</span>
