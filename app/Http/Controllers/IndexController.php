@@ -376,13 +376,14 @@ class IndexController extends Controller
                 ->orWhere('tag', 'LIKE', $keywords)
                 ->get();
 
-            $output = '<ul class="dropdown-menu " style="display:block; width: 400px;">';
+            $output = '<ul class="dropdown-menu " style="display: block;isplay:block; width: 400px;">';
 
             // Check if any books were found
             if ($truyen->count() > 0) {
                 foreach ($truyen as $key => $tr) {
                     $imagePath = asset('public/uploads/truyen/' . $tr->hinhanh);
-                    $output .= '<li class="li_search_ajax"><a class="d-flex flex-row justify-content-start   " href="/"><div><img loading="lazy"  class="mr-3 object-fit-cover" style="width: 50px;height: 50px" src="' . $imagePath . '" /> </div><div class="d-flex flex-column justify-content-center "><h6 style="font-size: 14px;font-weight: bold" class=""> ' . $tr->tentruyen . '</h6><h6 style="font-size: 14px;font-weight: bold"  >Tác giả: ' . $tr->tacgia . '</h6></div></a></li>';
+//                    $output .= '<li class="li_search_ajax"><a class="d-flex flex-row justify-content-start   " href="{{route('xem-truyen', [$tr->slug_truyen])}}"><div><img loading="lazy"  class="mr-3 object-fit-cover" style="width: 50px;height: 50px" src="' . $imagePath . '" /> </div><div class="d-flex flex-column justify-content-center "><h6 style="font-size: 14px;font-weight: bold" class=""> ' . $tr->tentruyen . '</h6><h6 style="font-size: 14px;font-weight: bold"  >Tác giả: ' . $tr->tacgia . '</h6></div></a></li>';
+                    $output .= '<li class="li_search_ajax"><a class="d-flex flex-row justify-content-start" href="' . route('xem-truyen', [$tr->slug_truyen]) . '"><div><img loading="lazy" class="mr-3 object-fit-cover" style="width: 50px; height: 50px" src="' . $imagePath . '" /> </div><div class="d-flex flex-column justify-content-center"><h6 style="font-size: 14px; font-weight: bold"> ' . e($tr->tentruyen) . '</h6><h6 style="font-size: 14px; font-weight: bold">Tác giả: ' . e($tr->tacgia) . '</h6></div></a></li>';
                     $output .= '<hr/>';
                 }
             } else {
