@@ -16,9 +16,11 @@
         <meta property="og:url" content="{{ Request::url() }}">
     @else
         <title>{{  $info_webs->name }}</title>
-        <meta name="description" content="{{ $info_webs->name }}">
+        <meta name="og:description" content="{{ $info_webs->name }}">
+        <meta property="og:title" content="{{$info_webs->name}}}">
+        <meta property="og:image" content="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}">
+        <meta property="og:url" content="{{ Request::url() }}">
     @endif
-
 
 
 
