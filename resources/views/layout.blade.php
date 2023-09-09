@@ -10,8 +10,6 @@
     @if (isset($data_seo))
         <title>{{ $data_seo->tentruyen ? $data_seo->tentruyen : $info_webs->name }}</title>
         <meta name="description" content="{{ $data_seo->mota ? $data_seo->mota : $info_webs->name }}">
-
-
         <meta property="og:title" content="{{$data_seo->tieude}}}">
         <meta property="og:description" content="{{$data_seo->mota}}">
         <meta property="og:image" content="{{ filter_var($truyen->hinhanh, FILTER_VALIDATE_URL) ? $truyen->hinhanh : asset('public/uploads/truyen/' . $data_seo->hinhanh) }}">
