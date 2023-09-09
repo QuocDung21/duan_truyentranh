@@ -3,7 +3,7 @@
     @php
         $count = count($truyen);
     @endphp
-    <!-- Breadcrumb Begin -->
+        <!-- Breadcrumb Begin -->
     <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
@@ -42,7 +42,9 @@
                                                 style="height: 200px; width: 130px;"
                                                 {{--                                                    data-setbg="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"--}}
                                             >
-                                                <img alt="{{$tr->tentruyen}}"  loading="lazy" style="height: 200px; width: 130px;" src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}" />
+                                                <img alt="{{$tr->tentruyen}}" loading="lazy"
+                                                     style="height: 200px; width: 130px;"
+                                                     src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"/>
                                                 <span class="sr-only">{{$tr->tentruyen}}</span>
                                                 <div class="view"
                                                      style="top: 5px; height: 20px;right: 1px; font-size: 10px"><i
@@ -63,14 +65,21 @@
                             @endforeach
                         </div>
                     </div>
-{{--                    <div class="product__pagination">--}}
-{{--                        <a href="#" class="current-page">1</a>--}}
-{{--                        <a href="#">2</a>--}}
-{{--                        <a href="#">3</a>--}}
-{{--                        <a href="#">4</a>--}}
-{{--                        <a href="#">5</a>--}}
-{{--                        <a href="#"><i class="fa fa-angle-double-right"></i></a>--}}
-{{--                    </div>--}}
+                    <!-- Hiển thị phân trang -->
+                    <div class="product__pagination">
+                        @for ($i = 1; $i <= $truyen->lastPage(); $i++)
+                            <a class="{{ $truyen->currentPage() == $i ? 'current-page' : '' }}"
+                               href="{{ $truyen->url($i) }}">{{ $i }}</a>
+                        @endfor
+
+                        @if ($truyen->hasMorePages())
+                            <a href="{{ $truyen->url($truyen->lastPage()) }}"><i
+                                    class="fa fa-angle-double-right"></i></a>
+                        @else
+                            <a class="disabled"><i class="fa fa-angle-double-right disabled"></i></a>
+                        @endif
+
+                    </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-8">
                     <div class="product__sidebar">
@@ -95,7 +104,9 @@
                                                 <li>{{ $item->tentheloai }}</li>
                                             @endforeach
                                         </ul>
-                                        <h5 class="text-truncate" style="max-width: 300px;"><a class="" style="font-size: 10px;font-weight: 600" href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
+                                        <h5 class="text-truncate" style="max-width: 300px;"><a class=""
+                                                                                               style="font-size: 10px;font-weight: 600"
+                                                                                               href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">
                                                 {{ $tr->tentruyen }}
                                             </a></h5>
                                         <span><i class="fa fa-eye"></i> {{ $tr->luotxem != 0 ? $tr->luotxem : 0 }}

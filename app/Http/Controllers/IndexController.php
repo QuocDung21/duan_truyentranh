@@ -125,7 +125,7 @@ class IndexController extends Controller
             ->whereHas('thuocnhieutheloaitruyen', function ($query) use ($theloai_id) {
                 $query->where('theloai_id', $theloai_id->id);
             })
-            ->get();
+            ->paginate(25);
 
         return view('pages.theloai')
             ->with(compact('truyen'))
@@ -146,7 +146,8 @@ class IndexController extends Controller
             ->whereHas('thuocnhieudanhmuctruyen', function ($query) use ($danhmuc_id) {
                 $query->where('danhmuc_id', $danhmuc_id->id);
             })
-            ->get();
+            ->paginate(25);
+//            ->get();
         return view('pages.danhmuc')
             ->with(compact('truyen'))
             ->with('theloai', $this->theloai)

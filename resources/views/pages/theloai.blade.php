@@ -79,14 +79,20 @@
                                 @endforeach
                             </div>
                         </div>
-{{--                        <div class="product__pagination">--}}
-{{--                            <a href="#" class="current-page">1</a>--}}
-{{--                            <a href="#">2</a>--}}
-{{--                            <a href="#">3</a>--}}
-{{--                            <a href="#">4</a>--}}
-{{--                            <a href="#">5</a>--}}
-{{--                            <a href="#"><i class="fa fa-angle-double-right"></i></a>--}}
-{{--                        </div>--}}
+                        <div class="product__pagination">
+                            @for ($i = 1; $i <= $truyen->lastPage(); $i++)
+                                <a class="{{ $truyen->currentPage() == $i ? 'current-page' : '' }}"
+                                   href="{{ $truyen->url($i) }}">{{ $i }}</a>
+                            @endfor
+
+                            @if ($truyen->hasMorePages())
+                                <a href="{{ $truyen->url($truyen->lastPage()) }}"><i
+                                        class="fa fa-angle-double-right"></i></a>
+                            @else
+                                <a class="disabled"><i class="fa fa-angle-double-right disabled"></i></a>
+                            @endif
+
+                        </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-8">
                         <div class="product__sidebar">
