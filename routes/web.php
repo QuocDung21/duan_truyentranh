@@ -17,7 +17,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Auth::routes();
 // Client
-Route::get('/', [IndexController::class, 'home']);
+Route::get('/', [IndexController::class, 'home'])->name('homepage');
 Route::post('/timkiem-ajax', [IndexController::class, 'timkiem_ajax'])->name('timkiem-ajax');
 Route::get('/tim-kiem', [IndexController::class, 'timkiem'])->name('tim-kiem');
 Route::get('/danh-muc/{slug}', [IndexController::class, 'danhmuc'])->name('danh-muc');

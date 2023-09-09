@@ -104,6 +104,7 @@ class ComposerStaticInit03edf5e9af806c6ba76783d95aba618e
             'Psr\\Http\\Client\\' => 16,
             'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
+            'Psr\\Clock\\' => 10,
             'PragmaRX\\Google2FA\\' => 19,
             'PhpParser\\' => 10,
             'PhpOption\\' => 10,
@@ -362,6 +363,10 @@ class ComposerStaticInit03edf5e9af806c6ba76783d95aba618e
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
         ),
+        'Psr\\Clock\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/clock/src',
+        ),
         'PragmaRX\\Google2FA\\' => 
         array (
             0 => __DIR__ . '/..' . '/pragmarx/google2fa/src',
@@ -558,6 +563,16 @@ class ComposerStaticInit03edf5e9af806c6ba76783d95aba618e
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'L' => 
+        array (
+            'Laravelium\\Sitemap' => 
+            array (
+                0 => __DIR__ . '/..' . '/laravelium/sitemap/src',
+            ),
         ),
     );
 
@@ -3207,6 +3222,9 @@ class ComposerStaticInit03edf5e9af806c6ba76783d95aba618e
         'Laravel\\Ui\\Presets\\Vue' => __DIR__ . '/..' . '/laravel/ui/src/Presets/Vue.php',
         'Laravel\\Ui\\UiCommand' => __DIR__ . '/..' . '/laravel/ui/src/UiCommand.php',
         'Laravel\\Ui\\UiServiceProvider' => __DIR__ . '/..' . '/laravel/ui/src/UiServiceProvider.php',
+        'Laravelium\\Sitemap\\Model' => __DIR__ . '/..' . '/laravelium/sitemap/src/Laravelium/Sitemap/Model.php',
+        'Laravelium\\Sitemap\\Sitemap' => __DIR__ . '/..' . '/laravelium/sitemap/src/Laravelium/Sitemap/Sitemap.php',
+        'Laravelium\\Sitemap\\SitemapServiceProvider' => __DIR__ . '/..' . '/laravelium/sitemap/src/Laravelium/Sitemap/SitemapServiceProvider.php',
         'League\\CommonMark\\CommonMarkConverter' => __DIR__ . '/..' . '/league/commonmark/src/CommonMarkConverter.php',
         'League\\CommonMark\\ConverterInterface' => __DIR__ . '/..' . '/league/commonmark/src/ConverterInterface.php',
         'League\\CommonMark\\Delimiter\\Delimiter' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Delimiter.php',
@@ -3924,6 +3942,7 @@ class ComposerStaticInit03edf5e9af806c6ba76783d95aba618e
         'PHPUnit\\Framework\\Constraint\\LogicalXor' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/Operator/LogicalXor.php',
         'PHPUnit\\Framework\\Constraint\\ObjectEquals' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/Object/ObjectEquals.php',
         'PHPUnit\\Framework\\Constraint\\ObjectHasAttribute' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/Object/ObjectHasAttribute.php',
+        'PHPUnit\\Framework\\Constraint\\ObjectHasProperty' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/Object/ObjectHasProperty.php',
         'PHPUnit\\Framework\\Constraint\\Operator' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/Operator/Operator.php',
         'PHPUnit\\Framework\\Constraint\\RegularExpression' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/String/RegularExpression.php',
         'PHPUnit\\Framework\\Constraint\\SameSize' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Constraint/Cardinality/SameSize.php',
@@ -4572,6 +4591,7 @@ class ComposerStaticInit03edf5e9af806c6ba76783d95aba618e
         'PragmaRX\\Google2FA\\Support\\Base32' => __DIR__ . '/..' . '/pragmarx/google2fa/src/Support/Base32.php',
         'PragmaRX\\Google2FA\\Support\\Constants' => __DIR__ . '/..' . '/pragmarx/google2fa/src/Support/Constants.php',
         'PragmaRX\\Google2FA\\Support\\QRCode' => __DIR__ . '/..' . '/pragmarx/google2fa/src/Support/QRCode.php',
+        'Psr\\Clock\\ClockInterface' => __DIR__ . '/..' . '/psr/clock/src/ClockInterface.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
@@ -6051,6 +6071,7 @@ class ComposerStaticInit03edf5e9af806c6ba76783d95aba618e
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit03edf5e9af806c6ba76783d95aba618e::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit03edf5e9af806c6ba76783d95aba618e::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit03edf5e9af806c6ba76783d95aba618e::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit03edf5e9af806c6ba76783d95aba618e::$classMap;
 
         }, null, ClassLoader::class);
