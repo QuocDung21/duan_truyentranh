@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\InfoWebsites;
 use Illuminate\Http\Request;
 use App\Models\DanhmucTruyen;
+use Intervention\Image\Facades\Image;
 
 class TruyenController extends Controller
 {
@@ -27,6 +28,7 @@ class TruyenController extends Controller
             ->where('kichhoat', 0)
             ->get();
     }
+
     public function index()
     {
         $truyen = Truyen::with('danhmuctruyen', 'theloai')
@@ -54,7 +56,7 @@ class TruyenController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
 
@@ -117,7 +119,7 @@ class TruyenController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -128,7 +130,7 @@ class TruyenController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -146,8 +148,8 @@ class TruyenController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -189,16 +191,35 @@ class TruyenController extends Controller
         $truyen->tomtat = $data['tomtat_truyen'];
         $truyen->kichhoat = $data['kichhoat'];
         $get_image = $request->hinhanh;
+//        if ($get_image) {
+//            $path = 'public/uploads/truyen/' . $truyen->hinhanh;
+//            if (file_exists($path)) {
+//                unlink($path);
+//            }
+//            $path = 'public/uploads/truyen/';
+//            $get_name_image = $get_image->getClientOriginalName();
+//            $name_image = current(explode('.', $get_name_image));
+//            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+//            $get_image->move($path, $new_image);
+//            $truyen->hinhanh = $new_image;
+//        }
         if ($get_image) {
             $path = 'public/uploads/truyen/' . $truyen->hinhanh;
+
             if (file_exists($path)) {
                 unlink($path);
             }
+
             $path = 'public/uploads/truyen/';
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
-            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+            $new_image = $name_image . rand(0, 99) . '.webp'; // Đổi định dạng sang WebP
             $get_image->move($path, $new_image);
+
+            // Chuyển đổi hình ảnh sang WebP
+            $img = Image::make($path . $new_image)->encode('webp', 75);
+            $img->save($path . $new_image);
+
             $truyen->hinhanh = $new_image;
         }
         $truyen->save();
@@ -212,7 +233,7 @@ class TruyenController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
