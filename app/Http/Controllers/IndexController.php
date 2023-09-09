@@ -85,7 +85,7 @@ class IndexController extends Controller
                 })
                 ->where('kichhoat', 0)
                 ->orderBy('id', 'DESC')
-                ->take(10)
+                ->take(15)
                 ->get();
             $dm->danhSachTruyen = $danhSachTruyen;
 //            if ($danhSachTruyen->isEmpty()) {
@@ -376,7 +376,7 @@ class IndexController extends Controller
                 ->orWhere('tag', 'LIKE', $keywords)
                 ->get();
 
-            $output = '<ul class="dropdown-menu " style="display: block;isplay:block; width: 400px;">';
+            $output = '<ul class="dropdown-menu " style="display: block; width: 400px;">';
 
             // Check if any books were found
             if ($truyen->count() > 0) {
