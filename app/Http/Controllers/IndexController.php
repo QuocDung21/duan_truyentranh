@@ -71,6 +71,8 @@ class IndexController extends Controller
 //            ->get();
     }
 
+
+
     public function home()
     {
         $danhMucList = DanhmucTruyen::where('kichhoat', 0)
