@@ -192,11 +192,13 @@ class IndexController extends Controller
 
         $tendanhmuc_dau = $danhMucTruyen->first();
 
+
         return view('pages.truyen')
             ->with(compact('truyen', 'chapter', 'tendanhmuc_dau', 'chapter_dau', 'danhMucTruyen', 'theLoaiTruyen', 'chapter_moi', 'truyenmoicapnhat', 'chapter_all'))
             ->with('theloai', $this->theloai)
             ->with('truyen_moicapnhat', $this->truyen_moicapnhat)
             ->with('info_webs', $this->info_web)
+            ->with('data_seo' , $truyen)
             ->with('danhmuc', $this->danhmuc);
     }
 

@@ -7,8 +7,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ $info_webs->name }}</title>
-    <meta name="description">
+    @if (isset($data_seo))
+        <title>{{ $data_seo->tentruyen ? $data_seo->tentruyen : $info_webs->name }}</title>
+        <meta name="description" content="{{ $data_seo->mota ? $data_seo->mota : $info_webs->name }}">
+
+
+        <meta property="og:title" content="{{$data_seo->tieude}}}">
+        <meta property="og:description" content="{{$data_seo->mota}}">
+        <meta property="og:image" content="{{ filter_var($truyen->hinhanh, FILTER_VALIDATE_URL) ? $truyen->hinhanh : asset('public/uploads/truyen/' . $data_seo->hinhanh) }}">
+        <meta property="og:url" content="{{ Request::url() }}">
+    @else
+        <title>{{  $info_webs->name }}</title>
+        <meta name="description" content="{{ $info_webs->name }}">
+    @endif
+
+
+
+
     <meta name="ROBOTS" content="INDEX,FOLLOW"/>
 
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
@@ -21,10 +36,15 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KCR1BMGYK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
         gtag('config', 'G-9KCR1BMGYK');
     </script>
+
 
     <link href="https://cdn.jsdelivr.net/npm/@icon/elegant-icons@0.0.1-alpha.4/elegant-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -50,7 +70,8 @@
                     <a href="{{ url('/') }}"
                        style="display: flex;justify-content: center;align-items: center">
                         <img loading="lazy" style="border-radius: 50%;height: 50px;width: 50px;object-fit: fill"
-                             src="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}" alt="{{$info_webs->name}}">
+                             src="{{ asset('public/uploads/info/logo/' . $info_webs->logo) }}"
+                             alt="{{$info_webs->name}}">
                     </a>
                 </div>
             </div>
@@ -91,7 +112,8 @@
             {{--        Tìm kiếm        --}}
             <div class="col-lg-3 col-sm-12 d-flex justify-content-center align-item-center">
                 <div class="input-group rounded mt-2">
-                    <form class="d-flex " style="height: 38px" autocomplete="off" action="{{ route('tim-kiem') }}" method="GET">
+                    <form class="d-flex " style="height: 38px" autocomplete="off" action="{{ route('tim-kiem') }}"
+                          method="GET">
                         @csrf
                         <input id="keywords" name="keywords" type="search" class="form-control rounded"
                                placeholder="Tìm kiếm"
@@ -208,7 +230,7 @@
 
 
 <script>
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         const searchDiv = document.getElementById('search_ajax');
         const keywordsInput = document.getElementById('keywords');
 
