@@ -95,20 +95,20 @@
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-12 col-sm-12" style="margin-top: 50px">
-{{--                        <div class="row">--}}
-{{--                            <div class="col-lg-12">--}}
-{{--                                <div class="anime__details__episodes">--}}
-{{--                                    <div class="section-title">--}}
-{{--                                        <h5>Chương mới nhất :</h5>--}}
-{{--                                    </div>--}}
-{{--                                    @foreach ($chapter_moi as $cter)--}}
-{{--                                        <a--}}
-{{--                                            title="{{$cter->tieude}}"--}}
-{{--                                            href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>--}}
-{{--                                    @endforeach--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="anime__details__episodes">
+                                    <div class="section-title">
+                                        <h5>Chương mới nhất :</h5>
+                                    </div>
+                                    @foreach ($chapter_moi as $cter)
+                                        <a
+                                            title="{{$cter->tieude}}"
+                                            href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12">
                                 <div class="anime__details__review">
