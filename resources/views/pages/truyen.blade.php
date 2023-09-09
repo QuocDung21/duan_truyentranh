@@ -117,23 +117,23 @@
                                     </div>
                                     <div class="anime__details__widget">
                                         <div class="row">
-{{--                                            <div class="col-lg-12 col-md-12">--}}
-{{--                                                <ul--}}
-{{--                                                    style="display: grid !important;--}}
-{{--                                                            grid-template-columns: repeat(3, 1fr) ;--}}
-{{--                                                            grid-gap: 10px !important;">--}}
-{{--                                                    @foreach ($chapter as $cter)--}}
-{{--                                                        <li>--}}
-{{--                                                            <a style="color: white"--}}
-{{--                                                               title="{{$cter->tieude}}"--}}
-{{--                                                               href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>--}}
-{{--                                                        </li>--}}
-{{--                                                    @endforeach--}}
-{{--                                                </ul>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="d-flex justify-content-center col-lg-12 col-md-12">--}}
-{{--                                                {{ $chapter->links() }}--}}
-{{--                                            </div>--}}
+                                            <div class="col-lg-12 col-md-12">
+                                                <ul
+                                                    style="display: grid !important;
+                                                            grid-template-columns: repeat(3, 1fr) ;
+                                                            grid-gap: 10px !important;">
+                                                    @foreach ($chapter as $cter)
+                                                        <li>
+                                                            <a style="color: white"
+                                                               title="{{$cter->tieude}}"
+                                                               href="{{ route('xem-chapter', [$cter->slug_chapter]) }}">{{ $cter->tieude }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div class="d-flex justify-content-center col-lg-12 col-md-12">
+                                                {{ $chapter->links() }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
