@@ -85,6 +85,7 @@
                                             style=" width:100px"
                                             src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
                                         >
+
                                     </div>
                                     <div class="product__sidebar__comment__item__text">
                                         <ul>
