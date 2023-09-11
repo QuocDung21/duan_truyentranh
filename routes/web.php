@@ -1,5 +1,12 @@
 <?php
 
+
+use App\Models\Chapter;
+use App\Models\Theloai;
+use App\Models\Truyen;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use Laravel\Fortify\Fortify;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +22,7 @@ use App\Http\Controllers\TheloaiController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 
+
 Auth::routes();
 // Client
 Route::get('/', [IndexController::class, 'home'])->name('homepage');
@@ -26,16 +34,51 @@ Route::get('/xem-truyen/{slug}', [IndexController::class, 'xemtruyen'])->name('x
 Route::get('/the-loai/{slug}', [IndexController::class, 'theloai'])->name('the-loai');
 
 
-Route::get('/sitemap.xml', function () {
-    $path = public_path('sitemap.xml');
+//Route::get("genrate-sitemap", function () {
+//    $sitemap = App::make('sitemap');
+//    $sitemap->add(route('homepage'), Carbon::now('Asia/Ho_Chi_Minh'), '1.0', 'daily');
+//
+//    $danhmuc = \App\Models\DanhmucTruyen::orderBy('id', 'Desc')->get();
+//    $theloai = Theloai::orderBy('id', 'Desc')->get();
+//    $truyen = Truyen::orderBy('id', 'Desc')->get();
+//
+//    foreach ($danhmuc as $dmuc) {
+//        $url = env('APP_URL') . "/danh-muc/{$dmuc->slug_danhmuc}";
+//        $sitemap->add($url, Carbon::now('Asia/Ho_Chi_Minh'), '0.7', 'daily');
+//    }
+//
+//    foreach ($theloai as $tloai) {
+//        $url = env('APP_URL') . "/the-loai/{$tloai->slug_theloai}";
+//        $sitemap->add($url, Carbon::now('Asia/Ho_Chi_Minh'), '0.7', 'daily');
+//    }
+//
+//    foreach ($truyen as $tr) {
+//        $url = env('APP_URL') . "/xem-truyen/{$tr->slug_truyen}";
+//        $sitemap->add($url, Carbon::now('Asia/Ho_Chi_Minh'), '0.7', 'daily');
+//    }
+//
+//    $chapter = Chapter::select('slug_chapter')->get();
+//    foreach ($chapter as $cter) {
+//        $url = env('APP_URL') . "/xem-chapter/{$cter->slug_chapter}";
+//        $sitemap->add($url, Carbon::now('Asia/Ho_Chi_Minh'), '0.7', 'daily');
+//    }
+//
+//    $sitemap->store('xml', 'sitemap');
+//
+//    File::copy(public_path('sitemap.xml'), base_path('sitemap.xml'));
+//    File::copy(public_path('sitemap-0.xml'), base_path('sitemap-0.xml'));
+//    File::copy(public_path('sitemap-1.xml'), base_path('sitemap-1.xml'));
+//
+//    if (File::exists(base_path() . '/sitemap.xml')) {
+//        File::copy(public_path('sitemap.xml'), base_path('sitemap.xml'));
+//    }
+////    dd(redirect(asset('sitemap.xml')));
+//    return redirect(asset('sitemap.xml'));
+//});
 
-    if (file_exists($path)) {
-        return response()->file($path)->header('Content-Type', 'application/xml');
-    } else {
-        abort(404);
-    }
+Route::get('/create_sitemap', function (){
+    return \Illuminate\Support\Facades\Artisan::call('sitemap:create');
 });
-
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
