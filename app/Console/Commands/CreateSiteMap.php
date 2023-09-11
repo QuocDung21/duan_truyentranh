@@ -88,6 +88,8 @@ class CreateSiteMap extends Command
 
         if (File::exists(base_path() . '/sitemap.xml')) {
             File::copy(public_path('sitemap.xml'), base_path('sitemap.xml'));
+            File::copy(public_path('sitemap-0.xml'), base_path('sitemap-0.xml'));
+            File::copy(public_path('sitemap-1.xml'), base_path('sitemap-1.xml'));
         }
     }
 }

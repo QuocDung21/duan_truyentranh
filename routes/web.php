@@ -26,16 +26,9 @@ Route::get('/xem-truyen/{slug}', [IndexController::class, 'xemtruyen'])->name('x
 Route::get('/the-loai/{slug}', [IndexController::class, 'theloai'])->name('the-loai');
 
 
-Route::get('/sitemap.xml', function () {
-    $path = public_path('sitemap.xml');
-
-    if (file_exists($path)) {
-        return response()->file($path)->header('Content-Type', 'application/xml');
-    } else {
-        abort(404);
-    }
+Route::get("/create-sitemap",function (){
+  return \Illuminate\Support\Facades\Artisan::call('sitemap:create');
 });
-
 
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
