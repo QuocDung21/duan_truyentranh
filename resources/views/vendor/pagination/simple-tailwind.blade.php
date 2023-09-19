@@ -7,18 +7,18 @@
                 <span> <i class="fa fa-arrow-left" aria-hidden="true"></i> Chương trước</span>
             </span>
         @else
-            <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="">
+            <a href="{{ $paginator->previousPageUrl() }}" rel="canonical" class="">
                 {{-- {!! __('pagination.previous') !!} --}}
                 <span> <i class="fa fa-arrow-left" aria-hidden="true"></i> Chương trước</span>
             </a>
         @endif
         |
         @if ($paginator->hasMorePages())
-            <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="">
+            <a href="{{ $paginator->nextPageUrl() }}" rel="canonical" class="">
                 <span> Chương tiếp theo <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
             </a>
         @else
-            <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="">
+            <a href="{{ $paginator->nextPageUrl() }}" rel="canonical" class="">
                 <span> Chương tiếp theo <i class="fa fa-arrow-right" aria-hidden="true"></i></span>
             </a>
         @endif

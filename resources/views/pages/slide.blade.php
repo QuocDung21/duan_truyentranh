@@ -1,3 +1,5 @@
+
+
 <section class="mt-5">
     <div class="container">
         <div class="col-lg-8 col-md-8 col-sm-8">
@@ -10,15 +12,13 @@
                 <div class="custom-product-comment-item " style="width:200px;height: 300px">
                     <div class="custom-product-comment-item-pic" style="width:200px;height: 300px;">
                         <img style="border-radius: 5px; object-fit: fill; width:200px;height: 300px;"
-                             title="{{$tr->tentruyen}}"
-                             alt="{{$tr->tentruyen}}"
-                             src="{{  filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
-                                loading="lazy"
-                        >
+                            title="{{ $tr->tentruyen }}" alt="{{ $tr->tentruyen }}"
+                            src="{{ filter_var($tr->hinhanh, FILTER_VALIDATE_URL) ? $tr->hinhanh : asset('public/uploads/truyen/' . $tr->hinhanh) }}"
+                            loading="lazy">
                     </div>
                     <div class="custom-product-comment-item-text">
                         <h5 style="font-size: 10px"><a style="color: white;font-size: 12px;text-align: center"
-                                                       href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">{{ $tr->tentruyen }}</a>
+                                href="{{ route('xem-truyen', [$tr->slug_truyen]) }}">{{ $tr->tentruyen }}</a>
                         </h5>
                         <span><i class="fa fa-eye"></i> {{ $tr->luotxem }} lượt xem</span>
                     </div>
@@ -27,3 +27,6 @@
         </div>
     </div>
 </section>
+
+
+

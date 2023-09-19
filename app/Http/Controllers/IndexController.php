@@ -19,7 +19,7 @@ class IndexController extends Controller
 
     public function __construct()
     {
-//        $this->info_web = InfoWebsites::first();
+        //        $this->info_web = InfoWebsites::first();
         $this->truyenmoicapnhat = Cache::remember('truyenmoicapnhat', now()->addMinutes(10), function () {
             return Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
                 ->take(5)
@@ -37,16 +37,16 @@ class IndexController extends Controller
                 ->first();
         });
 
-//        $this->slide_truyen = Truyen::orderBy('id', 'DESC')
-//            ->where('kichhoat', 0)
-//            ->take(8)
-//            ->first();
-//        $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
-//            ->where('kichhoat', 0)
-//            ->get();
-//        $this->theloai = Theloai::orderBy('id', 'DESC')
-//            ->where('kichhoat', 0)
-//            ->get();
+        //        $this->slide_truyen = Truyen::orderBy('id', 'DESC')
+        //            ->where('kichhoat', 0)
+        //            ->take(8)
+        //            ->first();
+        //        $this->danhmuc = DanhmucTruyen::orderBy('id', 'DESC')
+        //            ->where('kichhoat', 0)
+        //            ->get();
+        //        $this->theloai = Theloai::orderBy('id', 'DESC')
+        //            ->where('kichhoat', 0)
+        //            ->get();
         $this->danhmuc = Cache::remember('danhmuc', now()->addHours(6), function () {
             return DanhmucTruyen::orderBy('id', 'DESC')
                 ->where('kichhoat', 0)
@@ -64,11 +64,11 @@ class IndexController extends Controller
             ->take(4)
             ->get();
 
-//        $this->truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
-//            ->take(5)
-//            ->orderBy('updated_at', 'desc')
-//            ->where('kichhoat', 0)
-//            ->get();
+        //        $this->truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
+        //            ->take(5)
+        //            ->orderBy('updated_at', 'desc')
+        //            ->where('kichhoat', 0)
+        //            ->get();
     }
 
 
@@ -90,11 +90,11 @@ class IndexController extends Controller
                 ->take(15)
                 ->get();
             $dm->danhSachTruyen = $danhSachTruyen;
-//            if ($danhSachTruyen->isEmpty()) {
-//                unset($danhMucList[$key]);
-//            } else {
-//                $dm->danhSachTruyen = $danhSachTruyen;
-//            }
+            //            if ($danhSachTruyen->isEmpty()) {
+            //                unset($danhMucList[$key]);
+            //            } else {
+            //                $dm->danhSachTruyen = $danhSachTruyen;
+            //            }
         }
         $truyen = Truyen::orderBy('luotxem', 'DESC')
             ->with('theloai')
@@ -102,14 +102,14 @@ class IndexController extends Controller
             ->take(5)
             ->get();
 
-//        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
-//            ->take(5)
-//            ->orderBy('updated_at', 'desc')
-//            ->where('kichhoat', 0)
-//            ->get();
-//        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')
-//            ->where('kichhoat', 0)
-//            ->get();
+        //        $truyenmoicapnhat = Truyen::with('danhmuctruyen', 'thuocnhieutheloaitruyen')
+        //            ->take(5)
+        //            ->orderBy('updated_at', 'desc')
+        //            ->where('kichhoat', 0)
+        //            ->get();
+        //        $truyen_theloai = Truyen::with('thuocnhieutheloaitruyen')
+        //            ->where('kichhoat', 0)
+        //            ->get();
         return view('pages.home')
             ->with(compact('truyen', 'danhMucList'))
             ->with('danhmuc', $this->danhmuc)
@@ -149,7 +149,7 @@ class IndexController extends Controller
                 $query->where('danhmuc_id', $danhmuc_id->id);
             })
             ->paginate(25);
-//            ->get();
+        //            ->get();
         return view('pages.danhmuc')
             ->with(compact('truyen'))
             ->with('theloai', $this->theloai)
@@ -200,87 +200,87 @@ class IndexController extends Controller
             ->with('theloai', $this->theloai)
             ->with('truyen_moicapnhat', $this->truyen_moicapnhat)
             ->with('info_webs', $this->info_web)
-            ->with('data_seo' , $truyen)
+            ->with('data_seo', $truyen)
             ->with('danhmuc', $this->danhmuc);
     }
 
-//    public function xemchapter($slug)
-//    {
-////        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
-//
-//        //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
-//        $truyen = Chapter::where('slug_chapter', $slug)->first();
-//
-//        // lấy ra dữ liệu của chapter sau
-//        $chapter_next = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '>', $truyen->id)->min('id');
-//        // lấy ra dữ liệu của chapter trước
-//        $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
-//        //Kết nối với dữ liệu bảng book
-////        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
-//        // Lấy ra số chapter
-////        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
-//
-//        $truyenId = Chapter::where('slug_chapter', $slug)->first();
-////        $truyen = Chapter::orderBy('id', 'DESC')
-////            ->where('slug_chapter', $slug)
-////            ->first();
-//        $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
-//            ->where('id', $truyen->truyen_id)
-//            ->first();
-//
-////        Thay đổi lấy các select cần thiết
-//        $chapter = Chapter::select('noidung', 'id', 'slug_chapter', 'tieude')
-//            ->with('truyen')
-//            ->orderBy('id', 'ASC')
-//            ->where('slug_chapter', $slug)
-//            ->where('truyen_id', $truyenId->truyen_id)
-//            ->first();
-////        $all_chapter = Chapter::orderBy('id', 'ASC')
-////            ->where('truyen_id', $truyenId->truyen_id)
-////            ->get();
-//        $all_chapter = cache('all_chapter', function () use ($truyenId) {
-//            return Chapter::orderBy('id', 'ASC')
-//                ->where('truyen_id', $truyenId->truyen_id)
-//                ->get();
-//        }, 60);
-//
-////        $specificChapter = null;
-////        if ($all_chapter) {
-////            foreach ($all_chapter as $chapterItem) {
-////                if ($chapterItem->slug_chapter === $slug) {
-////                    $specificChapter = $chapterItem;
-////                    break;
-////                }
-////            }
-////        }
-//
-////        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
-////            ->orderBy('id', 'DESC')
-////            ->first();
-////        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
-////            ->orderBy('id', 'ASC')
-////            ->first();
-//        $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
-//        if (!Session::has($hasViewedKey)) {
-//            // Tăng lượt xem cho truyện
-//            $chapter->truyen->luotxem += 1;
-//            $chapter->truyen->save();
-//            // Đánh dấu là đã xem trong session
-//            Session::put($hasViewedKey, true);
-//        }
-//        $next_chapter = Chapter::find($chapter_next);
-//        $previous_chapter = Chapter::find($chapter_previous);
-//        // dd($next_chapter->slug_chapter);
-//
-//        return view('pages.chapter')
-//            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'truyen'))
-////            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
-//            ->with('theloai', $this->theloai)
-//            ->with('info_webs', $this->info_web)
-//            ->with('danhmuc', $this->danhmuc);
-//        // ->with('chapter_next ', Chapter::find($chapter_next))
-//        // ->with('chapter_previous', Chapter::find($chapter_previous));
-//    }
+    //    public function xemchapter($slug)
+    //    {
+    ////        $category = DanhmucTruyen::orderBy('id', 'desc')->get();
+    //
+    //        //Lấy ra dữ liệu 1 hàng trong bảng chapter THÔNG qua cột slug_chapter
+    //        $truyen = Chapter::where('slug_chapter', $slug)->first();
+    //
+    //        // lấy ra dữ liệu của chapter sau
+    //        $chapter_next = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '>', $truyen->id)->min('id');
+    //        // lấy ra dữ liệu của chapter trước
+    //        $chapter_previous = Chapter::where('truyen_id', $truyen->truyen_id)->where('id', '<', $truyen->id)->max('id');
+    //        //Kết nối với dữ liệu bảng book
+    ////        $chapter = Chapter::with('truyen')->where('slug_chapter', $slug)->where('truyen_id', $truyen->truyen_id)->first();
+    //        // Lấy ra số chapter
+    ////        $chapter_number = Chapter::with('truyen')->orderBy('id', 'desc')->where('truyen_id', $truyen->truyen_id)->get();
+    //
+    //        $truyenId = Chapter::where('slug_chapter', $slug)->first();
+    ////        $truyen = Chapter::orderBy('id', 'DESC')
+    ////            ->where('slug_chapter', $slug)
+    ////            ->first();
+    //        $truyen_breadcrumb = Truyen::with('thuocnhieudanhmuctruyen', 'thuocnhieutheloaitruyen')
+    //            ->where('id', $truyen->truyen_id)
+    //            ->first();
+    //
+    ////        Thay đổi lấy các select cần thiết
+    //        $chapter = Chapter::select('noidung', 'id', 'slug_chapter', 'tieude')
+    //            ->with('truyen')
+    //            ->orderBy('id', 'ASC')
+    //            ->where('slug_chapter', $slug)
+    //            ->where('truyen_id', $truyenId->truyen_id)
+    //            ->first();
+    ////        $all_chapter = Chapter::orderBy('id', 'ASC')
+    ////            ->where('truyen_id', $truyenId->truyen_id)
+    ////            ->get();
+    //        $all_chapter = cache('all_chapter', function () use ($truyenId) {
+    //            return Chapter::orderBy('id', 'ASC')
+    //                ->where('truyen_id', $truyenId->truyen_id)
+    //                ->get();
+    //        }, 60);
+    //
+    ////        $specificChapter = null;
+    ////        if ($all_chapter) {
+    ////            foreach ($all_chapter as $chapterItem) {
+    ////                if ($chapterItem->slug_chapter === $slug) {
+    ////                    $specificChapter = $chapterItem;
+    ////                    break;
+    ////                }
+    ////            }
+    ////        }
+    //
+    ////        $max_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+    ////            ->orderBy('id', 'DESC')
+    ////            ->first();
+    ////        $min_id = Chapter::where('truyen_id', $truyenId->truyen_id)
+    ////            ->orderBy('id', 'ASC')
+    ////            ->first();
+    //        $hasViewedKey = 'viewed_truyen_' . $chapter->slug_chapter;
+    //        if (!Session::has($hasViewedKey)) {
+    //            // Tăng lượt xem cho truyện
+    //            $chapter->truyen->luotxem += 1;
+    //            $chapter->truyen->save();
+    //            // Đánh dấu là đã xem trong session
+    //            Session::put($hasViewedKey, true);
+    //        }
+    //        $next_chapter = Chapter::find($chapter_next);
+    //        $previous_chapter = Chapter::find($chapter_previous);
+    //        // dd($next_chapter->slug_chapter);
+    //
+    //        return view('pages.chapter')
+    //            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'truyen'))
+    ////            ->with(compact('chapter', 'truyen_breadcrumb', 'all_chapter', 'next_chapter', 'previous_chapter', 'max_id', 'min_id', 'truyen'))
+    //            ->with('theloai', $this->theloai)
+    //            ->with('info_webs', $this->info_web)
+    //            ->with('danhmuc', $this->danhmuc);
+    //        // ->with('chapter_next ', Chapter::find($chapter_next))
+    //        // ->with('chapter_previous', Chapter::find($chapter_previous));
+    //    }
 
     public function xemchapter($slug)
     {
@@ -387,7 +387,7 @@ class IndexController extends Controller
             if ($truyen->count() > 0) {
                 foreach ($truyen as $key => $tr) {
                     $imagePath = asset('public/uploads/truyen/' . $tr->hinhanh);
-//                    $output .= '<li class="li_search_ajax"><a class="d-flex flex-row justify-content-start   " href="{{route('xem-truyen', [$tr->slug_truyen])}}"><div><img loading="lazy"  class="mr-3 object-fit-cover" style="width: 50px;height: 50px" src="' . $imagePath . '" /> </div><div class="d-flex flex-column justify-content-center "><h6 style="font-size: 14px;font-weight: bold" class=""> ' . $tr->tentruyen . '</h6><h6 style="font-size: 14px;font-weight: bold"  >Tác giả: ' . $tr->tacgia . '</h6></div></a></li>';
+                    //                    $output .= '<li class="li_search_ajax"><a class="d-flex flex-row justify-content-start   " href="{{route('xem-truyen', [$tr->slug_truyen])}}"><div><img loading="lazy"  class="mr-3 object-fit-cover" style="width: 50px;height: 50px" src="' . $imagePath . '" /> </div><div class="d-flex flex-column justify-content-center "><h6 style="font-size: 14px;font-weight: bold" class=""> ' . $tr->tentruyen . '</h6><h6 style="font-size: 14px;font-weight: bold"  >Tác giả: ' . $tr->tacgia . '</h6></div></a></li>';
                     $output .= '<li class="li_search_ajax"><a class="d-flex flex-row justify-content-start" href="' . route('xem-truyen', [$tr->slug_truyen]) . '"><div><img loading="lazy" class="mr-3 object-fit-cover" style="width: 50px; height: 50px" src="' . $imagePath . '" /> </div><div class="d-flex flex-column justify-content-center"><h6 style="font-size: 14px; font-weight: bold"> ' . e($tr->tentruyen) . '</h6><h6 style="font-size: 14px; font-weight: bold">Tác giả: ' . e($tr->tacgia) . '</h6></div></a></li>';
                     $output .= '<hr/>';
                 }
