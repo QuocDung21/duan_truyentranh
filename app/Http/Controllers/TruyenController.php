@@ -10,6 +10,7 @@ use App\Models\InfoWebsites;
 use Illuminate\Http\Request;
 use App\Models\DanhmucTruyen;
 use Intervention\Image\Facades\Image;
+use Overtrue\Pinyin\Pinyin;
 
 class TruyenController extends Controller
 {
@@ -62,6 +63,10 @@ class TruyenController extends Controller
 
     //
     // 'hinhanh' => 'required|image|mimes:png,jpg,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+    public function isChinese($string)
+    {
+        return preg_match('/[\x{4e00}-\x{9fa5}]+/u', $string);
+    }
 
     public function store(Request $request)
     {
@@ -92,7 +97,17 @@ class TruyenController extends Controller
         foreach ($data['theloai'] as $key => $tloai) {
             $truyen->theloai_id = $tloai[0];
         }
-        $slug = Str::slug($data['tentruyen']);
+        // $slug = Str::slug($data['tentruyen']);
+
+
+        if ($this->isChinese($data['tentruyen'])) {
+            $pinyin = new Pinyin();
+            $slug = $pinyin->permalink($data['tentruyen']);
+        } else {
+            $slug = Str::slug($data['tentruyen']);
+        }
+
+
         $truyen->tentruyen = $data['tentruyen'];
         $truyen->tag = $data['tag'];
         $truyen->tacgia = $data['tacgia'];
@@ -174,7 +189,16 @@ class TruyenController extends Controller
                 'tomtat_truyen.required' => 'Mô tả không được trống',
             ],
         );
-        $slug = Str::slug($data['tentruyen']);
+        // $slug = Str::slug($data['tentruyen']);
+
+        if ($this->isChinese($data['tentruyen'])) {
+            $pinyin = new Pinyin();
+            $slug = $pinyin->permalink($data['tentruyen']);
+        } else {
+            $slug = Str::slug($data['tentruyen']);
+        }
+
+
         $truyen = Truyen::find($id);
         foreach ($data['danhmuc'] as $key => $dmuc) {
             $truyen->danhmuc_id = $dmuc[0];
@@ -191,18 +215,18 @@ class TruyenController extends Controller
         $truyen->tomtat = $data['tomtat_truyen'];
         $truyen->kichhoat = $data['kichhoat'];
         $get_image = $request->hinhanh;
-//        if ($get_image) {
-//            $path = 'public/uploads/truyen/' . $truyen->hinhanh;
-//            if (file_exists($path)) {
-//                unlink($path);
-//            }
-//            $path = 'public/uploads/truyen/';
-//            $get_name_image = $get_image->getClientOriginalName();
-//            $name_image = current(explode('.', $get_name_image));
-//            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
-//            $get_image->move($path, $new_image);
-//            $truyen->hinhanh = $new_image;
-//        }
+        //        if ($get_image) {
+        //            $path = 'public/uploads/truyen/' . $truyen->hinhanh;
+        //            if (file_exists($path)) {
+        //                unlink($path);
+        //            }
+        //            $path = 'public/uploads/truyen/';
+        //            $get_name_image = $get_image->getClientOriginalName();
+        //            $name_image = current(explode('.', $get_name_image));
+        //            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
+        //            $get_image->move($path, $new_image);
+        //            $truyen->hinhanh = $new_image;
+        //        }
         if ($get_image) {
             $path = 'public/uploads/truyen/' . $truyen->hinhanh;
 
